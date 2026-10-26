@@ -1,7 +1,7 @@
 # Film craft
 
 Rules learned from fixing real films made with this skill. They apply to every look; the dark documentary look
-leans on them most. Reading map: Pacing and text, Camera, Figures and places, Maps, Sound, Live app films, Checks.
+leans on them most. Reading map: Pacing and text, Camera, Motion, Figures and places, Maps, Sound, Live app films, Checks.
 
 ## Pacing and text
 
@@ -18,6 +18,18 @@ leans on them most. Reading map: Pacing and text, Camera, Figures and places, Ma
 - A rack focus must resolve: pull to the subject within about a second and hold it sharp. A shot that stays soft
   reads as a rendering bug.
 - Keep figures and key objects clear of the caption area in both layouts (16:9 and 9:16 frame differently).
+- Move each camera on a smooth spline through three or more points, never a straight lerp between two. It is already
+  moving at the cut (cut on motion, no ease from rest), carries a slight handheld drift, and looks from a hero angle:
+  a low macro that tracks the action, an orbit, a crane that rises with what grows, a reveal that cranes down.
+
+## Motion
+
+- Nothing stops dead. A tool eases in, follows through and leaves the frame in an arc before the cut, and a held
+  object keeps moving a little. A finished plant or figure keeps a slow sway, and each action overlaps the next.
+- Growth starts tiny and swells. A plant is born as a small sprout on its line and grows over 1.5 to 4 s on an
+  ease-in-out curve with a soft settle. Small plants lead and big ones follow. An easeOutBack over half a second
+  makes things appear at full size at once, which reads as a pop.
+- Check motion in a moving clip at full frame rate, not on a contact sheet. Stills hide pops and dead stops.
 
 ## Figures and places
 
@@ -88,8 +100,10 @@ leans on them most. Reading map: Pacing and text, Camera, Figures and places, Ma
 
 ## Checks
 
-- Make contact sheets of the final encode at 1 fps (`scripts/contact-sheet.sh`) and look at every sheet. Check the
-  sheet files are newer than the video before trusting them; stale sheets hide regressions.
+- Make contact sheets of the final encode at a stated fps (`scripts/contact-sheet.sh <video> <folder> <fps>`: 1 for
+  a slow film, 4 for action) and look at every sheet. Check the sheet files are newer than the video before
+  trusting them; stale sheets hide regressions.
+- Before reporting, run the full loop in `self-review.md`.
 - Look for: captions cut early, figures under captions, clipped labels, empty map areas, soft shots, floating or
   sunken figures, doors that open onto walls, vehicles backing along their route, black frames at cuts. In a live app
   film also look for: the cursor hidden or off target, UI over the action, selection rings wider than the object, a

@@ -138,3 +138,19 @@ data (driver names, patient names) is shown only when the feed already sends it 
 Trap from the first build: React StrictMode mounts effects twice, so movers and pins registered in an effect were
 registered twice and the pins hid. Make every registry idempotent (keyed by unit id) or leave StrictMode off in the
 component entry.
+
+## Publishing as a claude.ai Artifact
+
+Measured on a real walk-through page:
+
+- Artifacts refuse `.glb`, `.gltf` and `.bin` files under any content type. Ship each model as glTF JSON, named
+  `<name>.gltf.json`, with the buffer embedded as base64.
+- The page's CSP blocks `fetch()` of `data:` URIs. GLTFLoader cannot read that embedded buffer by itself, and the page
+  shows "could not load" with no console error you can see. In the page, fetch the JSON, decode the buffer, rebuild a
+  GLB in memory and call `gltfLoader.parseAsync`.
+- Each text file may be 16 MB at most after base64, which adds about a third. Split big scenes and load the rest on
+  first use. Textures go as `.webp` files and audio as `.mp3`. Skip Draco and KTX2, because their decoders fetch wasm
+  from other hosts.
+- Check the published page in a signed-in Chrome, because a built-in browser may not be signed in. When the Chrome
+  window is hidden behind another app, `requestAnimationFrame` drops to about 1 fps. Judge motion from local
+  Playwright runs, not from that tab.

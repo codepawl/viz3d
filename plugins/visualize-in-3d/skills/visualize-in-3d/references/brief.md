@@ -167,7 +167,7 @@ footprint, an ellipse for long things, at most about 1.3x); bare white or grey g
 material: asphalt, lane paint, verges, floors); a last shot where the site is small in a sea of empty ground. Use the stage presets for the film's beats instead of
 free camera moves when a beat shows one stage, and show a speed change (2x or 5x) once with the control on screen.
 
-Record the film as {{SKILL_DIR}}/references/film.md "Live app films" says. Run the dev server as a background
+Before reporting, run the loop in {{SKILL_DIR}}/references/self-review.md (up to three rounds) on the app and the film. Record the film as {{SKILL_DIR}}/references/film.md "Live app films" says. Run the dev server as a background
 job and stop it when done. Write README.md, pass2_started_at.txt and pass2_finished_at.txt (UTC). Budget about 100 tool calls. Report: what was
 built, how to run it, screenshot and film paths, checks with numbers, honest gaps, and a one-line caption suggestion
 ("Claude built a live <place>, every <main assets> modeled in Blender and running in three.js").

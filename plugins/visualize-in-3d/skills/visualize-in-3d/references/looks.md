@@ -2,7 +2,7 @@
 
 Each topic file names one look. The look sets the world's rendering, the UI skin and what the film shows; the data
 model, the dashboard parts and the film's click-driven shape stay the same. Reading map: Toy isometric (default),
-Point-cloud survey, Photoreal terrain analysis, Dark documentary, Choosing.
+Point-cloud survey, Photoreal terrain analysis, Dark documentary, Pixel diorama, Choosing.
 
 Reference stills or clips for a look are optional. If you have some, save them under `{{WORK_DIR}}/references/<slug>/`
 and point the briefs at them; they are for study only and never ship in the app or the film. Without them, the
@@ -89,10 +89,54 @@ frames, music or text). Fits a case file or a piece of history: a crime, a disap
 - Motion and sound: slow pushes and dissolves, nothing snappy; a low ambient drone with soft hits on reveals.
 - Respect: victims are named with dates and treated as people; the film follows the investigation, not the gore.
 
+## Pixel diorama
+
+Reference: the "small floating world" pixel style seen in short battle and port clips. Reuse
+`{{SKILL_DIR}}/scripts/pixel-pass.js` (copy to `src/pixel-pass.js`; it only imports `three`). Fits any place seen as
+a small floating world with many tiny units: ports, yards, farms, camps, fairs, battles. Needs no Blender: boxes,
+extrusions and a few icospheres read well at this resolution.
+
+- Rendering: a real 3D scene drawn at about 360 px across (use `pixelScale` 5 at 1920x1080, so 384x216) and
+  upscaled with nearest-neighbour; one directional sun with real cast shadows; flat toon shading, 3 to 4 tones per
+  material (`createToonMaterial`); dark 1 px outlines around objects from depth edges, light creases from normal
+  edges; a limited natural palette (greens, soil browns, concrete, teal water, muted colours); a plain
+  paper-coloured background; the world is a floating block of 0.5 u cells (a cap cell over a soil column) with
+  ragged edges (cells near the border drop out by noise) and a soil cliff below.
+- Camera: orthographic, azimuth -135 and elevation 30 for the iso views. `snapOrthographicCamera` snaps the camera to
+  whole low-res pixels along its right and up axes and returns the sub-pixel residual that `PixelPass.render` applies
+  while upscaling, so the camera drifts smoothly and nothing shimmers. Ease the focus, zoom, azimuth and elevation
+  yourself every frame; keep zoom changes slow (they re-sample every texel).
+- Smoke, dust and fade-ins: clusters of 4 or 5 icospheres sharing one material with `addDitherDissolve`, an ordered
+  Bayer discard in low-res pixels. Mark the group `userData.skipNormalPass = true`. Units fade in at the edge of the
+  world with the same helper, so nothing appears out of thin air.
+- Water: a flat toon slab, deeper-blue lane stripes, pale arcs (`RingGeometry` arcs that blink on for the middle of
+  their life) and sparkles (tiny cubes blinking in steps), plus arcs spawned behind moving boats.
+- Traps: pixel scale too high (units under 3 px vanish; keep boxes at least 4 px), too many shadow-casting instanced
+  meshes (cast shadows only from objects, not ground cells), a half-float render target needs
+  `EXT_color_buffer_half_float` (all WebGL2 desktop), clipping planes need `renderer.localClippingEnabled = true`.
+- Views, each chosen for what it shows best: a wide iso overview, a close-up of the busiest spot, a map-style
+  top-down (azimuth 0, elevation 76) for flows, a low side view for arrivals, and a side cutaway of one unit. A
+  cutaway clips the camera-side half of that unit with a clipping plane (`material.clippingPlanes`,
+  `side = DoubleSide`) and hides anything in front, so its inside shows while work goes on. Build the interior
+  inside the unit from the start.
+- UI: flat paper panels with a 3 px ink outline and a hard offset shadow, a pixel font (Pixelify Sans, OFL,
+  bundled), segmented progress bars, 8x8 bitmap status icons with a different shape per state, quiet text tabs.
+- The floating block itself needs detail, or its corners and underside look sharp and plain:
+  - corners rounded in pixel steps, with an eroded edge
+  - an underside of rock strata that tapers to hanging spires of varied length, with roots
+  - hanging vines that sway over the edges
+  - a waterfall where water meets the edge, and a lava stream where lava meets it
+  - loose rocks, grass tufts and moss along the top edge, instanced
+- Characters, creatures or vehicles acting in this look (a fight, a chase): `action.md`.
+- Film: real clicks on a virtual clock (`film.md`, Live app films): overview, close-up, click a unit (card and
+  follow), cutaway, top-down, low view, overview. Check frames at the real size; pixels must be square and crisp.
+
 ## Choosing
 
 Toy isometric is the default for every topic. The point-cloud look can read as dull on a busy site, so use it when
 it is asked for. Otherwise pick the look the place itself suggests: built places full of moving vehicles go toy
 isometric; land and water seen from above go point-cloud; an event spreading across real land over time goes
-photoreal terrain; a case or a piece of history told in order goes dark documentary. Write the look's name in the
-topic file. Add a new look only after saving its reference and writing a section here.
+photoreal terrain; a case or a piece of history told in order goes dark documentary; a small floating world with
+many tiny units, or a battle between creatures, goes pixel diorama. A look the user shows from a reference video is
+studied frame by frame (`scripts/contact-sheet.sh`) and written up as a new section here. Write the look's name in
+the topic file. Add a new look only after saving its reference and writing a section here.

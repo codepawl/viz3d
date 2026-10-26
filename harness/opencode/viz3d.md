@@ -6,4 +6,4 @@ Load the visualize-in-3d skill and follow it from the start for this request:
 
 $ARGUMENTS
 
-If the first word is a mode, use that shape and drop the word from the subject. The modes are app (live app with a dashboard and a short film), lesson (lesson app), prototype (quick prototype from primitives), embed (live embed on real data), film or doc (documentary film), action (action short). Otherwise pick the shape from the subject with the skill's table. If the request is empty, ask what the user wants people to see.
+If the first word is a mode, use that shape and drop the word from the subject. The modes are app (live app with a dashboard and a short film), lesson (lesson app), prototype (quick prototype from primitives), embed (live embed on real data), film or doc (documentary film), action (action short), book (illustrated cutaway plate, or a book of several with quizzes). Otherwise pick the shape from the subject with the skill's table. If the request is empty, ask what the user wants people to see.

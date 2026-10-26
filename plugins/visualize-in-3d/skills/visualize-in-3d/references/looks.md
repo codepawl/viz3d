@@ -2,7 +2,7 @@
 
 Each topic file names one look. The look sets the world's rendering, the UI skin and what the film shows; the data
 model, the dashboard parts and the film's click-driven shape stay the same. Reading map: Toy isometric (default),
-Point-cloud survey, Photoreal terrain analysis, Dark documentary, Pixel diorama, Choosing.
+Point-cloud survey, Photoreal terrain analysis, Dark documentary, Pixel diorama, Illustrated cutaway plate, Choosing.
 
 Reference stills or clips for a look are optional. If you have some, save them under `{{WORK_DIR}}/references/<slug>/`
 and point the briefs at them; they are for study only and never ship in the app or the film. Without them, the
@@ -131,12 +131,45 @@ extrusions and a few icospheres read well at this resolution.
 - Film: real clicks on a virtual clock (`film.md`, Live app films): overview, close-up, click a unit (card and
   follow), cutaway, top-down, low view, overview. Check frames at the real size; pixels must be square and crisp.
 
+## Illustrated cutaway plate
+
+Reference: an encyclopedia plate of a medieval castle in the style of the DK and Stephen Biesty cross-section books.
+It shows one big building cut open, with a room on every level full of small people at work, and labels in the margins.
+Fits one big object or building with many rooms full of people: ships, castles, cathedrals, stations, factories. The
+`book` mode (`book.md`) builds it. Keep a copy of the reference under `{{WORK_DIR}}/references/<slug>/` for study.
+
+- Page: warm cream paper (about `#f3ead6`) with fine grain. The object floats on the paper, with no ground box or sky.
+  Its base dissolves into the paper in loose washes (rocks, water, sea).
+- Rendering, read off the plate: watercolour washes in 3 or 4 soft tones per material, warm overall. Thin dark brown
+  ink outlines from depth and normal edges, slightly uneven. Short ink hatching in the shadow tones only. Pigment
+  pools darker along wash edges. Paper grain multiplied over everything. The ink is brown (about `#3d2615`), never
+  black.
+- Light tells the story: the exterior is pale stone or paint in daylight, and the cut interiors glow amber (lamps,
+  fires), so the eye goes straight into the rooms. Give each room its own wash (cool for a bridge, green for a
+  garden, red for a boiler). One amber wash over everything reads flat. Accents are few and saturated.
+- The cut: the camera-side wall is removed in a stepped, broken edge (masonry or hull plates show their thickness),
+  never a clean plane. Tilt the section plane back as it rises, so each level's ceiling edge sits behind its floor
+  edge and slab edges do not hide the rooms below. Every exposed room is a stacked stage seen from a high
+  three-quarter view, packed with small figures each doing the room's job (eating, cooking, praying, stoking).
+  Empty rooms kill the look.
+- Labels: no boxes. A bold serif heading and 2 to 4 lines of serif body sit in the empty paper beside the object, in
+  columns at the left and right edges, each with a thin dark leader line to its part. They are HTML over the canvas,
+  re-projected every frame, and their slots are chosen so leaders never cross (`book.md`, Labels).
+- Page furniture: a big small-caps serif title at the top left with a short intro paragraph, a small inset of the
+  whole exterior, and a "People in the ..." row along the bottom with full-figure characters, a bold name and a
+  two-line role each. House UI rules hold: no boxed frame or rule lines, so group by spacing alone.
+- Fonts: an engraved serif with real small caps for the title (Cormorant SC or IM Fell English SC, OFL), and a book
+  serif for labels (EB Garamond or Crimson Pro).
+- Proportions are real. Never stretch the model vertically to show more rooms. Make the decks taller in the plan
+  instead.
+
 ## Choosing
 
 Toy isometric is the default for every topic. The point-cloud look can read as dull on a busy site, so use it when
 it is asked for. Otherwise pick the look the place itself suggests: built places full of moving vehicles go toy
 isometric; land and water seen from above go point-cloud; an event spreading across real land over time goes
 photoreal terrain; a case or a piece of history told in order goes dark documentary; a small floating world with
-many tiny units, or a battle between creatures, goes pixel diorama. A look the user shows from a reference video is
+many tiny units, or a battle between creatures, goes pixel diorama; one big object or building with many
+rooms full of people goes illustrated cutaway plate. A look the user shows from a reference video is
 studied frame by frame (`scripts/contact-sheet.sh`) and written up as a new section here. Write the look's name in
 the topic file. Add a new look only after saving its reference and writing a section here.

@@ -1,71 +1,91 @@
 ---
 name: visualize-in-3d
-description: Make things that are hard to picture visible as a 3D world people can watch or play with - an operation (airport, data center, port, factory, hospital), a system, an event spreading over real land (wildfire, flood), or a story in time (a historical event, a case). Builds a live three.js app with a dashboard and a 30 s film, or a shot-by-shot documentary film, with models made in Blender from real references (or in three.js when Blender is missing), a quick no-Blender prototype for a leadership demo, or a component that embeds in an existing dashboard or product and runs on live company data. Use for "visualize how X works", "show this event on a 3D map", "a live 3D dashboard of how X runs", "a documentary-style 3D explainer", "a quick 3D prototype to show leadership", "put a live 3D view of our operation in our dashboard".
+description: Turn anything hard to picture into a 3D world people can watch or play with - an operation or system (airport, data center, port, factory, hospital), an event spreading over real land (wildfire, flood), a story in time (a historical event, a case), characters or machines in action (a fight, a chase, a launch), or how a thing works. Builds a live three.js app with a dashboard and a 30 s film, a lesson app, a quick no-Blender prototype, a live embed that runs on real data inside an existing dashboard, a documentary film, an action short, or an interactive cutaway plate or book. Looks include toy isometric, point cloud, photoreal terrain, dark documentary, pixel diorama and illustrated cutaway plate. Models come from ready sources or Blender builds made from real references, and the skill checks its own frames before showing anyone. Use for "visualize how X works", "show this event on a 3D map", "a live 3D dashboard of X", "a 3D lesson on how X works", "a documentary-style 3D explainer", "a quick 3D prototype", "two creatures fight in 3D".
 license: MIT
 ---
 
 # Visualize in 3D
 
-Some things are hard to understand from text, tables or a long video: how an airport turns a plane around in 45
-minutes, what an ER does with ten arrivals at once, where a data center's power goes, how a warehouse ships an order,
-how a case unfolded across a county, why a reactor exploded at 01:23. This skill turns them into a 3D world you can
-watch or click through, so the parts, the order and the cause can be seen at a glance. Five modes share one toolkit (models from real references, a
-deterministic virtual clock, contact-sheet checks):
-
-- **Live app**: a system or an operation. A real dashboard around a 3D world, a seeded simulation moving units and
-  numbers, and a 30 s film recorded by driving the app with real clicks. Steps below; briefs in `references/brief.md`.
-- **Documentary film**: an event, a case or a piece of history told in order. A fact file, a map, block-built scenes
-  with flat glowing figures, captions timed for reading, sound and a score by section. See
-  `references/documentary.md`.
-- **Quick prototype**: a one-pass live app built from three.js primitives, with no Blender, for a demo to leaders
-  after about an hour of agent time. See `references/live-embed.md`.
-- **Live embed**: the live app as a web component or an iframe page inside an existing dashboard or product. It runs
-  on the company's real data through an adapter (REST, SSE, WebSocket or CSV) and a field mapping. See
-  `references/live-embed.md`.
-- **Lesson app** (a live app for learning how a thing works: an aircraft, a circuit board, an engine): lessons of
-  3 to 5 steps, one control each, the 3D built up part by part, and a "Build your own" sandbox. Use the live app
-  steps; the brief's paragraph on parts, flow overlays and sandboxes applies.
-
-Pick the look in `references/looks.md` (toy isometric, point-cloud survey, photoreal terrain, dark documentary).
+Take any subject and make it visible in 3D: models from real references, a seeded simulation or a scripted timeline
+driving them, a look chosen for the subject, and a film checked frame by frame. The user can also start it with
+`/viz3d <mode> <subject>` (modes: app, lesson, prototype, embed, film, action, book).
 Paths use `{{WORK_DIR}}` for the folder where projects live (the current directory unless the user names one) and
 `{{SKILL_DIR}}` for this skill's folder. Write paths with forward slashes on every platform.
 
 ## Before you start
 
-1. **Blender** (skip this for a quick prototype or an embed, which use primitives unless the user asks for Blender): run `blender --version` (or look for it in the usual install folder). If it is missing, tell the user
-   it gives much better models and is a free download from blender.org, and ask whether to wait for the install or
-   go on without it. Without Blender, build the models in three.js as `references/no-blender.md` describes and say
-   in the report that model quality is lower.
-2. **Node and a browser for recording:** Node 20+ and Playwright with Chromium. ffmpeg for encoding and checks.
-3. **Subagents:** where the harness has them, hand each pass to a fresh subagent with its brief (each pass stays
-   inside a sane budget). Where it does not, run the passes one after another in this session, finishing and
-   checking one before starting the next, and re-read the topic file at the start of each.
-4. **Downloads** (elevation, map data, reference images, recorded sounds): name the source, count and rough size and
-   get the user's OK first.
+1. **Blender** (not needed for a quick prototype, an embed, or the pixel look): run `blender --version` or look in
+   the usual install folder. If it is missing, say it gives much better models, is free at blender.org, and ask
+   whether to wait or go on without it. Without it, follow `references/no-blender.md` and say in the report that
+   model quality is lower.
+2. **Node 20+ and Playwright with Chromium** for recording; **ffmpeg** for encoding and checks.
+3. **Subagents:** where the harness has them, give each pass to a fresh subagent with its brief and keep it inside
+   about 80 tool calls. Where it does not, run the passes one after another in this session, finish and check one
+   before starting the next, and re-read the plan file at the start of each.
+4. **Downloads** (elevation, map data, models, reference images, sounds): name the source, count and rough size,
+   and get the user's OK first.
 
-## Live app steps
+## 1. Pick the shape
 
-1. **Write the topic file** `{{WORK_DIR}}/TOPIC-<slug>.md` in the shape of the files in `examples/` (airport ramp,
-   AI data center, agent office, wildfire valley): folder and port, sites, the world (real parts of the place and what
-   moves), data (units, tasks, fields), four KPIs, the key stages of the process in order (each with where it happens
-   and the event that marks it), what the bottom timeline follows, made-up names, and the look (toy isometric when the user names none).
-   Research the real operation first and list the real object types the main assets stand for, and every activity
-   that happens there: each one must move in the world. For a real named place, follow "A real place" in
-   `references/real-objects.md` (open map data for the layout, exterior references for every landmark).
-2. **Pass 1, assets** with the Pass 1 brief (`references/brief.md`), or `references/no-blender.md` without Blender.
-3. **Pass 2, app and film** with the Pass 2 brief, once pass 1 is checked.
-4. **Check before showing anyone:** contact sheets of the film (`scripts/contact-sheet.sh`, sheets newer than the
-   video) and the screenshots, against the faults in `references/film.md` and the brief's checks.
-5. **Final polish:** what you or the user find goes into one more pass with "everything else is approved, change
-   nothing else", then re-record the film.
+Read what the user wants people to see, then pick one shape (or combine two) and read its reference:
+
+| The subject is | Shape | Read |
+|---|---|---|
+| A place or system that runs (units, tasks, flows) | Live app with dashboard and a 30 s film | `references/brief.md`, `examples/` |
+| How a thing works (aircraft, circuit board, engine) | Lesson app: 3 to 5 lessons, one control each, a "Build your own" sandbox | `references/brief.md` (parts, flow overlays, sandboxes) |
+| Something spreading over real land | Terrain app with a time scrubber | `references/looks.md` (photoreal terrain), `examples/wildfire-valley.md` |
+| A story, case or piece of history | Documentary film | `references/documentary.md`, `references/film.md` |
+| Characters, creatures or machines doing something | Action short | `references/action.md` |
+| One object cut open or exploded | Cutaway film, or an app with a section view | `references/film.md`, `references/looks.md` |
+| One big object or building with many rooms, as a page or a book | Book: interactive illustrated cutaway plate, with quizzes | `references/book.md`, `references/looks.md` |
+| A demo for leaders in about an hour | Quick prototype from three.js primitives | `references/live-embed.md` |
+| A live view inside an existing dashboard or product | Embed (web component or iframe) on real data | `references/live-embed.md`, `scripts/mock-feed.mjs` |
+
+Pick the look in `references/looks.md` (Choosing): toy isometric, point cloud, photoreal terrain, dark documentary
+pixel diorama or illustrated cutaway plate. Study a look the user shows from a reference video with timestamped frame sheets
+(`scripts/contact-sheet.sh <video> <folder> <fps>`), then write it up as a new section in `looks.md`.
+
+## 2. Write the plan file
+
+Write one file in `{{WORK_DIR}}` before anything is built: the topic file for an app (the `examples/` shape), the
+fact file for a documentary, the action sheet for an action short. It names the real parts of the subject, what
+moves or changes, the beats or features to show, the look, and the camera view that shows the subject best (a
+cutaway for depth, top-down for flows, low side for arrivals).
+
+Research the real subject first: real dimensions, steps, rules and moves. Use made-up names for companies and
+people unless the user asks for real ones. For a real named place, follow "A real place" in
+`references/real-objects.md`.
+
+## 3. Pass 1: assets and stage
+
+Models follow `references/asset-sources.md`: ready models first, then scans, packs, AI-generated models, and
+Blender builds from a reference sheet (`references/real-objects.md`). The pass reports stills at film scale.
+
+## 4. Pass 2: build and film, with the self-review loop
+
+Build the app or the film from the plan file with the brief in `references/brief.md`. Before reporting, run
+`references/self-review.md` for up to three rounds: `scripts/frame-guard.js` measurements, frame sheets and the
+mode's fault list. Run the two passes separately; one pass doing both runs too long.
+
+## 5. Check, then show
+
+Open the final sheets and peak stills yourself (`scripts/contact-sheet.sh`, sheets newer than the video). Look for
+what the loop can miss: a subject wrong for the real thing, a dull beat, broken UI rules, toys or programmer art.
+Every fault the user or you find that the loop missed goes into the fault lists the same turn
+(`self-review.md`, Growing the lists).
+
+## 6. Polish
+
+Give fixes to one more pass with "everything else is approved, change nothing else", then re-record. Publish only
+on the user's word.
 
 ## Rules
 
-- No real brands, logos, liveries or characters. A real place the user names is built as it is (its layout and
-  buildings), still without operator logos or liveries.
-- Every main asset is modelled from a reference sheet of the real thing (`references/real-objects.md`); models from
-  memory read as toys. This holds without Blender too.
-- A live app's film is driven by real input on a virtual clock; a documentary film is scripted shot by shot. Both
-  follow `references/film.md`.
+- Original names and designs by default. Real brands, liveries and known characters only when the user asks, with
+  licensed models and a credit line.
+- Every main asset matches a reference of the real thing. Models from memory read as toys.
+- Every frame is a function of time (a virtual clock, clips set from it), so any frame renders the same in any
+  order. Real clicks on that clock drive an app's film, not a camera moved in code.
+- Render and encode at low priority, one heavy job at a time, and stop every server you start.
 - Real people and real harm: facts from sources, victims named with respect, no gore (`references/documentary.md`).
 - Reference images and videos are for study only: never ship them in the app or the film.

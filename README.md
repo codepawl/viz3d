@@ -8,7 +8,7 @@ This skill has your agent turn questions
 like these into a 3D world you can watch or click through. The world is built from researched facts and from models
 made to real dimensions.
 
-It has five modes:
+It has seven modes:
 
 - **Live app**: a three.js app with a dashboard around a 3D world of the place. A seeded simulation moves the units and
   the numbers. The agent records a 30 s film by driving the app with real clicks on a virtual clock.
@@ -22,6 +22,12 @@ It has five modes:
 - **Lesson app**: a step-by-step lesson on a real object at real size, such as an Arduino and a breadboard. Parts and
   wires plug in as they do on a desk. The highlighted code line is what the board does right now. A free bench lets
   the learner build their own circuit.
+- **Action short**: creatures, machines or characters doing something, such as a fight, a chase or a launch. Every
+  move is planned beat by beat, and every hit lands on a visible contact. The agent checks the frames for hidden or
+  mistimed actions before it shows you the film.
+- **Book**: an illustrated cutaway plate of one big object or building, such as a liner or a castle, in 3D. You orbit
+  it, read the margin labels and fly into any room, each full of small people at work. Several subjects make a
+  page-turning book with a short quiz on each page.
 
 | Live app | Documentary film |
 |---|---|
@@ -42,7 +48,15 @@ Every live app has stage cameras on number keys, a guided tour, follow camera an
 
 ![A metro app with the stage bar at the top and the speed controls at the bottom](docs/images/stages.jpg)
 
-There are four looks: toy isometric, point-cloud survey, photoreal terrain and dark documentary.
+There are six looks: toy isometric, point-cloud survey, photoreal terrain, dark documentary, pixel diorama and illustrated cutaway plate.
+
+## What is new
+
+- The `/viz3d` command with a mode word, and command files for Gemini CLI and OpenCode.
+- The `book` mode and the illustrated cutaway plate look.
+- The pixel diorama look and an action short mode.
+- A self-review loop that measures frames, looks at them and fixes faults before you see the result.
+- A source list for ready models, and notes on publishing a live page as a claude.ai Artifact.
 
 ## Install
 
@@ -66,12 +80,56 @@ For Claude Code, Codex, Cursor and other agents that read skill folders, use the
 npx skills add codepawl/viz3d
 ```
 
-To install by hand, copy `plugins/visualize-in-3d/skills/visualize-in-3d` into your agent's skills folder (for Claude
-Code, `~/.claude/skills/`).
+To install by hand, copy both folders in `plugins/visualize-in-3d/skills/` (`visualize-in-3d` and the `viz3d`
+command) into your agent's skills folder:
+
+| Agent | Skills folder |
+|---|---|
+| Claude Code | `~/.claude/skills/` |
+| Codex | `~/.agents/skills/` |
+| Cursor | `~/.cursor/skills/` (it also reads `~/.claude/skills/` and `~/.agents/skills/`) |
+| Gemini CLI | `~/.gemini/skills/` |
+| OpenCode | `~/.config/opencode/skills/` |
+
+Gemini CLI and OpenCode take slash commands from their own folders. To get `/viz3d` there, also copy the command file:
+
+| Agent | Copy | To |
+|---|---|---|
+| Gemini CLI | `harness/gemini/viz3d.toml` | `~/.gemini/commands/` |
+| OpenCode | `harness/opencode/viz3d.md` | `~/.config/opencode/commands/` |
 
 ## Use
 
-Ask for what you want to see, for example:
+Start it with the command, a mode and the subject:
+
+```text
+/viz3d film the 1906 San Francisco earthquake
+/viz3d app a container port
+/viz3d action two mechs fighting in a flooded city
+/viz3d book the Titanic
+```
+
+| Mode | What you get |
+|---|---|
+| `app` | Live app with a dashboard and a 30 s film |
+| `lesson` | Lesson app that builds a real object step by step |
+| `prototype` | Quick prototype from three.js primitives, no Blender |
+| `embed` | Live embed for your dashboard, on your real data |
+| `film` | Documentary film |
+| `action` | Action short: creatures, machines or characters doing something |
+| `book` | Illustrated cutaway plate of one subject, or a page-turning book of several, with quizzes |
+
+Leave the mode out and the agent picks one from the subject. How you type the command depends on the agent:
+
+| Agent | Command |
+|---|---|
+| Claude Code, plugin install | `/viz3d` (or `/visualize-in-3d:viz3d` when another plugin also has a `viz3d`) |
+| Claude Code, skills folder | `/viz3d` |
+| Codex | `$viz3d`, or pick it from `/skills` |
+| Cursor | `/viz3d` |
+| Gemini CLI, OpenCode | `/viz3d`, after you copy the command file |
+
+You can also just ask for what you want to see, for example:
 
 - "Visualize how a container port works."
 - "Show how a city metro keeps its trains apart."
@@ -106,6 +164,11 @@ that only takes a URL, use `embed.html?source=...` in an iframe. To test without
   prototypes and embeds never need it.
 
 The skill asks before it downloads anything, such as elevation data, map data or reference images.
+
+## Contributing
+
+Faults you saw, new looks, example topics and harness adapters are welcome. Read
+[CONTRIBUTING.md](CONTRIBUTING.md). Coding agents read [AGENTS.md](AGENTS.md).
 
 ## License
 

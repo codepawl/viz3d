@@ -1,0 +1,7 @@
+interface:
+  display_name: "viz3d"
+  short_description: "Start visualize-in-3d with a mode and a subject"
+  default_prompt: "Use $viz3d with: "
+
+policy:
+  allow_implicit_invocation: false

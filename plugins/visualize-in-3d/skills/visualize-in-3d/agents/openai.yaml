@@ -1,0 +1,4 @@
+interface:
+  display_name: "Visualize in 3D"
+  short_description: "Turn a subject into a 3D world: live app, film, lesson or action short"
+  default_prompt: "Use $visualize-in-3d to turn this into a 3D world: "

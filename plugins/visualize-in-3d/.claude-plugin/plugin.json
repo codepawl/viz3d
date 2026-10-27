@@ -1,6 +1,6 @@
 {
   "name": "visualize-in-3d",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Turn hard-to-picture places, systems, objects and events into a 3D world you can watch, learn from or click through: a live three.js app with a dashboard, a lesson app, a documentary film, or an illustrated cutaway book, built from real layouts and models made from real references.",
   "author": {
     "name": "CodePawl",

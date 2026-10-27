@@ -47,6 +47,23 @@ measurement or a look at the frames could have found.
   must leave the subject in view.
 - A symbol in the frame centre: an emblem at the vanishing point, or wall parts that line up into a cross. A statue's
   raised arm can also read as a salute. Check every documentary shot about a regime for these.
+- A close shot from inside the subject's own clutter: tall dark parts (pylons, racks, masts) fill the frame.
+  Nothing reads as one object. Pull back until each part has space around it. In an app film, shrink
+  the dashboard so the world fills most of the frame.
+- A pop-up page that reads as a greeting card: one flat cut-out on one plane in front of a wall of text. A pop-up
+  needs depth layers at different distances, box folds with volume and a scenic backdrop. Its layers rise in a
+  staggered order and shadow each other.
+- Stiff programmer drawing on painted textures: straight strokes, hard polygon edges, flat fills. Illustrated art
+  needs curved, tapered ink lines, soft washes and organic shapes.
+- Close-ups that go soft or show only part of the detail. Paint each texture at 1.5 times the texels of the closest
+  shot, and draw text at that size. Use maximum anisotropy and frame the whole detail.
+- Loud, hissy foley on a gentle action, such as leaf-rustle recordings used for page turns. Keep paper foley soft and
+  low-passed under the music, with few snaps, never louder than the beat it marks.
+- Stacked sounds on one action, and "magic" stingers: a page turn with a creak, snaps, chimes and marimba at once.
+  Use one sound per action, and no wind chimes or sparkle on a reveal.
+- Falling water drawn as opaque white sprites or a row of identical streaks. At phone size it reads as foam clumps or
+  a barcode. Draw clear falling water as a thin, mostly transparent sheet that catches light on its edges.
+  It turns white only where it breaks, and its width varies.
 
 ## Growing the lists
 

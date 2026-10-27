@@ -64,6 +64,15 @@ measurement or a look at the frames could have found.
 - Falling water drawn as opaque white sprites or a row of identical streaks. At phone size it reads as foam clumps or
   a barcode. Draw clear falling water as a thin, mostly transparent sheet that catches light on its edges.
   It turns white only where it breaks, and its width varies.
+- The main event is missing from the picture while the numbers say it happens: a flood stage that shows dry rooms
+  with "46 cm" in the HUD. Shoot every stage and check that the event (water, fire, smoke) is drawn in every
+  view, the section view included.
+- A state that contradicts itself on screen: corridor lamps and bulbs still lit in a "Blackout" stage. Check every
+  light source against the state that should switch it.
+- A result or end card drawn translucent over a busy scene, so its text mixes with the rooms behind. A card with
+  more than one line of text sits on an opaque surface.
+- A cut-away neighbour faded with a coarse dither reads as a ghost polka-dot block. Fade it to a clean low alpha or
+  cut it to stub height like the main building.
 
 ## Growing the lists
 

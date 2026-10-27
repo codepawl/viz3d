@@ -2,7 +2,7 @@
 
 Each topic file names one look. The look sets the world's rendering, the UI skin and what the film shows; the data
 model, the dashboard parts and the film's click-driven shape stay the same. Reading map: Toy isometric (default),
-Point-cloud survey, Photoreal terrain analysis, Dark documentary, Pixel diorama, Illustrated cutaway plate, Choosing.
+Point-cloud survey, Photoreal terrain analysis, Dark documentary, Pixel diorama, Illustrated cutaway plate, Lived-in isometric, Choosing.
 
 Reference stills or clips for a look are optional. If you have some, save them under `{{WORK_DIR}}/references/<slug>/`
 and point the briefs at them; they are for study only and never ship in the app or the film. Without them, the
@@ -163,6 +163,25 @@ Fits one big object or building with many rooms full of people: ships, castles, 
 - Proportions are real. Never stretch the model vertically to show more rooms. Make the decks taller in the plan
   instead.
 
+## Lived-in isometric
+
+The survival-game look of Project Zomboid, studied from public sources only. Fits ordinary buildings where people
+live or work and a crisis plays out inside them: a house in a storm, a flat in a fire, a clinic in a blackout.
+
+- Camera: orthographic, high three-quarter view (about 30 degrees down, 45 degrees around), 4 to 6 zoom steps. The
+  floors stack; a floor switcher shows one floor and hides every floor above it.
+- The cut: walls and doors on the camera side drop to a 0.3 m stub around the floor in view, with a soft dithered fade
+  near the focused person instead of a hard pop; wall thickness, skirting and the inside finish show on the stub.
+- Lived in: real scale, every room furnished and cluttered with the things its people really own; muted, slightly
+  desaturated realistic materials with grime and wear, never toy chunky shapes or clean showroom surfaces.
+- Light tells the state: warm interior bulbs that spill through doors and windows onto floors and the street; when the
+  power fails the rooms drop to near black and only flashlights, candles and phone screens light them. Time of day
+  moves the sun. An optional vision cone darkens what the focused person cannot see.
+- Weather is part of the world: rain streaks and splashes, wind that sways trees, wires and loose things, puddles, and
+  murky brown flood water with floating debris that rises as a real plane through the rooms.
+- UI: small dark translucent panels in the lower corners (survival HUD), a right-click context menu on objects with
+  the real actions, a short task queue per person, and a clock with the hours to the event. House UI rules hold.
+
 ## Choosing
 
 Toy isometric is the default for every topic. The point-cloud look can read as dull on a busy site, so use it when
@@ -170,6 +189,6 @@ it is asked for. Otherwise pick the look the place itself suggests: built places
 isometric; land and water seen from above go point-cloud; an event spreading across real land over time goes
 photoreal terrain; a case or a piece of history told in order goes dark documentary; a small floating world with
 many tiny units, or a battle between creatures, goes pixel diorama; one big object or building with many
-rooms full of people goes illustrated cutaway plate. A look the user shows from a reference video is
+rooms full of people goes illustrated cutaway plate; an ordinary building with a crisis playing out inside it goes lived-in isometric. A look the user shows from a reference video is
 studied frame by frame (`scripts/contact-sheet.sh`) and written up as a new section here. Write the look's name in
 the topic file. Add a new look only after saving its reference and writing a section here.

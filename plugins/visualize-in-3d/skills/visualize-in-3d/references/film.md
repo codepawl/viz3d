@@ -64,6 +64,15 @@ leans on them most. Reading map: Pacing and text, Camera, Motion, Figures and pl
   never matches the feet on screen.
 - Score by section of the story (an opening, a turn, the main event, the aftermath, the end), crossfading over a
   second or two at the section's first cut, instead of one loop under everything.
+- Every mouse or keyboard input in a film gets its own small sound: a click, a wheel step, a key press, a drag. The
+  recorder logs each input with its frame (`input_events.json`: frame, kind, target), and the sound script places
+  one real recording per input and stops with an error on an input it has no sound for.
+- Input sounds stay small and soft: a light click, a soft whoosh on a transition, a quiet tick. No hits, booms or loud
+  UI blips. Showcase and app films carry a music bed under them, not effects alone.
+- No repeated ticks: not one per drag step, not one per counter step. A run of ticks reads as tapping a bowl. A drag
+  gets one soft whoosh for the whole gesture, and a counter runs silent under the music.
+- An app film's music is upbeat and warm (major key, light groove, plucks or acoustic), even when the story has an
+  outage in it. Slow whole-tone or minor drones read as horror.
 - Mix to about -19 LUFS (or -16 for a short social cut), true peak under -1 dBFS; sound effects stay audible under
   the music.
 

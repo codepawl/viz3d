@@ -73,6 +73,40 @@ measurement or a look at the frames could have found.
   more than one line of text sits on an opaque surface.
 - A cut-away neighbour faded with a coarse dither reads as a ghost polka-dot block. Fade it to a clean low alpha or
   cut it to stub height like the main building.
+- A town or site with no streets: houses and cars standing on grass because the layout had lots but no road graph.
+  Every built place gets its circulation first (roads with curbs, sidewalks and lane paint, driveways, yard paths),
+  and every vehicle drives on it.
+- A map layer toggle that draws nothing readable: thin world-width lines vanish at overview zoom. Shoot each layer at
+  overview and close, and draw network overlays with screen-space width lines and moving particles.
+- Dark puddle ellipses scattered on grass read as holes, and street-lamp light pools drawn as huge orange discs.
+  Puddles only on paving, few and sky-reflective; a lamp pool about the lamp's height in radius.
+- Vehicles that ignore the ground and the road: a car keeps its flat height and yaw on a hill, so it sinks into the
+  slope going up and floats going down, or points off the lane. Sample the ground under the front and rear axles every
+  frame, set height and pitch from them (and roll from both sides), yaw from the lane tangent, wheels spinning with
+  distance; check the gap at each wheel on the steepest road (under 5 cm). A site also needs believable traffic
+  density for its size, not a handful of cars.
+- Bare ground in the frame: neighbours cut low so the subject stays visible leave a flat empty field behind them.
+  Put a next row of full-height buildings behind the subject (behind it as seen from the camera, so it hides
+  nothing) with facades turned toward the camera, never plain rear walls, then low plots out to the distance fade.
+- A transition clip played on loop: a "sit" clip that is really the sit-down motion stands people up and sits them
+  down every cycle. Check each clip's first and last root pose; a clip that ends in a different pose plays once and
+  holds its last frame, or the model gets a separate held pose.
+- A result card or toasts over the last beat of a film that should end on the world itself. End on the simulation
+  unless the plan asks for a card.
+- A silent input: a click, wheel step, key press or drag in an app film with no sound on its frame. Check the
+  recorder's input log against the cue list.
+- A flashlight beam drawn as a straight translucent cone: hard edges, even brightness, frozen in the hand. Draw it
+  from the lens, fade it along its length and toward its edge, add faint haze noise and motes, and let the hand drift
+  a little. Guard the shader against NaN (pow of a negative, normalize of zero): one NaN pixel through bloom turns the
+  whole frame black.
+- Rain that falls as one uniform slant: every streak tilted by the same wind vector, same length and brightness. Keep
+  rain near vertical, give each drop its own lean, speed, length and brightness, and let gusts move across the scene.
+- A rain bed that hisses, sounds dull or rings. A distant rain wash is a band of hiss, low-passing it sounds cheap,
+  and offset copies of a mono bed comb-filter into a ringing room. Pick a close recording whose energy sits mostly
+  at 250 Hz to 4 kHz at a steady level, measure its band shares before mixing, and keep it quiet under the cues.
+- Sound tails that read as reverb in fast stretches (a howling wind bed, a clank left ringing, a thunder with a long
+  fade) and a low tone under the whole film (a bed whose loudest band sits at 80-250 Hz). Keep wind thin, cut one-shots
+  to their dry attack, drop ambience with no picture event, high-pass rain near 500 Hz and water near 150 Hz.
 
 ## Growing the lists
 

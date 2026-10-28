@@ -2,7 +2,7 @@
 
 Each topic file names one look. The look sets the world's rendering, the UI skin and what the film shows; the data
 model, the dashboard parts and the film's click-driven shape stay the same. Reading map: Toy isometric (default),
-Point-cloud survey, Photoreal terrain analysis, Dark documentary, Pixel diorama, Illustrated cutaway plate, Lived-in isometric, Choosing.
+Point-cloud survey, Photoreal terrain analysis, Dark documentary, Pixel diorama, Illustrated cutaway plate, Lived-in isometric, Dither + ASCII showcase, Choosing.
 
 Reference stills or clips for a look are optional. If you have some, save them under `{{WORK_DIR}}/references/<slug>/`
 and point the briefs at them; they are for study only and never ship in the app or the film. Without them, the
@@ -181,6 +181,28 @@ live or work and a crisis plays out inside them: a house in a storm, a flat in a
   murky brown flood water with floating debris that rises as a real plane through the rooms.
 - UI: small dark translucent panels in the lower corners (survival HUD), a right-click context menu on objects with
   the real actions, a short task queue per person, and a clock with the hours to the event. House UI rules hold.
+- Every panel in the app (KPIs, alerts, cards, layer and stage bars) takes the survival-HUD skin, not a generic
+  dashboard skin.
+- Bright by default: an overcast but light day the buildings read in. Night is a choice in an environment picker
+  (time of day, weather), never the only state. A film opens in daylight and turns the picker to night on camera, so
+  lamps and windows switch on and a fault shows as buildings that stay dark.
+- A network overlay follows the real route and height: an overhead line glows along its wires at wire height with its
+  poles highlighted; an underground cable or main shows below the ground (a cut or see-through ground band with the
+  conduit or pipe at its depth), never one flat line at ground level for both.
+
+## Dither + ASCII showcase
+
+Required for every film that shows off assets, models, a tool or a product in 3D.
+
+- The model is always a clean lit PBR render, never put through ASCII or dither, so people see the real model.
+- Dither and ASCII belong to everything around the model: the backdrop, the floor, transitions between assets, the UI
+  and the stat readouts. Dither is 1-bit ordered Bayer with 2-3 px cells at 1080p. Mask the model out of both passes.
+- Both stay near-monochrome and faint: grey dots with at most a whisper (about 15%) of a palette tint, so they read as
+  texture and never compete with the numbers or the models. Colour belongs to brand logos and status marks.
+- Show what the work changed, not just the asset. For an optimization: before and after side by side at the same
+  camera, with measured numbers per stage (file size, triangles, draw calls, texture size, load time), and a close-up
+  proving the look held.
+- Type: one monospace face, white or ink on the dark ground. Credits for sourced assets sit on the end card.
 
 ## Choosing
 
@@ -189,6 +211,6 @@ it is asked for. Otherwise pick the look the place itself suggests: built places
 isometric; land and water seen from above go point-cloud; an event spreading across real land over time goes
 photoreal terrain; a case or a piece of history told in order goes dark documentary; a small floating world with
 many tiny units, or a battle between creatures, goes pixel diorama; one big object or building with many
-rooms full of people goes illustrated cutaway plate; an ordinary building with a crisis playing out inside it goes lived-in isometric. A look the user shows from a reference video is
+rooms full of people goes illustrated cutaway plate; an ordinary building with a crisis playing out inside it goes lived-in isometric; a film that shows off assets or a product goes dither + ASCII showcase with the model rendered clean. A look the user shows from a reference video is
 studied frame by frame (`scripts/contact-sheet.sh`) and written up as a new section here. Write the look's name in
 the topic file. Add a new look only after saving its reference and writing a section here.

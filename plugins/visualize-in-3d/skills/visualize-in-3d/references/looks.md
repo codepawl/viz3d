@@ -2,13 +2,14 @@
 
 Each topic file names one look. The look sets the world's rendering, the UI skin and what the film shows; the data
 model, the dashboard parts and the film's click-driven shape stay the same. Reading map: Toy isometric (default),
-Point-cloud survey, Photoreal terrain analysis, Dark documentary, Pixel diorama, Illustrated cutaway plate, Lived-in isometric, Dither + ASCII showcase, Choosing.
+Point-cloud survey, Photoreal terrain analysis, Dark documentary, Pixel diorama, Illustrated cutaway plate,
+Lived-in isometric, Dither + ASCII showcase, Gradient glow ASCII, Clean ops world, Choosing.
 
 Reference stills or clips for a look are optional. If you have some, save them under `{{WORK_DIR}}/references/<slug>/`
 and point the briefs at them; they are for study only and never ship in the app or the film. Without them, the
 description of each look below is enough.
 
-## Toy isometric (default)
+## Toy isometric
 
 Built for an AI data center, an agents office, an airport ramp, a chip fab, air traffic control, a metro and a toll
 plaza. Think of a clean isometric diorama inside a light operations dashboard.
@@ -204,9 +205,74 @@ Required for every film that shows off assets, models, a tool or a product in 3D
   proving the look held.
 - Type: one monospace face, white or ink on the dark ground. Credits for sourced assets sit on the end card.
 
+## Gradient glow ASCII
+
+For a creature or object that is itself the art (an insect, an animal, a machine in motion), where the ASCII body is
+the point rather than a backdrop for a clean model. First used for a cockroach season.
+
+- The real lit 3D scene and a view-normal pass render at 3x3 texels per character cell (about 7x12 px cells at
+  1080 wide). Each cell picks a glyph from a brightness ramp (`: - = + * # % @`); depth or normal edges pick a line
+  glyph by direction. Every surface cell shows at least a colon so bodies read as filled shapes, not outlines.
+- Brightness is light plus a rim term (surfaces turned from the camera glow), so the silhouette always lights up.
+- Colour comes from a 5-stop gradient (deep violet, violet, magenta, orange, cream), positioned by light mixed with
+  a diagonal screen sweep (about 0.8 sweep). Light alone goes cream and monochrome; the sweep is what makes it a
+  gradient.
+- Materials are made matte (roughness 0.7+, no metal): glossy highlights blow out to white and skip the gradient.
+- Bloom only above about 0.55 luminance, so highlights and rims glow and the frame never fogs over.
+- Ground is black with a faint radial haze drawn as 2 px 4x4 Bayer dots in the two darkest stops.
+- Key light low and in front for faces (heads tucked under a shell go black otherwise), a strong rim from behind,
+  and a soft fill from the camera.
+- Creatures with antennae, whiskers or tails longer than the camera distance: never frame the close-up from in
+  front of the head, where the lens sits inside their sweep and they whip across the frame. Use a low 3/4 profile
+  behind the antenna's line. Antenna idle waves need a phase shift of about 1 radian per segment; an in-phase
+  wave stacks over the chain and stands the antenna straight up.
+- Blended-transparent materials (wings, fins, glass in many downloaded models) write no depth, so the glyph pass
+  reads them as empty background and they vanish. Switch them to an alpha cutout (`transparent false`, `alphaTest`
+  about 0.35, `depthWrite true`) and render the normal pass double-sided (roach wings, 2026-10-29).
+- A floor under the glyphs needs its own sparse treatment (tag it in the normal pass, 1-4 small glyphs by light,
+  wide grout) plus a light pool that travels with the subject, or a tracking shot reads as flat haze.
+
+## Clean ops world (default for a system that runs)
+
+A white-grey, evenly lit world with one teal accent, framed like a real operations product. Fits any place or system
+that runs a process: a factory, port, airport, hospital, data center, warehouse. Values below come from a finished
+reference app (a chip fab with a roof cut away, three.js with react-three-fiber).
+
+- World: pale cool greys only (ground `#e6ebf2`, backdrop and fog `#d3dae5`, roads `#c3cad6`, pads `#dde3ec`, white
+  markings, dark trim `#3a4250`). Machines are white and light-grey matte shells (roughness about 0.62, metalness
+  about 0.02) with thin accent stripes in the brand colour (teal `#13a594`). Colour is kept for state: green running,
+  amber waiting, red fault, and one warm orange for the thing being tracked (a lot, a parcel, a patient).
+- Camera: high 3/4 view, field of view 30, started about 60 / 120 / 160 from the centre looking down at it. Polar
+  angle limited to 0.25-1.25 rad so the user never goes flat or underground. Smoothed orbit (0.55 s), min distance
+  about 7 m, a follow mode that tracks a clicked unit.
+- Cutaway: roofs and near walls are removed or cut to stub height so the insides and the floor below show; keep the
+  far wall as a thin backdrop with a teal top rail.
+- Light: one warm sun (`#fff6ea`, intensity about 2.1) from the front-left and high, soft shadow (radius 4, 2048 map,
+  shadow box fitted to the site and refreshed every other frame), a hemisphere fill (`#eef4ff` over `#aab6c8`, 0.6),
+  a neutral room environment at 0.3, tone-mapping exposure about 0.74. Postprocessing: N8AO ambient occlusion
+  (radius about 1.6, intensity about 2.4, tint `#33415c`), light bloom only above luminance 1.0 for lamps and screens
+  (intensity 0.7), SMAA. Fog hides the edge of the world.
+- Content: people, vehicles and goods run the real process on a seeded simulation (queue, move, process, move on,
+  breakdowns with a ticket and a person who walks to fix it). Zone labels lie flat on the floor in teal pills.
+- UI, framed as a real product with an invented name: top bar (logo, search with a `/` hint, site switcher, live clock
+  with speed multiplier, alert bell, user); four KPI cards top left (icon in a soft teal square, label, big number
+  with a delta, one line of context); a list panel bottom right with tabs per entity kind and rows with a status chip
+  and progress bar; a progress or route timeline bar bottom left; zoom and home buttons on the left edge. Cards are
+  white at 94 percent, 12-16 px radius, a soft blue-grey shadow, one system font, tabular numbers. Palette: ink
+  `#18212f`, muted `#6a7588`, fills `#f2f5f9`, status chips tinted soft backgrounds with a matching mark.
+- Interaction: click any unit to open its card (state, load, rate, what it is doing now) and a pin and tag over it; a
+  list row flies the camera there and follows it; Esc or a click on empty floor closes the card.
+- Data: every number on the dashboard is computed from the running model, never typed in; the delta and the lists
+  change as the simulation runs.
+- Film: a virtual clock and real clicks on units and list rows, ending on the world (see `film.md`).
+- Traps: a second accent colour, a dark theme, camera too low (loses the cutaway), KPI numbers that do not move.
+
 ## Choosing
 
-Toy isometric is the default for every topic. The point-cloud look can read as dull on a busy site, so use it when
+Clean ops world is the default for a system that runs (an operation with units, tasks and flows). Toy isometric (a
+more playful diorama on a slab, stronger colour) stays as an alternative when the user asks for it or the subject is
+light-hearted. A showcase film always uses dither + ASCII with the model
+rendered clean. The point-cloud look can read as dull on a busy site, so use it when
 it is asked for. Otherwise pick the look the place itself suggests: built places full of moving vehicles go toy
 isometric; land and water seen from above go point-cloud; an event spreading across real land over time goes
 photoreal terrain; a case or a piece of history told in order goes dark documentary; a small floating world with

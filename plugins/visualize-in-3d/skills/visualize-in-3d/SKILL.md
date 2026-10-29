@@ -1,14 +1,16 @@
 ---
 name: visualize-in-3d
-description: Turn anything hard to picture into a 3D world people can watch or play with - an operation or system (airport, data center, port, factory, hospital), an event spreading over real land (wildfire, flood), a story in time (a historical event, a case), characters or machines in action (a fight, a chase, a launch), or how a thing works. Builds a live three.js app with a dashboard and a 30 s film, a lesson app, a quick no-Blender prototype, a live embed that runs on real data inside an existing dashboard, a documentary film, an action short, or an interactive cutaway plate or book. Looks include toy isometric, point cloud, photoreal terrain, dark documentary, pixel diorama and illustrated cutaway plate. Models come from ready sources or Blender builds made from real references, and the skill checks its own frames before showing anyone. Use for "visualize how X works", "show this event on a 3D map", "a live 3D dashboard of X", "a 3D lesson on how X works", "a documentary-style 3D explainer", "a quick 3D prototype", "two creatures fight in 3D".
+description: Turn anything hard to picture into a 3D world people can watch or play with - an operation or system (airport, data center, port, factory, hospital), an event spreading over real land (wildfire, flood), a story in time (a historical event, a case), characters or machines in action (a fight, a chase, a launch), or how a thing works. Builds a live three.js app with a dashboard and a 30 s film, a lesson app, a quick no-Blender prototype, a live embed that runs on real data inside an existing dashboard, a documentary film, an action short, or an interactive cutaway plate or book. Looks include toy isometric, point cloud, photoreal terrain, dark documentary, pixel diorama and illustrated cutaway plate. Models come from ready sources or Blender builds made from real references, and the skill checks its own frames before showing anyone. Use for "visualize how X works", "show this event on a 3D map", "a live 3D dashboard of X", "a 3D lesson on how X works", "a documentary-style 3D explainer", "a quick 3D prototype", "two creatures fight in 3D", "app nhìn như game", "làm phim 3D về", "cho 2 con đánh nhau", "pixel battle", "theme point cloud", "kiểu wildfire tool".
 license: MIT
 ---
 
-# Visualize in 3D
+# Visualize in 3D (Dựng thế giới 3D để thấy mọi thứ vận hành)
+
+If `references/local.md` exists, read it first: it sets the folders and house rules for this machine.
 
 Take any subject and make it visible in 3D: models from real references, a seeded simulation or a scripted timeline
 driving them, a look chosen for the subject, and a film checked frame by frame. The user can also start it with
-`/viz3d <mode> <subject>` (modes: app, lesson, prototype, embed, film, action, book).
+`/viz3d <mode> <subject>` (modes: app, lesson, prototype, embed, film, action, book, game).
 Paths use `{{WORK_DIR}}` for the folder where projects live (the current directory unless the user names one) and
 `{{SKILL_DIR}}` for this skill's folder. Write paths with forward slashes on every platform.
 
@@ -38,10 +40,11 @@ Read what the user wants people to see, then pick one shape (or combine two) and
 | Characters, creatures or machines doing something | Action short | `references/action.md` |
 | One object cut open or exploded | Cutaway film, or an app with a section view | `references/film.md`, `references/looks.md` |
 | One big object or building with many rooms, as a page or a book | Book: interactive illustrated cutaway plate, with quizzes | `references/book.md`, `references/looks.md` |
+| A game people play in the browser (steer a creature, survive, grow) | Playable web game, bot-balanced | `references/game.md` |
 | A demo for leaders in about an hour | Quick prototype from three.js primitives | `references/live-embed.md` |
 | A live view inside an existing dashboard or product | Embed (web component or iframe) on real data | `references/live-embed.md`, `scripts/mock-feed.mjs` |
 
-Pick the look in `references/looks.md` (Choosing): toy isometric, point cloud, photoreal terrain, dark documentary
+Pick the look in `references/looks.md` (Choosing): clean ops world (default for a system that runs), toy isometric, point cloud, photoreal terrain, dark documentary
 pixel diorama or illustrated cutaway plate. Study a look the user shows from a reference video with timestamped frame sheets
 (`scripts/contact-sheet.sh <video> <folder> <fps>`), then write it up as a new section in `looks.md`.
 
@@ -89,3 +92,5 @@ on the user's word.
 - Render and encode at low priority, one heavy job at a time, and stop every server you start.
 - Real people and real harm: facts from sources, victims named with respect, no gore (`references/documentary.md`).
 - Reference images and videos are for study only: never ship them in the app or the film.
+- The public copy of this skill is mirrored from this folder. Edit only this folder; never put personal paths, names
+  or tools outside `references/local.md`. A nightly sync script mirrors the rest.

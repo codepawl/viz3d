@@ -1,3 +1,16 @@
+// Contact guard (measureContacts): for objects that rest on a surface (papers, a mug, a folder on a desk), checks every
+// frame that nothing sinks into the surface or sits so close that it z-fights. Usage inside renderAt(time):
+//   const contacts = measureContacts([{ name: 'invoice', object: invoiceGroup, surface: deskMesh }], { minimumGap: 0.0003 });
+//   if (contacts.some((entry) => !entry.ok)) { /* log it with the time and fail the render */ }
+// `surface` is a horizontal mesh (its top is found by a ray from above), a world height (number) or a function
+// (worldX, worldZ) => worldY. Every vertex of every visible mesh under `object` is taken to world space and compared with
+// the surface below it. A vertex lower than the surface is a 'penetration'; one above it by less than `minimumGap` is a
+// 'z-fight'. Meshes with userData.contactIgnore = true are skipped. Each result is
+// { name, ok, lowestGap, vertexCount, faults: [{ kind, gap, worldPosition }] }, faults capped by maxFaultsPerObject.
+// Skinned meshes (a rigged character lying on a bed) are sampled with skinning applied (SkinnedMesh.getVertexPosition),
+// measureContacts refreshes their world matrices itself; pose the bones before calling it.
+// A pair may also set side: 'below' (the object must stay under the surface, e.g. a body under a blanket; the gap is
+// surface minus vertex) and vertexFilter(mesh, vertexIndex) => boolean to measure only some vertices (e.g. not the hands).
 // Dependencies: none beyond "three" (tested with 0.186). Copy this file into the app next to your render code.
 // Frame guard: measures where the film's subjects land on screen, every frame, so a render
 // fails on the faults a viewer sees first (a creature cut by the frame edge, shrunk to a few
@@ -127,4 +140,66 @@ export function findFaults(frameLog, { minHeightPixels = 24, minVisibleShare = 0
     closeRun(key, lastTime);
   }
   return faults;
+}
+
+const contactRay = new THREE.Raycaster();
+const contactOrigin = new THREE.Vector3();
+const contactDown = new THREE.Vector3(0, -1, 0);
+
+function surfaceHeightBelow(surface, worldX, worldY, worldZ) {
+  if (typeof surface === 'number') {
+    return surface;
+  }
+  if (typeof surface === 'function') {
+    return surface(worldX, worldZ);
+  }
+  contactRay.set(contactOrigin.set(worldX, worldY + 1000, worldZ), contactDown);
+  contactRay.far = 3000;
+  const hits = contactRay.intersectObject(surface, true);
+  return hits.length ? hits[0].point.y : null;
+}
+
+// pairs: [{ name, object, surface, side = 'above', vertexFilter }]. options: { minimumGap = 0.0002, penetrationTolerance = 0, maxFaultsPerObject = 3 }.
+export function measureContacts(pairs, { minimumGap = 0.0002, penetrationTolerance = 0, maxFaultsPerObject = 3 } = {}) {
+  const probe = new THREE.Vector3();
+  return pairs.map(({ name, object, surface, side = 'above', vertexFilter }) => {
+    // updateMatrixWorld (not only updateWorldMatrix) also refreshes a skinned mesh's bind matrix inverse.
+    object.updateWorldMatrix(true, false);
+    object.updateMatrixWorld(true);
+    if (surface && surface.updateWorldMatrix) {
+      surface.updateWorldMatrix(true, true);
+    }
+    const faults = [];
+    let lowestGap = Infinity;
+    let vertexCount = 0;
+    object.traverse((child) => {
+      if (!child.isMesh || child.userData.contactIgnore || !child.visible) {
+        return;
+      }
+      const positions = child.geometry.attributes.position;
+      for (let index = 0; index < positions.count; index += 1) {
+        if (vertexFilter && !vertexFilter(child, index)) {
+          continue;
+        }
+        if (child.isSkinnedMesh) {
+          child.getVertexPosition(index, probe);
+        } else {
+          probe.fromBufferAttribute(positions, index);
+        }
+        probe.applyMatrix4(child.matrixWorld);
+        const surfaceY = surfaceHeightBelow(surface, probe.x, probe.y, probe.z);
+        if (surfaceY === null) {
+          continue;
+        }
+        vertexCount += 1;
+        const gap = side === 'below' ? surfaceY - probe.y : probe.y - surfaceY;
+        lowestGap = Math.min(lowestGap, gap);
+        const kind = gap < -penetrationTolerance ? 'penetration' : gap < minimumGap ? 'z-fight' : null;
+        if (kind && faults.length < maxFaultsPerObject) {
+          faults.push({ kind, gap, worldPosition: probe.toArray() });
+        }
+      }
+    });
+    return { name, ok: faults.length === 0, lowestGap, vertexCount, faults };
+  });
 }

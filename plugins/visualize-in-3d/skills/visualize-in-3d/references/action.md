@@ -67,6 +67,25 @@ Choreography:
 - Every special move gets its own cast. It has a wind-up pose and a charge that builds. Then the effect grows
   from its source to the target. An effect that pops into place at full size reads as cheap.
 
+Creature motion has physics in every joint (from a user note on a cockroach idle: "a little rigid, make it more
+insect movement, feel the physics in every joints"):
+
+- Never drive joints straight from smooth noise or sine curves; that glides like a puppet. Behaviour picks targets
+  and every joint is a damped spring chasing its target, stepped at a fixed rate from time 0 so frames stay
+  deterministic.
+- Insects and small animals dart and hold: targets jump on a seeded schedule (a few tenths of a second to a
+  couple of seconds apart), with short flicks and taps between. Big animals use slower, softer targets.
+- Chains (antennae, legs, tails, whiskers): each outer joint hangs off the one inside it and feels its parent's
+  angular acceleration, so it lags and whips. Heavy inner joints are stiff and well damped, light outer ones
+  springier. Keep damping near 0.5 and inherited inertia near 0.3 on long chains: nine light springs at 0.28
+  damping and 0.6 inertia resonated into a 220 degree tip swing.
+- Plot joint angles against targets before recording a clip: a move overshoots once and settles within about two
+  cycles, and nothing grows.
+- Before tuning a gait, wingbeat or strike, read the measured kinematics for that animal (or its nearest studied
+  relative) and cite them in SOURCES.md: which joints carry the stroke, cycle rate, duty factor, body sway (An,
+  2026-10-29, "did you reference the cockroach walk + sprint?"). Insects push by extending the femur and tibia;
+  the hip moves little, so a hip-only stroke looks like rowing. Mark slowed rates and judgement calls as such.
+
 Effects must look heavy and dangerous:
 
 - Beams, jets, flames and exhaust have an opaque core with a white-hot centre and saturated outer layers. Fire

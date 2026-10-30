@@ -75,7 +75,9 @@ frames, music or text). Fits a case file or a piece of history: a crime, a disap
   the street. A public domain period map (USGS historical topo, an old city plan) traced or shaded dark works.
 - 3D reconstructions: dark low-poly rooms and buildings lit by a few warm windows and one red light pool where the
   crime happened (the red light stands in for violence: never blood, bodies or wounds). People are flat solid
-  silhouettes: white for the victim or witness in focus, blue for police, translucent grey for others.
+  silhouettes: white for the victim or witness in focus, blue for police, translucent grey for others. Unlit one-colour
+  material on a rigged base mesh works, with a flat tapered tube from chest to below the hips so the bare waist and hips do
+  not read as a naked muscled body, and the head held up when bending so the outline keeps a head.
 - Labels: small boxed captions in spaced caps with thin leader lines (`PC THOMAS BARRETT`, `SUSPECT`), red dots at
   the anchor; a thin red timeline across the top with times and events (`04:45 BODY IS FOUND`), a note that times
   are approximate.
@@ -267,9 +269,28 @@ reference app (a chip fab with a roof cut away, three.js with react-three-fiber)
 - Film: a virtual clock and real clicks on units and list rows, ending on the world (see `film.md`).
 - Traps: a second accent colour, a dark theme, camera too low (loses the cutaway), KPI numbers that do not move.
 
+## White model documentary
+
+A case told as an architect's model: studied from LEMMiNO's documentaries and built for a full film.
+
+- Every lit set is pale matte grey with light edges (`EdgesGeometry` at 35 degrees on low-vertex meshes), one soft shadowed
+  sun aimed per set plus a hemisphere light, and the frame's corners falling to dark. Practical lights stay as weak accents.
+- Convert in one pass after assets load. Change materials in place: beats hold references and fade them. Scanned wood and
+  carpet lose their maps, paper with information keeps them. Keep the bloom threshold near 0.9.
+- Colour only for what is being told: screens, warning lights, the person the scene is about (flat red). One object the
+  story names as black stays black with pale edges, which makes it the subject of every wide shot.
+- People are flat unlit cut-outs with outlines that read: charcoal on pale sets, never white-grey. They cast shadows.
+- A white box reads as empty, so build what the real place has: floor joints, skirting, pilasters, trusses, frames on walls.
+  Rooms need a fourth wall facing inward only, so cameras outside it still see in. Hide what hangs above a high camera.
+- 2D material sits on a charcoal card with a torn glowing white border: mono text between two rules, quote marks, source,
+  date, citation number. A quote read aloud gets its own acting voice with a narrowed band, not the narrator's.
+- Traps: exposure blowing the floors white, mapped surfaces staying dark, fades that lose their references when materials are
+  replaced instead of changed, a light multiplier applied every frame to a value set only once.
+
 ## Choosing
 
-Clean ops world is the default for a system that runs (an operation with units, tasks and flows). Toy isometric (a
+A case that needs its action and places clearly seen can go white model documentary; dark documentary suits a case that lives on
+what stays hidden. Clean ops world is the default for a system that runs (an operation with units, tasks and flows). Toy isometric (a
 more playful diorama on a slab, stronger colour) stays as an alternative when the user asks for it or the subject is
 light-hearted. A showcase film always uses dither + ASCII with the model
 rendered clean. The point-cloud look can read as dull on a busy site, so use it when

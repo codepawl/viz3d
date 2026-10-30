@@ -203,3 +203,41 @@ export function measureContacts(pairs, { minimumGap = 0.0002, penetrationToleran
     return { name, ok: faults.length === 0, lowestGap, vertexCount, faults };
   });
 }
+
+// Grip guard (registerGrip / measureGrips): a hand that holds, pulls or turns something must TOUCH it. A hand animated to be
+// "near" a prop reads as floating, so every hand-on-object moment registers a grip and the render fails when they separate.
+//   1. Put a named socket (an Object3D) on the prop, in the prop's own space (a panel's edge, a lever's tip). It moves with the prop.
+//   2. Put a contact Object3D on the hand bone (the palm or finger crook that should touch the socket).
+//   3. Once, at build time: registerGrip({ name: 'panel-edge', hand: handBone, contact, socket, from: 126.5, to: 127.1 }).
+//      from/to are the seconds in which the hand is fully on the prop, not the approach or the release.
+//   4. Each frame, after two-bone IK has put contact on socket: const results = measureGrips(time). Fail the render when any
+//      result has ok false (distance in metres, GRIP_LIMIT = 1 cm). Each result is { name, distance, active, ok }.
+// The prop's motion stays time-driven and the arm follows it. When the arm cannot reach, the body turns, leans and steps; look at
+// that move in the shot, since a lunge across a low camera blacks out the frame. A push near the hinge needs less reach than the edge.
+const registeredGrips = [];
+export const GRIP_LIMIT = 0.01;
+
+export function registerGrip({ name, hand, contact, socket, from, to }) {
+  const existing = registeredGrips.findIndex((grip) => grip.name === name);
+  if (existing >= 0) {
+    registeredGrips.splice(existing, 1);
+  }
+  registeredGrips.push({ name, hand, contact, socket, from, to });
+}
+
+const gripContactPoint = new THREE.Vector3();
+const gripSocketPoint = new THREE.Vector3();
+
+export function measureGrips(time, { limit = GRIP_LIMIT } = {}) {
+  return registeredGrips.map((grip) => {
+    if (time < grip.from || time > grip.to) {
+      return { name: grip.name, distance: null, active: false, ok: true };
+    }
+    grip.contact.updateWorldMatrix(true, false);
+    grip.socket.updateWorldMatrix(true, false);
+    grip.contact.getWorldPosition(gripContactPoint);
+    grip.socket.getWorldPosition(gripSocketPoint);
+    const distance = gripContactPoint.distanceTo(gripSocketPoint);
+    return { name: grip.name, distance, active: true, ok: distance <= limit };
+  });
+}

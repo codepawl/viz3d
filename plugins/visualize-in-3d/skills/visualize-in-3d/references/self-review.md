@@ -30,6 +30,9 @@ Reading map: read "Every film" always, then only the groups that match what you 
 
 Read always.
 
+- A refine or remake of a film is shown before it stands next to the old film, frame against frame at the same moments. Better parts do not count if the whole film reads worse (An, 2026-10-30: "sao nó tệ hơn trước vậy").
+- "More realistic" came out as dirt: blotchy tiled ground filling the frame, stains on the skin, grey gloom, over-reflective glass. Realism comes from shape, clean light and soft shadows; keep the stage calm and bright unless the subject asks otherwise.
+- The camera hides what the step is about: a lowered flap seen from above and ahead sits behind the wing and only its track fairings show, as spikes. Film a moving part from the side where it moves into view.
 - The subject the viewer follows leaves the frame or shrinks under about 40 pixels tall.
 - An effect or a panel covers that subject for more than 0.3 s.
 - A colour, material or texture breaks for a few frames (a flat tint, a missing texture, z-fighting flicker).
@@ -43,6 +46,10 @@ Read always.
 - A colour cast added by the encode grade: compare one raw render frame with the same frame of the encoded film. Run
   `eq` and `vignette` on YUV and the blend on gbrp. An `eq` on gbrp frames before a screen blend turned a whole film
   purple.
+- A beat that renders empty or wrong only when the render runs into it from the beat before. The cause is state
+  (opacity, visibility, near plane) set inside one beat's branch and never reset: a vanished cabinet stayed invisible
+  through the next shot. Reset such state on every frame. After any partial re-render, sheet the whole film at 1 fps
+  before sending, not just the spans you changed.
 - A result card or toasts over the last beat of a film that should end on the world itself. End on the simulation
   unless the plan asks for a card.
 
@@ -132,10 +139,36 @@ Anything that walks, crawls, drives or is simulated.
 - Flying units that pass low over signs and stations and cover them (same day). Rise vertically, cruise above the
   tallest object, and descend vertically into an open spot. Paint station names on the floor like the belt labels
   instead of on floating sign cards, and keep landing spots off that text.
+- A figure that glitches while it reaches (An, 2026-10-30: "con người nó cứ bị glitch"). A solver that answers each frame on its
+  own can land on another pose in the next frame. Bake its answers, hold and smooth them, play them back by time, and fail the
+  render on travel per frame (above about 12 cm for the pelvis or 22 cm for a hand at 30 fps). Also smooth facing across a path's corners.
+- A hand that floats near what it holds (An, 2026-10-30: "k cầm vào cái cạnh tủ mà lại lơ lửng"). Every hold, pull or
+  turn gets a socket on the prop, a contact on the hand, two-bone IK and a registered grip: `registerGrip` / `measureGrips`
+  in `scripts/frame-guard.js` fail the render above 1 cm. Then look at the shot: an arm that cannot reach makes the body lunge.
+  Measure the torso against the prop per frame too: every grip passed while the reach solver walked a chest 17 cm into a cabinet. Use the
+  hand on the prop's side, and read a solver's largest reach: a value at its cap means it failed. A held prop rides the hand (`carryProp` in
+  `scripts/human-arm.js`); only rails or a slot may lead it until it clears them. Hold things upright in the fist, palm on the long side.
+- A hand that touches but is bent like no hand can bend (An, 2026-10-30: "hướng tay cầm bị dị dạng ... giới hạn tay chân, cách cầm
+  thoải mái theo khớp gân"): the grip took its whole rotation from the prop, wrist at 149 degrees, and the palm axis had been
+  written backwards. `scripts/human-arm.js`: read the palm axis off the finger bones (where they curl, where the thumb sits) and never
+  assume it. A socket says only what the contact fixes (palm normal on a face, thumb side along an edge); the hand takes the rest
+  from the forearm and is clamped to the comfortable range. `keepArmInRange` is the last stop on every posed arm, stock clips too.
+  Fail the render on the anatomical range: elbow 0-145, pronation 80, supination 85, wrist flexion 80, extension 70, radial 20,
+  ulnar 30. `scripts/arm-audit.mjs` lists every fault in a film without capturing. Look at each grip with a lit close camera,
+  because a black figure hides this. Ask what holds the prop up: a palm on one side of a box holds nothing, so wrap an edge, or
+  put fingers behind and the thumb in front. And which side of a door or panel the body is on before choosing push or pull.
+- Props that collide by keyframe (a book shutting through its cover). Bake a rigid-body sim in Blender and play the
+  transforms back by time, with a per-frame gap probe; the film stays in three.js.
 - Units that stand still while idle or working (An, 2026-10-29, Factory: "lúc nó idle hay làm việc thì nó k có tương
   tác gì, nhìn nó bị nhạt"). Give each role its own readable work loop with the station's prop (typing, page turns,
   scanning with a magnifier), idle fidgets out of sync (bounce, look around, turn to a neighbour), and a small payoff
   when a task ends. Moving units also leave a path trail, flights included.
+- A seated character offset from the seat: Blocky passengers sat 0.26 m back, their torsos inside the seatback (An,
+  2026-10-30, "người ngồi trong cabin đang bị lệch so với vị trí ghế"). Measure the seated body against the cushion and
+  the backrest's front face, not the seat's bounding box, which includes the seatback and tray.
+- A recline that turns the whole part: rotating the whole seat about the floor tipped it forward (An, same day, "sao tự
+  nhiên ghế đẩy ra trước"). Split the moving piece (the backrest out of a one-mesh seat, by triangle position) and
+  hinge it where it meets the fixed part; check the hinge angle's sign on a still.
 - A soft chain built from dozens of tiny rigid physics links: it is unstable (in Unreal Chaos, links of about 2 cm exploded on the first tick and force-driven chains flew apart). Drive the motion kinematically and use physics only for contact.
 
 ### Vehicles, roads and terrain
@@ -145,6 +178,12 @@ Built places, traffic, ground.
 - A town or site with no streets: houses and cars standing on grass because the layout had lots but no road graph.
   Every built place gets its circulation first (roads with curbs, sidewalks and lane paint, driveways, yard paths),
   and every vehicle drives on it.
+- A vehicle that could not do what the story asks: a quadcopter docking with an airliner at cruise (An, 2026-10-30:
+  "nó bay k kịp so với tốc độ máy bay này"). Check speed, range and size against the real class before modelling;
+  a 900 km/h rendezvous needs a fixed-wing drone that matches speed and a capture rig.
+- A vehicle that pops between cuts: the drone rose straight out of the bay across a cut (An, same day, "0:14 drone
+  nó bị glitch"). Drive arrivals and departures on one continuous clock across the cut, and let a departing vehicle
+  leave the frame fully before the next shot.
 - Vehicles that ignore the ground and the road: a car keeps its flat height and yaw on a hill, so it sinks into the
   slope going up and floats going down, or points off the lane. Sample the ground under the front and rear axles every
   frame, set height and pitch from them (and roll from both sides), yaw from the lane tangent, wheels spinning with
@@ -160,6 +199,37 @@ Built places, traffic, ground.
 
 Rain, water, beams.
 
+- A beat about weather with no weather in the sky: a reroute card said "storm cell ahead" over clear clouds (An,
+  2026-10-30, "storm mà sao trong environment lại k có hiện bất kỳ storm nào"). Put the hazard on screen where the
+  camera looks (a cumulonimbus tower with lightning lit from inside), and move it in frame as the vehicle avoids it.
+- An avoidance where the obstacle moves instead of the vehicle: the storm slid aside while the plane held still in
+  frame and the clouds stood still (An, 2026-10-30, "sao né bão mà bão lại tự né nhỉ"). Fix the obstacle in world
+  space, turn and bank the vehicle against a camera that does not turn with it, and keep the ground or clouds
+  scrolling so speed reads. Place the obstacle so it passes beside the vehicle inside the shot: r6 left the cell 13 km
+  ahead on the turn side, so it barely moved in 4 s and the plane still looked headed into it ("chưa thấy né").
+- An object that appears with no visible mechanism: a dinner rose out of a console with no hatch or lift (An, same
+  day, "đồ ăn từ đâu hiện ra từ dưới lên"). Show the opening, the platform and the moving part before the object.
+- A hand-off nobody sees: the meal vanished from the lift and reappeared on the robot, hidden under its head (An,
+  2026-10-30, "con robot phải lấy rồi mới đưa đồ ăn cầm theo"). Show the reach, the object moving across, and the
+  carrier holding it in view on the way; frame the hand-off side-on or from above, not behind the carrier.
+- A part that overhangs its housing: a lift hatch ran 9 cm past the console's end, so the sinking tray clipped the
+  console face, and a lamp floated off the end (An, same day, "đồ ăn nó bị dính vào tường"). Check every opening
+  and fixture against its housing's box.
+- A cover under the body: a duvet thinner than the sleeper and set at mattress height sat inside her (An, same day,
+  "cái mền đắp sao lại ở dưới thân"). Measure the body's top and put covers over it.
+- A device that moves into a face: a tablet arm swung to the reader's head (An, same day). Reach to the hands or
+  lap, and put controls where the person can reach them (the reading light in the seatback ahead, tapped on).
+- An ending that cuts on the climax: the film stopped 3 s after touchdown (An, 2026-10-30, "khúc cuối hơi cục, để cho nó
+  đáp một đoạn nữa rồi hết vid"). Let the action finish and settle (rollout to a stop, a held beat), then the end title,
+  placed where it does not cover the subject.
+- A beat moved in the cut keeps its old lighting: check a re-cut shot against the clock and time of day around it, and
+  sample between lightning flashes as well as on them, since a flash hides a storm that is invisible the rest of the time.
+- A feature shown as one on/off moment: the seat device only toggled a lamp (An, 2026-10-30, "nên hiện scene tương tác được,
+  hiển thị sự tiện lợi và tân tiến"). Show the control itself in use, with its values changing and the real thing answering.
+- A camera inside a character: seats this close put an over-the-shoulder camera inside the head. Go first person and hide the head.
+- An AI action people would not expect for the moment: for a sleeper the "air off her face" vent read as odd, and
+  a body tilted against its reclining seat looked pushed up (An, same day, "t tưởng đắp gì lên mắt"). Pick the
+  action a real passenger knows (an eye mask, the seat, the shade, the light) and keep the body moving with the seat.
 - Falling water drawn as opaque white sprites or a row of identical streaks. At phone size it reads as foam clumps or
   a barcode. Draw clear falling water as a thin, mostly transparent sheet that catches light on its edges.
   It turns white only where it breaks, and its width varies.

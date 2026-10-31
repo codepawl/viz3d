@@ -10,6 +10,11 @@
       "name": "visualize-in-3d",
       "source": "./plugins/visualize-in-3d",
       "description": "Turn hard-to-picture places, systems and events into a 3D world you can watch or click through"
+    },
+    {
+      "name": "build-minecraft-model-from-image",
+      "source": "./plugins/build-minecraft-model-from-image",
+      "description": "Turn a picture of an object into a Minecraft-style 3D model of clean cuboids with pixel textures"
     }
   ]
 }

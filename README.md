@@ -165,6 +165,23 @@ that only takes a URL, use `embed.html?source=...` in an iframe. To test without
 
 The skill asks before it downloads anything, such as elevation data, map data or reference images.
 
+## Also in this repository
+
+**build-minecraft-model-from-image** turns a picture of an object into a Minecraft-style 3D model. The agent looks at
+the picture and writes the model as code: a few cuboids with pixel textures, not a fine voxel grid and not an
+image-to-3D network. You get a GLB, a viewer page, renders from every side and a sheet that compares them with the
+picture. It needs Python through [uv](https://docs.astral.sh/uv/) and Blender 5.x for the renders.
+
+![Four photos with the block model built from each: an iron kettle, an armchair, a rubber duck and a pink fire hydrant](docs/images/minecraft-model.jpg)
+
+```text
+/plugin install build-minecraft-model-from-image@codepawl
+```
+
+Photo credits for the picture above and the skill's `examples/`: kettle and armchair by Auckland War Memorial Museum
+(armchair photo by Gerald E Jones), CC BY 4.0. Rubber duck by Julian Lupyan, CC0. Fire hydrant by Tournasol7, CC BY 4.0.
+All from Wikimedia Commons.
+
 ## Contributing
 
 Faults you saw, new looks, example topics and harness adapters are welcome. Read

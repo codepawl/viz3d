@@ -1,0 +1,20 @@
+{
+  "name": "build-minecraft-model-from-image",
+  "version": "0.1.0",
+  "description": "Turn a 2D picture of an object into a Minecraft-style 3D model: a few clean cuboids with pixel textures, written by the agent as code, with GLB export, a viewer, renders and checks.",
+  "author": {
+    "name": "CodePawl",
+    "url": "https://codepawl.com"
+  },
+  "homepage": "https://github.com/codepawl/viz3d",
+  "repository": "https://github.com/codepawl/viz3d",
+  "license": "MIT",
+  "keywords": [
+    "3d",
+    "minecraft",
+    "blockbench",
+    "glb",
+    "blender",
+    "image-to-3d"
+  ]
+}

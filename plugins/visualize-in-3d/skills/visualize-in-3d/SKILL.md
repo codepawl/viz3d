@@ -63,6 +63,7 @@ people unless the user asks for real ones. For a real named place, follow "A rea
 
 Models follow `references/asset-sources.md`: ready models first, then scans, packs, AI-generated models, and
 Blender builds from a reference sheet (`references/real-objects.md`). The pass reports stills at film scale.
+A review loop that reads many frames runs them through a `frame-reader` agent; open only the frames a decision hangs on.
 
 ## 4. Pass 2: build and film, with the self-review loop
 

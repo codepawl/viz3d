@@ -30,6 +30,8 @@ Reading map: read "Every film" always, then only the groups that match what you 
 
 Read always.
 
+- Moving parts that clip into static ones: a vehicle or rail passing through a tool, a support post through a machine. Measure the clearance in code from the model bounds and require it above zero before looking at frames (Session Fab, 2026-10-31: OHT legs sunk through tool roofs and An called it glitching).
+
 - A refine or remake of a film is shown before it stands next to the old film, frame against frame at the same moments. Better parts do not count if the whole film reads worse (An, 2026-10-30: "sao nó tệ hơn trước vậy").
 - "More realistic" came out as dirt: blotchy tiled ground filling the frame, stains on the skin, grey gloom, over-reflective glass. Realism comes from shape, clean light and soft shadows; keep the stage calm and bright unless the subject asks otherwise.
 - The camera hides what the step is about: a lowered flap seen from above and ahead sits behind the wing and only its track fairings show, as spikes. Film a moving part from the side where it moves into view.
@@ -67,6 +69,11 @@ Any shot with a moving camera.
 
 Interactive apps, dashboards and their films.
 
+- The film spends its time dragging the time scrubber. Allow one short drag at most; the cursor works inside the world: hover, click a machine, follow a unit (An, 2026-10-31).
+- A moving unit gives no sign of where it is going, or a machine's state cannot be read at a glance. Draw each unit's path along its real route, and give running, idle and fault marks of different shapes, all from sim state (An, 2026-10-31).
+- A stretch of more than about 2 s where the cursor and camera hold still while the script waits for the sim. Speed it up in the edit or wait before recording starts (Session Fab round 3 waited 5 s for a walker).
+- A sound cue for an event that is off screen. A sim's event log covers the whole site, so check each cue against the frame at its time.
+
 - Too many controls on an interactive page: panels in several corners, labels on every object at once, controls over
   the subject. Use one dock at the bottom, one menu open at a time, and labels only for the current step. A phone card
   must leave the subject in view.
@@ -98,6 +105,12 @@ Interactive apps, dashboards and their films.
   Use big friendly units in the subject's own brand colours (a mascot-like bot for software), a different station
   design per role with a label sign, the links between stations drawn by their real volume, and open on the full
   overview.
+- A click in a film that lands on the wrong thing or on nothing (2026-10-31, warehouse: the camera stayed on a forklift
+  after clicks meant for a line and a dock, and another forklift's hit box caught a third). Read the selected unit after
+  every scripted click and fail the take on a mismatch. Give the app a real way back to the overview for the cursor to use.
+- A close-up that lands on an idle unit or behind a prop (same film: an empty belt, an empty dock, a forklift hidden by
+  its rack). Give each kind of unit a view that shows its work, and search the seed for the pre-roll where each unit is
+  busy on the second it is on screen, instead of hoping a live sim obliges.
 
 ### Books and illustrated plates
 
@@ -237,12 +250,24 @@ Rain, water, beams.
   from the lens, fade it along its length and toward its edge, add faint haze noise and motes, and let the hand drift
   a little. Guard the shader against NaN (pow of a negative, normalize of zero): one NaN pixel through bloom turns the
   whole frame black.
+- A jump scare nobody planned: a level jump of more than about 12 dB within a second, usually near silence before a hit.
+  Print half-second levels of the final mix; do not trust a cue's own check, which passes because the hit is loud.
 - Rain that falls as one uniform slant: every streak tilted by the same wind vector, same length and brightness. Keep
   rain near vertical, give each drop its own lean, speed, length and brightness, and let gusts move across the scene.
+
+- A whole frame washed pale or milky. Split it into albedo, sky and sun before touching materials: pale roofs in a city
+  film came from a solid coping box sitting on every roof like a lid, and a milky veil came from light shafts marched
+  from the camera instead of from a distance.
+- Smoke or steam that starts in mid air, or a plume with nothing under it. Crop each mouth at double size: every plume
+  must start at a visible pipe, stack or vent, and all plumes lean the same way.
 
 ### Sound
 
 Any film or app with audio.
+- A generated recording asked for 3 s that is really 0.6 s of sound and then silence, while the picture keeps going.
+  Measure each cue's level over time; a long action gets several recordings, not one stretched hope.
+- A bright line on the mix sheet is not yet a fault: the spectrogram is log scale. Measure that band per stem first. A
+  14 kHz line that looked like a whine was -68 dBFS, inside the music track.
 
 - Loud, hissy foley on a gentle action, such as leaf-rustle recordings used for page turns. Keep paper foley soft and
   low-passed under the music, with few snaps, never louder than the beat it marks.

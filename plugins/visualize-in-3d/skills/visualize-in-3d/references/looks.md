@@ -3,7 +3,8 @@
 Each topic file names one look. The look sets the world's rendering, the UI skin and what the film shows; the data
 model, the dashboard parts and the film's click-driven shape stay the same. Reading map: Toy isometric (default),
 Point-cloud survey, Photoreal terrain analysis, Dark documentary, Pixel diorama, Illustrated cutaway plate,
-Lived-in isometric, Dither + ASCII showcase, Gradient glow ASCII, Clean ops world, Choosing.
+Lived-in isometric, Dither + ASCII showcase, Gradient glow ASCII, Clean ops world, White model documentary, Layer
+build film, Choosing.
 
 Reference stills or clips for a look are optional. If you have some, save them under `{{WORK_DIR}}/references/<slug>/`
 and point the briefs at them; they are for study only and never ship in the app or the film. Without them, the
@@ -78,6 +79,10 @@ frames, music or text). Fits a case file or a piece of history: a crime, a disap
   silhouettes: white for the victim or witness in focus, blue for police, translucent grey for others. Unlit one-colour
   material on a rigged base mesh works, with a flat tapered tube from chest to below the hips so the bare waist and hips do
   not read as a naked muscled body, and the head held up when bending so the outline keeps a head.
+- Neon on the dark picture: bloom filters on luminance, so pure red never reaches it, and a stronger bloom only fogs the
+  black. Lift bright saturated colour above 1 in a pass of its own before the bloom (an effect merged into the bloom's pass
+  does not feed it), raising the strongest channel and pressing the others down, or red clips to pink. Leave orange and
+  yellow out, or pencils and lamp-lit wood glow.
 - Labels: small boxed captions in spaced caps with thin leader lines (`PC THOMAS BARRETT`, `SUSPECT`), red dots at
   the anchor; a thin red timeline across the top with times and events (`04:45 BODY IS FOUND`), a note that times
   are approximate.
@@ -287,9 +292,33 @@ A case told as an architect's model: studied from LEMMiNO's documentaries and bu
 - Traps: exposure blowing the floors white, mapped surfaces staying dark, fades that lose their references when materials are
   replaced instead of changed, a light multiplier applied every frame to a value set only once.
 
+## Layer build film
+
+Reference: a Blender city breakdown film. One locked aerial camera, and a place is built up in layers until the last
+one is a finished, cinematic frame. No labels and no narration: the picture alone says what each layer added.
+
+- Order: live city teaser with a moving camera, a 1.4 s slide to the bare first layer (a hard cut plus falling blocks
+  made the viewer jump, a fade looked soft), masses rise from the ground, facade detail, roof props, a viewport look with a
+  wire sweep and a wire-only beat, clay, materials wipe on building by building, traffic, turntables of two heroes,
+  sun move, signs light, four pass panels (albedo, sky, normal, sun), atmosphere, a long push along the street on the final, ending in the shot with no text card.
+- Rendering in three.js: every output frame is an average of many renders (jittered sun passes, sky dome passes,
+  sub-pixel camera jitter, shutter time for motion blur) in half-float targets. Then ray-marched shafts through a sun
+  depth map, depth haze, a steam layer, bloom, a filmic grade, grain. 8 sun and 24 sky passes hold at 1080p.
+- Hero frame: camera about 42 degrees down, not 64, and a raking sun so tower shadows fall across the street. Depth
+  comes from hard shadow with light haze only: a low sun along the street with thick haze reads as a milky toy. Most of
+  the frame sits in open shade, median luminance about 0.2 with little clipped (0.1 and heavy grime read as dark and dirty). Start the shaft march well away from the
+  camera, or the air there lays a veil over the whole frame.
+- Air detail: derive every smoke plume from the prop that makes it (rooftop pipe, street steam chimney), one wind for
+  all, tight at the mouth. Dust and litter are real geometry in the averaged scene, so they take sun, shadow and blur.
+- Scale and wear decide whether it reads as a real city: streets at real width with dense traffic, stained roofs,
+  colour bands, blinds and fire escapes on walls, and signs lit by the scene, muted and dirty, never brighter than the
+  roofs beside them. Compare luminance percentiles against the reference before calling a look finished.
+- Sound: one recording per action, placed from the film's own event times; a real track whose surge lands on the
+  final layer.
+
 ## Choosing
 
-A case that needs its action and places clearly seen can go white model documentary; dark documentary suits a case that lives on
+A build-up or breakdown of a place, where the wow is watching it become real, goes layer build film. A case that needs its action and places clearly seen can go white model documentary; dark documentary suits a case that lives on
 what stays hidden. Clean ops world is the default for a system that runs (an operation with units, tasks and flows). Toy isometric (a
 more playful diorama on a slab, stronger colour) stays as an alternative when the user asks for it or the subject is
 light-hearted. A showcase film always uses dither + ASCII with the model

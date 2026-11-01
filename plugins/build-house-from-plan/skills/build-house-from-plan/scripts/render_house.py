@@ -663,7 +663,8 @@ def main():
             continue
         kind = shot.get("kind", "exterior")
         for portal in portals:
-            portal.hide_render = kind != "interior"
+            # Outside too: a dark room behind the glass or an open door reads as a black hole in the wall.
+            portal.hide_render = False
         if shot.get("cut") and shot["cut"] != cut_applied:
             apply_cut(plan["levels"].get("floor", 0.0) * scale + shot["cut"] * scale, plan)
             cut_applied = shot["cut"]

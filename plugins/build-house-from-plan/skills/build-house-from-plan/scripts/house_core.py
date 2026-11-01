@@ -13,7 +13,7 @@ LIBRARY = pathlib.Path(os.environ.get("HOUSE_ASSET_LIBRARY", pathlib.Path.home()
 
 # name: (Poly Haven or ambientCG folder, metres per tile, tint, desaturate, bump strength, roughness scale)
 TEXTURED_MATERIALS = {
-    "siding_white": ("distressed_painted_planks", 1.6, (0.92, 0.90, 0.85), 1.0, 0.25, 0.9),
+    "siding_white": ("distressed_painted_planks", 1.6, (1.45, 1.42, 1.34), 1.0, 0.25, 0.9),
     "board_redwood": ("oak_wood_planks", 2.0, (0.62, 0.47, 0.35), 0.65, 0.6, 1.0),
     "grass_path": ("grass_path_2", 3.0, (0.8, 0.76, 0.7), 0.0, 1.0, 1.0),
     "shingle_wood": ("weathered_planks", 2.0, (0.62, 0.60, 0.56), 0.75, 0.8, 1.0),

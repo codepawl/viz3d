@@ -93,13 +93,15 @@ def lot_footprints(plan_slabs, lot):
     return outlines
 
 
+SLAB_DEPTH = 1.5
+
+
 def build_strips(street, collection):
-    """Road, pavements and drives: flat polygons just above the ground."""
+    """Road, pavements and drives as slabs, so a kerb has a face and no gap shows black beside the road."""
     batch = MeshBatch("street_surfaces", 71)
     for surface in street.get("surfaces", []):
         height = surface.get("z", 0.0)
-        points = [Vector((point[0], point[1], height)) for point in surface["poly"]]
-        batch.add_face(points, surface["material"], uvs=[(point[0], point[1]) for point in surface["poly"]])
+        batch.add_prism(surface["poly"], height - SLAB_DEPTH, height, surface["material"])
     batch.finish(collection)
 
 

@@ -49,6 +49,9 @@ Each entry was seen on a real render from this pipeline. Read the group you are 
   127 s and looks the same.
 - **Empty strip at the horizon.** The ground ends in clean sky. Add a treeline of 110 or more trees, set `ground_size`
   well past it. Use a list of rings when one ring leaves gaps.
+- **Black seam along a kerb.** Road and pavement were flat faces at different heights. Build them as slabs.
+- **Doorway or window a black hole from outside.** The room behind it had no light. Keep the window lamps on for exteriors.
+- **White siding renders grey.** The scan is dark before any tint. A tint above 1.0 is fine, check it beside a photo.
 - **Disc edge in a high aerial.** The ground has an end. Keep the camera low enough that the treeline hides it.
 - **Pines and firs.** The scanned pine takes many minutes to import. Use broadleaf trees unless the place demands them.
 - **House floating or sunk.** Set `site.ground_level` from the drawing's steps, and let the plinth show.

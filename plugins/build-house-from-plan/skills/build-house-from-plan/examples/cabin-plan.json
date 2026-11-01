@@ -1,0 +1,971 @@
+{
+ "name": "Cedar Pass Lodge, Cabin 22",
+ "units": "ft",
+ "source": {
+  "image": "source/plan_sheet.png",
+  "url": "https://commons.wikimedia.org/wiki/File:First_floor_plan,_building_section,_west_elevation,_south_elevation,_baseboard_profile,_crown_molding_profile,_window_and_door_details_-_Cedar_Pass_Lodge,_Cabin_22,_20681_South_Dakota_Highway_240,_Interior,_Jackson_County,_SD_HABS_SD-25-Q_(sheet_1_of_1).png",
+  "license": "Public domain: Historic American Buildings Survey, National Park Service"
+ },
+ "calibration": {
+  "pairs": [
+   {
+    "px": [
+     2265,
+     2470
+    ],
+    "plan": [
+     0,
+     0
+    ]
+   },
+   {
+    "px": [
+     3904,
+     2470
+    ],
+    "plan": [
+     16.375,
+     0
+    ]
+   },
+   {
+    "px": [
+     3904,
+     1036
+    ],
+    "plan": [
+     16.375,
+     14.375
+    ]
+   },
+   {
+    "px": [
+     2265,
+     1036
+    ],
+    "plan": [
+     0,
+     14.375
+    ]
+   }
+  ]
+ },
+ "provenance": {
+  "sourced": [
+   "Walls, door, windows, bathroom fixtures, porch deck and roof overhang outline (HABS first floor plan, dimensioned)",
+   "Ceiling 7'-9 3/4\", sill 3'-0 5/8\", window height 3'-0\", door 6'-7 1/8\", eave and ridge heights above grade (section and elevations)",
+   "Gable roof with the ridge parallel to the front, wood shingles, stucco walls, boarded interior walls (elevations and section)"
+  ],
+  "inferred": [
+   "Colours: stucco, trim and shingle colours are chosen, the sheet is black and white",
+   "Basin shown as a pedestal model where the plan draws a small vanity",
+   "Closet behind the shower is closed off; the plan gives it no door swing",
+   "Beds, nightstand, chair and rug; the plan draws no loose furniture",
+   "Ground: mown grass and trees instead of the real Badlands prairie",
+   "Exterior board-and-batten paint: the sheet shows the plan only, finish taken from the period type"
+  ]
+ },
+ "printed_dimensions": [
+  {
+   "label": "width 16-4 1/2",
+   "a": [
+    0,
+    0
+   ],
+   "b": [
+    16.375,
+    0
+   ],
+   "value": 16.375
+  },
+  {
+   "label": "depth 14-4 1/2",
+   "a": [
+    16.375,
+    0
+   ],
+   "b": [
+    16.375,
+    14.375
+   ],
+   "value": 14.375
+  },
+  {
+   "label": "porch 3-5 5/8",
+   "a": [
+    0,
+    -3.47
+   ],
+   "b": [
+    0,
+    0
+   ],
+   "value": 3.47
+  }
+ ],
+ "levels": {
+  "floor": 0.0,
+  "ceiling": 7.81
+ },
+ "style": {
+  "siding": "batten",
+  "wall_base": "stucco_cream",
+  "window_material": "trim_white",
+  "interior_wall": "cabin_boards",
+  "interior_trim": "trim_white",
+  "reveal": "trim_white",
+  "end_cap": "stucco_cream",
+  "door_material": "door_green",
+  "soffit": "trim_white",
+  "fascia": "trim_white",
+  "corner_board": 0.0,
+  "exterior_casing": 0.3,
+  "interior_casing": 0.28,
+  "baseboard": 0.35,
+  "siding_material": "boards_painted",
+  "batten_material": "boards_painted"
+ },
+ "walls": [
+  {
+   "id": "front",
+   "a": [
+    0.24,
+    0.24
+   ],
+   "b": [
+    16.13,
+    0.24
+   ],
+   "t": 0.48,
+   "kind": "ext",
+   "outside": -1,
+   "top": "roof"
+  },
+  {
+   "id": "east",
+   "a": [
+    16.13,
+    0.24
+   ],
+   "b": [
+    16.13,
+    14.13
+   ],
+   "t": 0.48,
+   "kind": "ext",
+   "outside": -1,
+   "top": "roof"
+  },
+  {
+   "id": "rear",
+   "a": [
+    16.13,
+    14.13
+   ],
+   "b": [
+    0.24,
+    14.13
+   ],
+   "t": 0.48,
+   "kind": "ext",
+   "outside": -1,
+   "top": "roof"
+  },
+  {
+   "id": "west",
+   "a": [
+    0.24,
+    14.13
+   ],
+   "b": [
+    0.24,
+    0.24
+   ],
+   "t": 0.48,
+   "kind": "ext",
+   "outside": -1,
+   "top": "roof"
+  },
+  {
+   "id": "bath_w",
+   "a": [
+    10.49,
+    14.13
+   ],
+   "b": [
+    10.49,
+    6.7
+   ],
+   "t": 0.42,
+   "kind": "int"
+  },
+  {
+   "id": "bath_diag",
+   "a": [
+    10.49,
+    6.7
+   ],
+   "b": [
+    12.47,
+    4.6
+   ],
+   "t": 0.25,
+   "kind": "int"
+  },
+  {
+   "id": "bath_s",
+   "a": [
+    12.47,
+    4.6
+   ],
+   "b": [
+    16.13,
+    4.6
+   ],
+   "t": 0.25,
+   "kind": "int"
+  },
+  {
+   "id": "closet_s",
+   "a": [
+    10.49,
+    11.25
+   ],
+   "b": [
+    13.31,
+    11.25
+   ],
+   "t": 0.16,
+   "kind": "int"
+  },
+  {
+   "id": "closet_e",
+   "a": [
+    13.31,
+    11.25
+   ],
+   "b": [
+    13.31,
+    14.13
+   ],
+   "t": 0.16,
+   "kind": "int"
+  }
+ ],
+ "openings": [
+  {
+   "id": "w_front",
+   "wall": "front",
+   "kind": "window",
+   "from": 6.68,
+   "to": 9.8,
+   "sill": 3.05,
+   "head": 6.05,
+   "sash": "double_hung",
+   "panes_x": 1,
+   "panes_y": 2
+  },
+  {
+   "id": "d_front",
+   "wall": "front",
+   "kind": "door",
+   "from": 11.11,
+   "to": 13.75,
+   "sill": 0,
+   "head": 6.6,
+   "panels": "sheathing",
+   "swing": 1,
+   "hinge": "end",
+   "open": 78,
+   "hardware": "brass"
+  },
+  {
+   "id": "w_rear",
+   "wall": "rear",
+   "kind": "window",
+   "from": 6.74,
+   "to": 9.84,
+   "sill": 3.05,
+   "head": 6.05,
+   "sash": "double_hung",
+   "panes_x": 1,
+   "panes_y": 2
+  },
+  {
+   "id": "w_bath",
+   "wall": "east",
+   "kind": "window",
+   "from": 6.4,
+   "to": 8.58,
+   "sill": 3.05,
+   "head": 6.05,
+   "sash": "double_hung",
+   "panes_x": 1,
+   "panes_y": 2
+  },
+  {
+   "id": "d_bath",
+   "wall": "bath_diag",
+   "kind": "door",
+   "from": 0.45,
+   "to": 2.5,
+   "sill": 0,
+   "head": 6.6,
+   "panels": "slab",
+   "swing": -1,
+   "hinge": "start",
+   "open": 85,
+   "material": "trim_white"
+  }
+ ],
+ "rooms": [
+  {
+   "name": "Bedroom",
+   "kind": "bedroom",
+   "floor": "oak_floor",
+   "ceiling": 7.81,
+   "crown": 0.25,
+   "poly": [
+    [
+     0.48,
+     0.48
+    ],
+    [
+     15.89,
+     0.48
+    ],
+    [
+     15.89,
+     4.47
+    ],
+    [
+     12.35,
+     4.47
+    ],
+    [
+     10.28,
+     6.62
+    ],
+    [
+     10.28,
+     13.89
+    ],
+    [
+     0.48,
+     13.89
+    ]
+   ]
+  },
+  {
+   "name": "Bathroom",
+   "kind": "bath",
+   "floor": "tile_white",
+   "ceiling": 7.81,
+   "poly": [
+    [
+     12.59,
+     4.73
+    ],
+    [
+     15.89,
+     4.73
+    ],
+    [
+     15.89,
+     13.89
+    ],
+    [
+     13.39,
+     13.89
+    ],
+    [
+     13.39,
+     11.33
+    ],
+    [
+     10.7,
+     11.33
+    ],
+    [
+     10.7,
+     6.78
+    ]
+   ]
+  },
+  {
+   "name": "Closet",
+   "kind": "closet",
+   "floor": "oak_floor",
+   "ceiling": 7.81,
+   "no_access": true,
+   "poly": [
+    [
+     10.7,
+     11.33
+    ],
+    [
+     13.23,
+     11.33
+    ],
+    [
+     13.23,
+     13.89
+    ],
+    [
+     10.7,
+     13.89
+    ]
+   ]
+  }
+ ],
+ "slabs": [
+  {
+   "poly": [
+    [
+     0,
+     0
+    ],
+    [
+     16.375,
+     0
+    ],
+    [
+     16.375,
+     14.375
+    ],
+    [
+     0,
+     14.375
+    ]
+   ],
+   "z": -0.02,
+   "t": 1.2,
+   "material": "concrete_floor",
+   "side_material": "stone_rubble"
+  },
+  {
+   "poly": [
+    [
+     -0.21,
+     -3.47
+    ],
+    [
+     16.1,
+     -3.47
+    ],
+    [
+     16.1,
+     0
+    ],
+    [
+     -0.21,
+     0
+    ]
+   ],
+   "z": -0.08,
+   "t": 0.9,
+   "material": "pine_boards",
+   "side_material": "pine_boards"
+  }
+ ],
+ "roof": {
+  "planes": [
+   {
+    "name": "front",
+    "corners": [
+     [
+      -1.0,
+      -1.29,
+      7.73
+     ],
+     [
+      17.37,
+      -1.29,
+      7.73
+     ],
+     [
+      17.37,
+      7.19,
+      12.09
+     ],
+     [
+      -1.0,
+      7.19,
+      12.09
+     ]
+    ],
+    "cover": "shingle",
+    "thickness": 0.14,
+    "exposure": 0.42,
+    "course": 0.5,
+    "fascia_depth": 0.45,
+    "fascia": "trim_white",
+    "rafters": {
+     "spacing": 2.0,
+     "first": 0.7,
+     "w": 0.125,
+     "d": 0.36,
+     "material": "trim_white"
+    }
+   },
+   {
+    "name": "rear",
+    "corners": [
+     [
+      -1.0,
+      15.7,
+      7.73
+     ],
+     [
+      17.37,
+      15.7,
+      7.73
+     ],
+     [
+      17.37,
+      7.19,
+      12.09
+     ],
+     [
+      -1.0,
+      7.19,
+      12.09
+     ]
+    ],
+    "cover": "shingle",
+    "thickness": 0.14,
+    "exposure": 0.42,
+    "course": 0.5,
+    "fascia_depth": 0.45,
+    "fascia": "trim_white",
+    "rafters": {
+     "spacing": 2.0,
+     "first": 0.7,
+     "w": 0.125,
+     "d": 0.36,
+     "material": "trim_white"
+    }
+   }
+  ]
+ },
+ "boxes": [
+  {
+   "origin": [
+    13.39,
+    11.33,
+    0
+   ],
+   "x": [
+    2.5,
+    0,
+    0
+   ],
+   "y": [
+    0,
+    0.08,
+    0
+   ],
+   "z": [
+    0,
+    0,
+    0.5
+   ],
+   "material": "trim_white"
+  },
+  {
+   "origin": [
+    13.39,
+    11.33,
+    0
+   ],
+   "x": [
+    2.5,
+    0,
+    0
+   ],
+   "y": [
+    0,
+    2.56,
+    0
+   ],
+   "z": [
+    0,
+    0,
+    0.12
+   ],
+   "material": "counter_laminate"
+  }
+ ],
+ "curtains": [
+  {
+   "a": [
+    13.4,
+    11.4
+   ],
+   "b": [
+    15.85,
+    11.4
+   ],
+   "z0": 0.3,
+   "z1": 6.6,
+   "material": "curtain_plain",
+   "folds": 9
+  }
+ ],
+ "rugs": [
+  {
+   "a": [
+    5.2,
+    3.6
+   ],
+   "b": [
+    9.8,
+    11.2
+   ],
+   "material": "fabric_rug"
+  }
+ ],
+ "furnish": [
+  {
+   "asset": "obj:b0aa0259376b435fab6645365a7fbd87",
+   "at": [
+    3.95,
+    10.7
+   ],
+   "rot": 90,
+   "fit_w": 6.6,
+   "name": "bed_rear"
+  },
+  {
+   "asset": "obj:b0aa0259376b435fab6645365a7fbd87",
+   "at": [
+    3.95,
+    4.9
+   ],
+   "rot": 90,
+   "fit_w": 6.6,
+   "name": "bed_front"
+  },
+  {
+   "asset": "ph:ClassicNightstand_01",
+   "at": [
+    1.35,
+    7.8
+   ],
+   "rot": 90,
+   "fit_h": 2.0,
+   "name": "nightstand"
+  },
+  {
+   "asset": "ph:vintage_oil_lamp",
+   "at": [
+    1.35,
+    7.8
+   ],
+   "z": 2.02,
+   "rot": 0,
+   "fit_h": 1.3,
+   "name": "oil_lamp"
+  },
+  {
+   "asset": "ph:Rockingchair_01",
+   "at": [
+    9.0,
+    2.2
+   ],
+   "rot": -30,
+   "name": "rocker"
+  },
+  {
+   "asset": "ph:side_table_01",
+   "at": [
+    14.6,
+    1.9
+   ],
+   "rot": 0,
+   "fit_h": 1.9,
+   "name": "side_table"
+  },
+  {
+   "asset": "ph:hanging_picture_frame_01",
+   "at": [
+    10.2,
+    8.8
+   ],
+   "z": 4.1,
+   "rot": 90,
+   "fit_h": 1.6,
+   "name": "picture"
+  },
+  {
+   "asset": "obj:24d1b493899d407780140688abae19bc",
+   "at": [
+    11.8,
+    9.77
+   ],
+   "rot": 90,
+   "fit_h": 2.5,
+   "name": "toilet"
+  },
+  {
+   "asset": "obj:901084912a1b41758dc8b892b25ac46d",
+   "at": [
+    14.35,
+    5.75
+   ],
+   "rot": 180,
+   "fit_h": 2.9,
+   "name": "basin"
+  },
+  {
+   "asset": "ph:painted_wooden_chair_02",
+   "at": [
+    8.0,
+    -1.9
+   ],
+   "rot": 10,
+   "name": "porch_chair"
+  }
+ ],
+ "lamps": [],
+ "site": {
+  "hdri": "kloofendal_48d_partly_cloudy_puresky",
+  "sun": {
+   "azimuth": 318,
+   "elevation": 40,
+   "strength": 4.2
+  },
+  "ground_level": -0.68,
+  "centre": [
+   8,
+   6
+  ],
+  "flat_radius": 26,
+  "ground_size": 2600,
+  "grass_radius": 150,
+  "grass_density": 90,
+  "grass_scale": 1.0,
+  "no_grass": [],
+  "paths": [
+   {
+    "poly": [
+     [
+      10.6,
+      -3.6
+     ],
+     [
+      14.0,
+      -3.6
+     ],
+     [
+      14.6,
+      -60.0
+     ],
+     [
+      10.0,
+      -60.0
+     ]
+    ],
+    "material": "gravel_path"
+   }
+  ],
+  "plants": [
+   {
+    "asset": "ph:island_tree_01",
+    "at": [
+     -46,
+     30
+    ],
+    "rot": 40,
+    "fit_h": 30
+   },
+   {
+    "asset": "ph:tree_small_02",
+    "at": [
+     46,
+     34
+    ],
+    "rot": 120,
+    "fit_h": 20
+   }
+  ],
+  "treeline": [
+   {
+    "radius": 300,
+    "count": 110,
+    "heights": [
+     45,
+     85
+    ],
+    "assets": [
+     "ph:island_tree_01",
+     "ph:island_tree_02",
+     "ph:tree_small_02"
+    ]
+   },
+   {
+    "radius": 900,
+    "count": 260,
+    "heights": [
+     55,
+     95
+    ],
+    "assets": [
+     "ph:island_tree_01",
+     "ph:island_tree_02",
+     "ph:tree_small_02"
+    ]
+   }
+  ]
+ },
+ "shots": [
+  {
+   "name": "ext_front",
+   "kind": "exterior",
+   "pos": [
+    32,
+    -26,
+    4.6
+   ],
+   "look": [
+    8,
+    6,
+    5.8
+   ],
+   "lens": 34,
+   "exposure": 0.0
+  },
+  {
+   "name": "int_bedroom",
+   "kind": "interior",
+   "pos": [
+    9.7,
+    13.3,
+    4.8
+   ],
+   "look": [
+    1.5,
+    4.5,
+    3.6
+   ],
+   "lens": 22
+  },
+  {
+   "name": "int_bath",
+   "kind": "interior",
+   "pos": [
+    11.4,
+    6.9,
+    4.8
+   ],
+   "look": [
+    15.5,
+    12.6,
+    3.0
+   ],
+   "lens": 20
+  },
+  {
+   "name": "cutaway",
+   "kind": "exterior",
+   "pos": [
+    28,
+    -24,
+    30
+   ],
+   "look": [
+    8,
+    7,
+    0
+   ],
+   "lens": 40,
+   "level": false,
+   "cut": 7.0,
+   "exposure": 0.0
+  }
+ ],
+ "films": [
+  {
+   "name": "rise",
+   "frames": 264,
+   "lens": 34,
+   "level": false,
+   "exposure": 0.0,
+   "build_up": {},
+   "path": [
+    {
+     "pos": [
+      8.184999999999999,
+      6.585000000000001,
+      34
+     ],
+     "look": [
+      8.184999999999999,
+      7.1850000000000005,
+      0
+     ]
+    },
+    {
+     "pos": [
+      10.0902,
+      4.530200000000001,
+      32.64
+     ],
+     "look": [
+      8.184999999999999,
+      7.1850000000000005,
+      0
+     ]
+    },
+    {
+     "pos": [
+      14.8532,
+      -2.1068000000000016,
+      29.24
+     ],
+     "look": [
+      8.184999999999999,
+      7.1850000000000005,
+      0
+     ]
+    },
+    {
+     "pos": [
+      18.90175,
+      -7.7482500000000005,
+      25.16
+     ],
+     "look": [
+      8.184999999999999,
+      7.1850000000000005,
+      0.5
+     ]
+    },
+    {
+     "pos": [
+      22.9503,
+      -13.3897,
+      17.0
+     ],
+     "look": [
+      8.0925,
+      6.5925,
+      2.32
+     ]
+    },
+    {
+     "pos": [
+      32,
+      -26,
+      4.6
+     ],
+     "look": [
+      8,
+      6,
+      5.8
+     ]
+    }
+   ]
+  }
+ ]
+}

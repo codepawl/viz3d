@@ -1,0 +1,20 @@
+{
+  "name": "build-house-from-plan",
+  "version": "0.1.0",
+  "description": "Turn a 2D house plan into a photoreal 3D house in Blender Cycles, checked by overlaying the build on the drawing, with stills, a build-up film and whole streets.",
+  "author": {
+    "name": "CodePawl",
+    "url": "https://codepawl.com"
+  },
+  "homepage": "https://github.com/codepawl/viz3d",
+  "repository": "https://github.com/codepawl/viz3d",
+  "license": "MIT",
+  "keywords": [
+    "3d",
+    "architecture",
+    "floor-plan",
+    "blender",
+    "cycles",
+    "photoreal"
+  ]
+}

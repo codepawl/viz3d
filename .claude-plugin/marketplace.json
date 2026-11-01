@@ -15,6 +15,11 @@
       "name": "build-minecraft-model-from-image",
       "source": "./plugins/build-minecraft-model-from-image",
       "description": "Turn a picture of an object into a Minecraft-style 3D model of clean cuboids with pixel textures"
+    },
+    {
+      "name": "build-house-from-plan",
+      "source": "./plugins/build-house-from-plan",
+      "description": "Turn a 2D house plan into a photoreal 3D house, checked against the drawing"
     }
   ]
 }

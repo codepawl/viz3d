@@ -182,6 +182,21 @@ Photo credits for the picture above and the skill's `examples/`: kettle and armc
 (armchair photo by Gerald E Jones), CC BY 4.0. Rubber duck by Julian Lupyan, CC0. Fire hydrant by Tournasol7, CC BY 4.0.
 All from Wikimedia Commons.
 
+**build-house-from-plan** turns a 2D house plan into a photoreal 3D house. The agent reads the walls, doors, windows and
+scale off the drawing into a plan file. A check overlays the built walls on the drawing's ink and fails when they do not
+line up. The house gets measured wall thickness, real frames and glass, CC0 scanned materials and real furniture models,
+and renders in Blender Cycles. You get stills, a film of the walls rising off the drawing, and whole streets. It needs
+Python through [uv](https://docs.astral.sh/uv/), Blender 5.x and a GPU.
+
+![From a public domain drawing to a house and a street](docs/images/house-from-plan.jpg)
+
+```text
+/plugin install build-house-from-plan@codepawl
+```
+
+The plans behind the picture are public domain: Historic American Buildings Survey and Historic American Engineering
+Record sheets from the Library of Congress, and a USDA plan. Furniture includes CC BY models listed in the skill's example.
+
 ## Contributing
 
 Faults you saw, new looks, example topics and harness adapters are welcome. Read

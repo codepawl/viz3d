@@ -3,7 +3,7 @@
 For an event, a case or a piece of history told in order: a 2-4 minute film in the dark documentary look (or
 another look the subject suggests), made from a fact file, a real map, block-built scenes and flat glowing figures.
 It was built first for a 1950s criminal case and then generalized. Reading map: Fact file, Respect rules, Project
-shape, Script, Scenes, Maps, Sound, Render and checks, Passes.
+shape, Script, Scenes, Maps, Sound, Long-form craft, Render and checks, Passes.
 
 ## Fact file
 
@@ -66,6 +66,28 @@ A Vite + React + React Three Fiber app with a `film.html` page that plays the fi
 
 Follow `film.md`, Sound: real CC0 recordings for footsteps (placed on footfalls), doors, cars and ambience; no
 constant noise bed; a score in sections (for example childhood, losses, the event, the aftermath, the end).
+
+## Long-form craft
+
+Measured on 22 long documentaries of one large channel (2016 to 2025), for films over about 10 minutes. Build methods are
+inferred from frames. These are defaults; the user's own rules win.
+
+- Most of what reads as 3D is flat: a scanned page or photo on a tilted plane, shallow depth of field, a vignette, a dolly of 6
+  to 12 s. Only the biggest films had built environments. Spend modelling on 2 or 3 anchor scenes that return, and make every
+  document a tilted plane first.
+- One accent colour on a charcoal ground. Any other colour has one fixed meaning for the whole film.
+- A highlighter wipes over a phrase as the voice reads it (multiply plane, reveal uniform along `uv.x`). Blur everything but
+  the line that matters.
+- Maps: a dark base, a route that draws on, chip labels with a leader line. The same framing returns with the route longer.
+- People are flat silhouettes coded by role, with no built faces; real faces appear only in archive photos.
+- Put evidence side by side so viewers can compare by eye. These comparisons, turns in the story, chilling small details,
+  quotable thesis lines and chapter starts are where most-replayed peaks sat. Lists without a person sat in the dips.
+- Motion: stills drift 1 to 3% over about 5 s; a 3D shot holds 1.5 s and then moves. Typed text runs 30 to 70 characters per
+  second, faster than the voice. A quote card builds in about 1.9 s inside a gap in the voice.
+- Sound: music starts before the voice (median voice entry 13 s). Voice sits 13 to 16 dB over music, whole mix -16 to -18.5
+  LUFS. On a heavy transition the music or hit jumps 0.25 to 0.65 s before the picture changes, after a dip of 0.75 to 1.9 s.
+  Before a reveal: fade down, 1.2 to 3.2 s of silence, a hit, then the text, only a few times a film. Archive audio is
+  band-limited to about 300 Hz to 4 kHz with on-screen text, over a bass bed.
 
 ## Render and checks
 

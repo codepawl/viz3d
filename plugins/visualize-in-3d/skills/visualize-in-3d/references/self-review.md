@@ -30,6 +30,20 @@ Reading map: read "Every film" always, then only the groups that match what you 
 
 Read always.
 
+- A model that breaks into scattered shards after a mesh decimation pass, while its code is unchanged. Shoot every decimated model and compare it with the original; if a code revert does not fix a broken model, restore the original file first (Ironbay's scissor lift at ratio 0.05 came out as loose plates and floating debris, and a worker hunted it in the code).
+- A decimation target or a re-export that makes the file bigger than the original compressed one (the same lift grew from 11 MB to 32 MB, without meshopt).
+- Whole frames go dark in a repeatable run while the camera pose and the sim are valid: a few NaN pixels spread by a bloom or AO blur. Render that frame with the composer off and read the scene buffer for non-finite values. In Ironbay the source was zero-length vertex normals in the glbs, which become NaN only when lit. Repair them on load instead of clamping the blur.
+- A framing number measured by a separate still script while the film's own path moves the camera differently (Ironbay's V8 measured 271 px on stills and never appeared in the film, because a car click turned on follow). Measure on frames from the film's own path.
+- Physical realism, checked on consecutive frames as well as stills (An, 2026-11-01, on four SimReady films): an object with no support, a load lifted with no contact or carrier (a forklift raising a beam), a warning light floating in the air, an effect no physics would make, a tool tip off the tube it works on (measure tip to surface in mm), or a vehicle too big against a real door and desk.
+- A light shown as a visible cone or beam mesh. Light reads through what it falls on: a pool on the floor and objects that changes as the light arrives, and looks better than the cone did (An, same day).
+- A beacon or lamp placed by a typed-in height beside a model, not read from the model. A robot beacon at a fixed y floated next to its mast, and it hid in stills where the mast overlapped it. Read the mount point from the model's vertices and turn it with the unit's heading.
+- A strip laid behind a vehicle whose end drifts away from it. Position by a curve's parameter and draw by arc length disagree on an ellipse: the boom's end ran ahead of its robot. Resample the path evenly by length, and give the strip a source on the vehicle (a reel that shrinks).
+- A light with no source on screen: a soft lamp added to lift a dim subject, or a point light offset 1.5 m off a wall fitting. Move a real fitting so it lights the subject and aim it, with a shadow.
+- A camera flown in a straight line between shots (2026-11-01, office night shift: "lượn mượt mà chứ k phải đi xuyên đồ vật"). Fly a curve that rises above the tallest object between two low views, log the distance from the camera to every mesh box each frame with a no-draw dry run, and read the count of frames under 0.25 m.
+- A cone removed with nothing in its place (same film: "máy scan máy tính nó còn k hiện cái beam"). A working beam stays visible as one thin soft ray fading with distance, landing on a line that moves on the thing it scans.
+- A prop whose body is open where you mounted something. A lamp and a tow bar at typed-in positions hung in air because the robot was a flat base with two side racks (2026-11-01, office night shift), and a stock model mop stood upright touching nothing. Check part bounds at the mount height, then crop a frame.
+- A bright streak on a floor or a spark on steel near a fire, in no reflection any viewer expects. A flame's point light glints on anything polished, and a model's roughness map can keep a surface polished after its `roughness` value is raised. Drop the map on walls and slabs, and keep mirror reflection to the wet patch.
+
 - Moving parts that clip into static ones: a vehicle or rail passing through a tool, a support post through a machine. Measure the clearance in code from the model bounds and require it above zero before looking at frames (Session Fab, 2026-10-31: OHT legs sunk through tool roofs and An called it glitching).
 
 - A refine or remake of a film is shown before it stands next to the old film, frame against frame at the same moments. Better parts do not count if the whole film reads worse (An, 2026-10-30: "sao nó tệ hơn trước vậy").
@@ -45,6 +59,7 @@ Read always.
 - Stale outputs: sheets or stills older than the film they claim to show.
 - Ghost copies of the whole frame: a camera shake or jump that differs between the motion-blur subframes of one
   frame. Camera offsets are set once per output frame.
+- Corners and far walls turning white in a dark scene while no mesh is there: a contrast post effect pushes near-black values below zero, and the next effect turns them bright (2026-11-01, factory fire). Remove `BrightnessContrastEffect` and grade with lights and tone mapping. Test by screenshot; `readPixels` reads the wrong framebuffer behind a composer.
 - A colour cast added by the encode grade: compare one raw render frame with the same frame of the encoded film. Run
   `eq` and `vignette` on YUV and the blend on gbrp. An `eq` on gbrp frames before a screen blend turned a whole film
   purple.
@@ -59,6 +74,7 @@ Read always.
 
 Any shot with a moving camera.
 
+- A camera that passes through objects or turns abruptly (An, 2026-11-01: "camera biết lượn mượt mà chứ k phải đi xuyên đồ vật"). Fly a smooth curve, and measure the camera's distance to every mesh's bounding box on each frame, including the moves between shots. Any frame inside a box is a fault.
 - A symbol in the frame centre: an emblem at the vanishing point, or wall parts that line up into a cross. A statue's
   raised arm can also read as a salute. Check every documentary shot about a regime for these.
 - A close shot from inside the subject's own clutter: tall dark parts (pylons, racks, masts) fill the frame.
@@ -67,12 +83,16 @@ Any shot with a moving camera.
 
 ### Apps and UI
 
+- A click mark that lands beside its target (An, 2026-11-01: "điểm chọt bị lệch vào các ống phẫu thuật"). Project the target's world position to the screen on the click frame, and put the mark on that point. Check small targets at full size.
 Interactive apps, dashboards and their films.
 
 - The film spends its time dragging the time scrubber. Allow one short drag at most; the cursor works inside the world: hover, click a machine, follow a unit (An, 2026-10-31).
 - A moving unit gives no sign of where it is going, or a machine's state cannot be read at a glance. Draw each unit's path along its real route, and give running, idle and fault marks of different shapes, all from sim state (An, 2026-10-31).
 - A stretch of more than about 2 s where the cursor and camera hold still while the script waits for the sim. Speed it up in the edit or wait before recording starts (Session Fab round 3 waited 5 s for a walker).
 - A sound cue for an event that is off screen. A sim's event log covers the whole site, so check each cue against the frame at its time.
+- A close-up that lands after the action it came for. Trigger the click on the sim's work (first stroke laid, tool on the surface), not on the phase starting, and start it from a pick test so a click on a target behind a moving unit does not select the unit (Paint Studio t1: three wrong selections, knife close-up on nothing).
+- Two materials from one patch function look identical: three.js shares a program when `onBeforeCompile` source matches, so a variant silently renders the first one's shader. Give variants a `customProgramCacheKey` (Paint Studio: the wooden palette read flat brown for hours).
+- A step that generates paid assets from a copied script: check the prompts it will send before running, since a text patch can miss on CRLF and generate the old subject (Paint Studio: 20 forklift sounds and 2 music tracks wasted).
 
 - Too many controls on an interactive page: panels in several corners, labels on every object at once, controls over
   the subject. Use one dock at the bottom, one menu open at a time, and labels only for the current step. A phone card
@@ -97,6 +117,9 @@ Interactive apps, dashboards and their films.
   trên không gian k thay đổi j, hầu như đều tuyến tính"). Show the data's real rhythm in the scene: quiet days empty,
   peaks packed, areas rising and falling at different times. Shoot a quiet, a normal and a peak position side by side;
   they must differ at a glance.
+- A tool that misses what it works on (An, 2026-11-01, operating room: "điểm chọt bị lệch", up to 39 mm off a cannula 18 mm wide). Blending poses joint by joint swings the end off its contact even when both poses are right. Log the end's distance from its target in millimetres on every frame of the film's own path, and hold the end on the target with the rig's own joints each frame.
+- A spot light placed at a lamp's centre, shadowed by its own housing, so the room is lit but no pool lands (2026-11-01, operating room). Start the light in front of the glass and check that the pool falls on the subject.
+- A cross on the floor from a reflection blurred along two directions with a very bright point in it (2026-11-01, operating room). Cap samples before the blur.
 - A real place that reads as sci-fi or cluttered (An, same day: the fab "k giống cái factory thật lắm, hơi scifi và
   khó nhìn"). Check against photos of the real place before shooting: real proportions, its own colour cues, fewer and
   larger elements, nothing decorative, readable at 1280x720.
@@ -108,9 +131,15 @@ Interactive apps, dashboards and their films.
 - A click in a film that lands on the wrong thing or on nothing (2026-10-31, warehouse: the camera stayed on a forklift
   after clicks meant for a line and a dock, and another forklift's hit box caught a third). Read the selected unit after
   every scripted click and fail the take on a mismatch. Give the app a real way back to the overview for the cursor to use.
+- A half-size draft that fails or misleads because the HUD is in fixed pixels (2026-11-01, operating room: at half viewport a read-only strip sat on the click point and took the click, and the HUD looked twice its final size). Read-only panels get `pointer-events: none`; judge HUD size and overlap on a full-size frame.
+- A camera flight whose straight line runs through the unit in the middle of the room (2026-11-01, operating room: a frame filled by a white column on the way to the console). Bend the flight around the unit and test the whole curve against every mesh's box when the flight starts.
+- A flight that stops at the overview and leaves the other way (2026-11-01, operating room: clean clearance of 373 mm, yet a 146 degree turn over 1 s, 9.3 m/s and a 29 m/s2 jolt at each end). Clearance alone misses this: also measure speed, per-frame acceleration, look rate and the turn over a 1 s window, which sees a stop-and-reverse that a frame-to-frame angle skips. Use a fifth-order move that starts from the present velocity and acceleration, and let the next click land in flight. Then check the clicks again, because the next target may still be out of frame.
+- A click planned from a world point that is off screen or behind a unit with higher pick priority (2026-11-01, factory fire: five of eight clicks in the first dry run). Run the recorder once without saving frames, choose each click point from a grid over the unit's box by asking the app what it would pick there, and stop the take at the first mismatch instead of finding it after a long render.
 - A close-up that lands on an idle unit or behind a prop (same film: an empty belt, an empty dock, a forklift hidden by
   its rack). Give each kind of unit a view that shows its work, and search the seed for the pre-roll where each unit is
   busy on the second it is on screen, instead of hoping a live sim obliges.
+- Work overlays left on after the work ends (2026-11-01, office night shift: route lines and markers on the floor at 08:00). Tie them to the same state the clock announces.
+- A mechanism too thin to read (same film: a carton on a rod, a scan arm crossing a chair back). Widen it to a real tray or rail and route it above the furniture. Check a crop before accepting a reader's "floating": both arms were attached.
 
 ### Books and illustrated plates
 
@@ -125,6 +154,15 @@ Pop-up books, cutaway plates, painted textures.
   shot, and draw text at that size. Use maximum anisotropy and frame the whole detail.
 
 ### Motion and physics
+
+- A vehicle route that crosses props (An, 2026-11-01: "xe khoanh tròn xe mà đi xuyên mấy cái thùng"). Check the vehicle and its load against every prop on each frame. Any overlap is a fault, so move the route or the props.
+- An item that moves by itself to the gripper before the pick (An, 2026-11-01, on the dark store: "cái chai ... tự di chuyển tới vị trí của cái móc"). The gripper travels to the item and touches it first, and the item then moves only while attached to a carrier.
+- A lift or mast that overshoots and comes back: the item is level with the bar, but the bar jumps higher and slides back down (An, same day: "đơ đơ phi logic"). Plan one monotonic move to the pick height with acceleration and deceleration, and log height against time: a pick has 0 reversals before it reaches the item.
+- A device sunk into the surface that holds it (An, 2026-11-01: "máy báo cháy dính vào tường"). Mount it the real way: its base touches the surface and its body stays outside.
+- Spilled liquid that vanishes when the flow stops (An, 2026-11-01: "k giữ mấy cái trail còn lại mà lại xoá hết nước"). Stop only the flow. Pools and trails stay, then dry or drain over time.
+- A load or part that moves with nothing carrying it, and a thing that hangs with no support (An, 2026-11-01: "forklift kéo thanh đỡ lên cao k cần điểm tựa", "đèn báo lơ lửng giữa không trung"). For every moving load and every prop above the floor, name what holds it and show that contact in frame: forks under the beam, a pole or wall bracket under the lamp. No named support is a fault, and effects that break physics are faults too.
+- A vehicle too large for its room (An, 2026-11-01: "mấy cái xe nhìn bự dữ"). Measure each vehicle against the door and a person in the same frame, using the real dimensions.
+- A seeded sim that plays a different night in Node and in the browser, so a shot plan misses (Nightshift, 2026-11-01). A sort with a random comparator gives a different order in each engine. Shuffle with a seeded Fisher-Yates, and run the same night in Node and Chromium once to compare.
 
 Anything that walks, crawls, drives or is simulated.
 
@@ -188,6 +226,8 @@ Anything that walks, crawls, drives or is simulated.
 
 Built places, traffic, ground.
 
+- A vehicle that corners with its front wheels straight, stutters through a turn, or drives backwards when the real one would not (An, 2026-11-01, airport ramp film: "nó cua là nó k chuyển bánh với lại cua bị lag z, với lại có xe đi ngược nữa"). Research how the real vehicle and operation run first. Measure heading against velocity, steering angle against path curvature, wheel rotation against distance and frame-to-frame jumps.
+
 - A town or site with no streets: houses and cars standing on grass because the layout had lots but no road graph.
   Every built place gets its circulation first (roads with curbs, sidewalks and lane paint, driveways, yard paths),
   and every vehicle drives on it.
@@ -212,6 +252,7 @@ Built places, traffic, ground.
 
 Rain, water, beams.
 
+- A light beam that reads as a cone object (An, 2026-11-01: "k làm lộ là cái object cone nữa"). Show light by what it lands on: a pool on the floor and objects that brighten as it reaches them. Any visible cone edge, flat fill or hard tip is a fault. Removing the beam is also a fault when the action needs it (An, same day, on a scanner: "còn k hiện cái beam"). Keep a thin beam that fades with distance, plus the light on its target.
 - A beat about weather with no weather in the sky: a reroute card said "storm cell ahead" over clear clouds (An,
   2026-10-30, "storm mà sao trong environment lại k có hiện bất kỳ storm nào"). Put the hazard on screen where the
   camera looks (a cumulonimbus tower with lightning lit from inside), and move it in frame as the vehicle avoids it.
@@ -255,6 +296,17 @@ Rain, water, beams.
 - Rain that falls as one uniform slant: every streak tilted by the same wind vector, same length and brightness. Keep
   rain near vertical, give each drop its own lean, speed, length and brightness, and let gusts move across the scene.
 
+- A dark scene that breaks into hard pure white and black shapes, with speckle at their edges, while the raw HDR image has no bad pixels (Nightmart, 2026-11-01). A contrast effect after tone mapping pushes near-black below zero, and the sRGB encode turns a negative into NaN. Clamp to zero after every grade step, and read the raw target for NaN and negatives before blaming lights or materials. A dark clear colour shows it as a whole white background.
+- Ground outside a building reading as a lit tan floor through a door (Nightmart, 2026-11-01). Point lights without shadows shine through walls, so the door lamp inside lit the alley. Give what lies outside a material that takes no lights, with its lamp pools painted into a light map, and check it with the door open.
+- An item that moves before its carrier touches it, such as a bottle that slides over to a hook and then gets lifted (An, 2026-11-01: "tự di chuyển tới vị trí của cái móc ... phi logic"). The carrier travels to the item, touches it, and the item is fixed to the carrier for its whole path. Set it down on its place instead of blending it there. Log the gap between the carrier and the item at each grip and each release; it must be about 0.
+- A machine axis that jumps above its goal and comes back, or stops dead (An, 2026-11-01: "thanh forklift nó tự nhảy lên cao hơn, rồi lại tuột xuống"). Drive each axis with one planned move with acceleration and braking, pace it with the travel, and log height against time for each pick. Direction reversals between the start and the pick must be 0. A visual trick that changes a part's length to clear a view counts as this fault.
+- A view placed relative to a unit that moves sideways, which sends the camera into the facing shelf, or a view where the unit's own frame hides the working part. Place it from the aisle's middle, choose its side from where the part will be, and look at the frames of each new take, since another unit in another aisle can fail where the last one passed.
+- A moving part with nothing under it, such as a crossbar above the top of its masts (An, 2026-11-01: "thanh này nó lơ lửng"). Compare the part's highest position with the real bounds of what holds it, and add a mount that goes down to the base.
+- A glowing rod or cone standing in for a light or a laser, or a state icon hanging in the air over a machine (Nightmart, 2026-11-01). Remove the mesh and light what it falls on: a small real point light on the goods with a soft spot on the surface. State goes on a lamp mounted on the machine, or on a post that stands on something.
+- A camera that flies in a straight line or kinks mid-flight (Nightmart, 2026-11-01). Measure each frame's clearance to every mesh and instance, and the turn and speed along the path, including the flights between shots. Arc the path, ease it with a quintic, and do not run a flight through OrbitControls: its polar limit kicked the camera sideways at 47 m/s. Trail a moving unit through one filter in flight and after it, so landing makes no corner.
+- A black disc in a mirror or sky at night, or white blotches on glossy parts (Nightshift, 2026-11-01). The sun in an HDRI can overflow half float into Infinity. Load the HDRI as float and clamp its peak before the environment map is built.
+- A wipe or paint trail that does not sit under the thing making it, or vanishes outside the room (Nightshift, 2026-11-01). A canvas texture has flipY on: check the canvas axis against the shader uv by shooting the trail under the robot, not by reading the number that says wiped.
+- A floor plane or mirror that runs past the walls: seen from above it shows the sky around the building. Discard it outside the rooms, along with roof plant and posts that stand outside.
 - A whole frame washed pale or milky. Split it into albedo, sky and sun before touching materials: pale roofs in a city
   film came from a solid coping box sitting on every roof like a lid, and a milky veil came from light shafts marched
   from the camera instead of from a distance.
@@ -264,6 +316,9 @@ Rain, water, beams.
 ### Sound
 
 Any film or app with audio.
+- Music that measures fine but nobody can hear: many cues keep the duck on and bury the bed. A median cue margin above
+  about 12 dB means the music is too low (An, 2026-11-01: "sao của minecraft k có nhạc z" at a 25 dB median, "nhạc còn
+  nhỏ" after a first lift, "ok hơn r" at a 12 dB median with cues still at least 6.8 dB clear).
 - A generated recording asked for 3 s that is really 0.6 s of sound and then silence, while the picture keeps going.
   Measure each cue's level over time; a long action gets several recordings, not one stretched hope.
 - A bright line on the mix sheet is not yet a fault: the spectrogram is log scale. Measure that band per stem first. A

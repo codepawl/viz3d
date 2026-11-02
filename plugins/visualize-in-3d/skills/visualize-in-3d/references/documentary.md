@@ -83,7 +83,10 @@ inferred from frames. These are defaults; the user's own rules win.
 - Put evidence side by side so viewers can compare by eye. These comparisons, turns in the story, chilling small details,
   quotable thesis lines and chapter starts are where most-replayed peaks sat. Lists without a person sat in the dips.
 - Motion: stills drift 1 to 3% over about 5 s; a 3D shot holds 1.5 s and then moves. Typed text runs 30 to 70 characters per
-  second, faster than the voice. A quote card builds in about 1.9 s inside a gap in the voice.
+  second, faster than the voice. A quote card builds in about 1.9 s inside a gap in the voice. A long quote lights word by word
+  from the transcript's word start times (31 words within about one frame); a shorter one fades in phrase by phrase.
+- Evidence the viewer can hear or read for themselves holds the most-replayed peaks on three comparable channels: real audio,
+  a message read in full over a card held 30 s or more. Replace shock adjectives with counts and understatement.
 - Sound: music starts before the voice (median voice entry 13 s). Voice sits 13 to 16 dB over music, whole mix -16 to -18.5
   LUFS. On a heavy transition the music or hit jumps 0.25 to 0.65 s before the picture changes, after a dip of 0.75 to 1.9 s.
   Before a reveal: fade down, 1.2 to 3.2 s of silence, a hit, then the text, only a few times a film. Archive audio is

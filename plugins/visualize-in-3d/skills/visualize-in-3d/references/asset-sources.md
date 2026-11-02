@@ -17,6 +17,8 @@ user's OK before downloading.
    them for props and set dressing, or as a base to restyle.
 5. **Build it** in Blender (or three.js, see `no-blender.md`) from a reference sheet (`real-objects.md`).
 
+Set material, light and camera values from measured data instead of by eye: physicallybased.info (CC0) lists colour, IOR and F0 per material, colour temperature and intensity per light, and sensor sizes per camera, with JSON on GitHub.
+
 Every main asset still gets the reference-sheet check from `real-objects.md`, whichever source it came from.
 Restyle imports to the film's look and scale. Skip anything marked non-commercial (NC) or no-derivatives (ND).
 Check each model's licence on its own page, not the collection's.

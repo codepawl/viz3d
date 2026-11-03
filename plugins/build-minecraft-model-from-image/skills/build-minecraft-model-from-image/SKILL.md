@@ -1,10 +1,12 @@
 ---
 name: build-minecraft-model-from-image
-description: Turn a 2D picture of an object into a Minecraft-style 3D model, a few clean cuboids with pixel textures in the Blockbench look, never fine jagged voxels. Exports GLB, a viewer and renders. Use for "make this photo a Minecraft model", "block model from an image", "turn this object into blocks", "voxel from a picture".
+description: Turn a 2D picture of an object into a Minecraft-style 3D model, a few clean cuboids with pixel textures in the Blockbench look, never fine jagged voxels. Exports GLB, a viewer and renders. Use for "make this photo a Minecraft model", "block model from an image", "turn this object into blocks", "voxel from a picture", "từ ảnh làm khối 3D minecraft", "voxel từ ảnh", "biến ảnh đồ vật thành block", "làm model minecraft".
 license: MIT
 ---
 
-# Build a Minecraft-style model from a picture
+# Build a Minecraft-style model from a picture (Dựng model kiểu Minecraft từ ảnh đồ vật)
+
+If `references/local.md` exists, read it first: it sets the folders and house rules for this machine.
 
 The agent looks at the picture and writes the model by hand as code. There is no image-to-3D model, no heightmap and no extrusion.
 
@@ -21,7 +23,7 @@ A fine voxel grid looks jagged and ugly. The target is how Minecraft itself is m
 
 ## Steps
 
-Scripts are in `{{SKILL_DIR}}/scripts`. Put each job in its own folder under `{{WORK_DIR}}`, with the picture as `source.jpg`. The scripts declare their Python dependencies inline, so `uv run` installs them. Blender 5.x does the renders. Set `BLENDER_PATH` if it is not on your PATH.
+`{{SKILL_DIR}}` is this skill's folder and `{{WORK_DIR}}` the folder where projects live. Scripts are in `{{SKILL_DIR}}/scripts`. Put each job in its own folder under `{{WORK_DIR}}`, with the picture as `source.jpg`. The scripts declare their Python dependencies inline, so `uv run` installs them. Blender 5.x does the renders. Set `BLENDER_PATH` if it is not on your PATH.
 
 1. **Look at the whole picture at full size before any tool.** Name each real part, and what is only shadow, reflection or background. Blueprints blur this: on the test run a port's shadow was read as a "dark neck", and a collared shirt as a white bib.
 2. **Read it:** `uv run --no-project {{SKILL_DIR}}/scripts/read_image.py source.jpg --blocks 24 --box x0,y0,x1,y1 --out read`. Add `--clear-background 18` on a plain background so holes open up (handles, slats). This writes `mask.png`, `blueprint.png` (block coordinates with a ruler), `palette.png` and `rows.json`. Pick `--blocks` so the thinnest part that must show gets 1 to 2 units.

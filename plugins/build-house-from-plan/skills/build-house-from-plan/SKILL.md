@@ -1,10 +1,12 @@
 ---
 name: build-house-from-plan
-description: Turn a 2D house plan into a photoreal 3D house in Blender Cycles, checked by overlaying the build on the drawing. Stills, a film of the walls rising off the drawing, and whole streets of houses. Use for a floor plan, a house plan or a blueprint that should become a real-looking 3D house or street.
+description: Turn a 2D house plan into a photoreal 3D house in Blender Cycles, checked by overlaying the build on the drawing. Stills, a film of the walls rising off the drawing, and whole streets of houses. Use for a floor plan, a house plan or a blueprint that should become a real-looking 3D house or street, "từ house plan làm nhà 3D", "bản vẽ thành nhà 3D", "dựng nhà từ mặt bằng", "nhà 3D từ bản vẽ".
 license: MIT
 ---
 
-# Build a photoreal 3D house from a 2D plan
+# Build a photoreal 3D house from a 2D plan (Dựng nhà 3D siêu chân thật từ bản vẽ 2D)
+
+If `references/local.md` exists, read it first: it sets the folders and house rules for this machine.
 
 A plan file is read off the drawing, checked against the drawing, built with real wall thickness and real frames, then
 dressed with scanned materials and models and rendered in Cycles. The drawing stays the judge: nothing ships unless the

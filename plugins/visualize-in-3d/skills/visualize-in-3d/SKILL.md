@@ -20,7 +20,8 @@ Paths use `{{WORK_DIR}}` for the folder where projects live (the current directo
    the usual install folder. If it is missing, say it gives much better models, is free at blender.org, and ask
    whether to wait or go on without it. Without it, follow `references/no-blender.md` and say in the report that
    model quality is lower.
-2. **Node 20+ and Playwright with Chromium** for recording; **ffmpeg** for encoding and checks.
+2. **Node 20+ and Playwright with Chromium** for recording; **ffmpeg** for encoding and checks. **67js** renders
+   films and stills: when one is the deliverable, read `references/67js.md` for setup and when to use it.
 3. **Subagents:** where the harness has them, give each pass to a fresh subagent with its brief and keep it inside
    about 80 tool calls. Where it does not, run the passes one after another in this session, finish and check one
    before starting the next, and re-read the plan file at the start of each.
@@ -36,16 +37,16 @@ Read what the user wants people to see, then pick one shape (or combine two) and
 | A place or system that runs (units, tasks, flows) | Live app with dashboard and a 30 s film | `references/brief.md`, `examples/` |
 | How a thing works (aircraft, circuit board, engine) | Lesson app: 3 to 5 lessons, one control each, a "Build your own" sandbox | `references/brief.md` (parts, flow overlays, sandboxes) |
 | Something spreading over real land | Terrain app with a time scrubber | `references/looks.md` (photoreal terrain), `examples/wildfire-valley.md` |
-| A story, case or piece of history | Documentary film | `references/documentary.md`, `references/film.md` |
-| Characters, creatures or machines doing something | Action short | `references/action.md` |
-| One object cut open or exploded | Cutaway film, or an app with a section view | `references/film.md`, `references/looks.md` |
+| A story, case or piece of history | Documentary film | `references/documentary.md`, `references/film.md`, `references/67js.md` |
+| Characters, creatures or machines doing something | Action short | `references/action.md`, `references/67js.md` |
+| One object cut open or exploded | Cutaway film, or an app with a section view | `references/film.md`, `references/looks.md`, `references/67js.md` |
 | One big object or building with many rooms, as a page or a book | Book: interactive illustrated cutaway plate, with quizzes | `references/book.md`, `references/looks.md` |
 | A game people play in the browser (steer a creature, survive, grow) | Playable web game, bot-balanced | `references/game.md` |
 | A demo for leaders in about an hour | Quick prototype from three.js primitives | `references/live-embed.md` |
 | A live view inside an existing dashboard or product | Embed (web component or iframe) on real data | `references/live-embed.md`, `scripts/mock-feed.mjs` |
 
-Pick the look in `references/looks.md` (Choosing): clean ops world (default for a system that runs), toy isometric, point cloud, photoreal terrain, dark documentary
-pixel diorama or illustrated cutaway plate. Study a look the user shows from a reference video with timestamped frame sheets
+Pick the look in `references/looks.md` (Choosing); clean ops world is the default for a system that runs. Study a
+look the user shows from a reference video with timestamped frame sheets
 (`scripts/contact-sheet.sh <video> <folder> <fps>`), then write it up as a new section in `looks.md`.
 
 ## 2. Write the plan file

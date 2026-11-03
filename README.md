@@ -8,6 +8,25 @@ This skill has your agent turn questions
 like these into a 3D world you can watch or click through. The world is built from researched facts and from models
 made to real dimensions.
 
+<table>
+  <tr>
+    <td width="200">
+      <a href="https://67js.codepawl.com">
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="https://67js.codepawl.com/brand/wordmark-dark.svg?v=0.10.0" />
+          <img src="https://67js.codepawl.com/brand/wordmark-light.svg?v=0.10.0" alt="67js" width="160" />
+        </picture>
+      </a>
+    </td>
+    <td>
+      Films and stills render in <a href="https://github.com/codepawl/67.js"><b>67js</b></a>, our WebGL2 engine that
+      agents drive through an MCP server: JSON scene recipes, PNG review grids, and GPU or CPU export to images and
+      video with bounded memory. viz3d works without it, and looks better with it. See
+      <a href="#films-and-stills-with-67js">Films and stills with 67js</a>.
+    </td>
+  </tr>
+</table>
+
 It has eight modes:
 
 - **Live app**: a three.js app with a dashboard around a 3D world of the place. A seeded simulation moves the units and
@@ -71,6 +90,7 @@ Name a look in your request, or let the agent pick one from the subject.
 
 ## What is new
 
+- Films and stills render in [67js](https://github.com/codepawl/67.js) when it is installed.
 - The `game` mode: a playable browser game, balanced by bot playtests.
 - Six more looks: clean ops world, lived-in isometric, white model documentary, Dither + ASCII showcase, gradient glow
   ASCII and layer build film.
@@ -176,6 +196,37 @@ your feed:
 that only takes a URL, use `embed.html?source=...` in an iframe. To test without your real system, the skill's
 `scripts/mock-feed.mjs` replays a JSONL file as a live feed.
 
+## Films and stills with 67js
+
+Apps, lessons, embeds and games stay in three.js, because people click and steer them. Documentaries, action shorts,
+cutaway films, showcase films and stills render in [67js](https://github.com/codepawl/67.js) when it is installed:
+
+- Terrain, scanned trees and grass, baked liquid, vehicles on paths, skinned characters, HDRI light and baked room
+  light come as addons.
+- The agent builds the scene as a JSON recipe through MCP and checks it on labelled review grids. It tries two or
+  three looks as branches and shows you the grid to pick from.
+- A timeline of shots with fades and depth of field drives the clock, so any frame renders the same in any order.
+- Render jobs export PNG and MP4 with the soundtrack and an audio sync check. Memory is planned before it is used.
+
+Set it up in your project:
+
+```bash
+npm install 67js@npm:@codepawlhq/67js
+```
+
+```bash
+claude mcp add 67js-scene -- npx --package @codepawlhq/67js 67js-mcp --backend gpu --memory 256
+```
+
+```bash
+npx skills add codepawl/67.js
+```
+
+The last command adds the 67js skills (`build-67js-scene` and `render-67js-media`). The skill's
+`references/67js.md` has the full workflow, Windows notes and the faults we have seen. Showcase and docs are at
+[67js.codepawl.com](https://67js.codepawl.com). If viz3d is useful to you, a star on
+[codepawl/67.js](https://github.com/codepawl/67.js) helps the engine behind it.
+
 ## What you need
 
 - Node 20 or later, with Playwright and Chromium for recording.
@@ -184,6 +235,7 @@ that only takes a URL, use `embed.html?source=...` in an iframe. To test without
 - [Blender](https://www.blender.org/download/) 5.x is optional. It gives much better models for the full live app and
   the documentary. Without it the skill builds the models in three.js and tells you the quality is lower. Quick
   prototypes and embeds never need it.
+- [67js](https://github.com/codepawl/67.js) is optional. It renders the films and stills, as described above.
 
 The skill asks before it downloads anything, such as elevation data, map data or reference images.
 

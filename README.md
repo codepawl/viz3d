@@ -58,6 +58,12 @@ It has eight modes:
 | ![An electric bus depot built from three.js primitives, with pantograph chargers over the buses](docs/images/quick-prototype.jpg) | ![A transit company dashboard with the 3D depot view inside it, a bus card open and a live status mark](docs/images/live-embed.jpg) |
 | **Lesson app** | **Stage cameras** |
 | ![An Arduino lesson: an LED fading on a breadboard, the current code line highlighted and the PWM signal drawn on the right](docs/images/lesson-app.jpg) | ![A metro app with the stage bar at the top and the speed controls at the bottom](docs/images/stages.jpg) |
+| **Action short** | **Book (cutaway plate)** |
+| ![A steam-driven mechanical spider walking over pipes on a prototype grid](docs/images/action.jpg) | ![An illustrated cutaway plate of RMS Titanic with labelled rooms and the people aboard](docs/images/book.jpg) |
+| **Game** | **Layer build look** |
+| ![A browser game: a swarm of red worms spreading through a low-poly forest, with the worm count in the corner](docs/images/game.jpg) | ![A city built up layer by layer, shown here at its white model stage](docs/images/layer-build.jpg) |
+| **Glow look** | **ASCII look** |
+| ![A cockroach drawn in glowing ASCII glyphs on a dark dithered floor](docs/images/glow.jpg) | ![An ASCII dungeon game: the hero and a spell drawn in glyphs inside a cave](docs/images/ascii.jpg) |
 
 A real place starts from its real layout. The agent draws the plan from OpenStreetMap data and
 builds the 3D world on the same coordinates, so the two line up. Things then work as they do in reality. Aircraft
@@ -90,7 +96,9 @@ Name a look in your request, or let the agent pick one from the subject.
 
 ## What is new
 
-- Films and stills render in [67js](https://github.com/codepawl/67.js) when it is installed.
+- Films and stills render in [67js](https://github.com/codepawl/67.js) when it is installed. Films longer than one
+  render job are split, joined and checked: tested on a 70 s film with no jump or sound gap at the joins.
+- Pictures of the action, book and game modes and of the layer build, glow and ASCII looks.
 - The `game` mode: a playable browser game, balanced by bot playtests.
 - Six more looks: clean ops world, lived-in isometric, white model documentary, Dither + ASCII showcase, gradient glow
   ASCII and layer build film.

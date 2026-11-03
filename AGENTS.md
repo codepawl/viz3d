@@ -14,7 +14,7 @@ It has the same rules with more reasons.
 
 | Change | Files |
 |---|---|
-| A look | `references/looks.md` (new section before `## Choosing`, one row in `## Choosing`), `README.md`, `SKILL.md` description |
+| A look | `references/looks.md` (new section before `## Choosing`, one row in `## Choosing`), the looks table in `README.md`, the look words in `skills/viz3d/SKILL.md`, `SKILL.md` description |
 | A mode | `references/<mode>.md`, shape table in `SKILL.md`, mode table in `skills/viz3d/SKILL.md`, `README.md`, both files in `harness/` |
 | A fault | the fault list in `references/self-review.md` or in the mode reference |
 | An example | `examples/<topic>.md`, in the shape of `examples/airport-ramp.md` |
@@ -29,7 +29,7 @@ It has the same rules with more reasons.
   `skills/viz3d/agents/openai.yaml` keeps `allow_implicit_invocation: false` for the same reason.
 - A mode word must match in all four places: `skills/viz3d/SKILL.md`, `harness/gemini/viz3d.toml`,
   `harness/opencode/viz3d.md` and the `README.md` mode table.
-- No private data: no personal names, home folders, drive letters, internal tool names, API keys or tokens. Use
+- No private data: no personal names, home folders, drive letters, internal tool names, project code names, API keys or tokens. A fault line carries no name or date of who reported it. Use
   `{{WORK_DIR}}` and `{{SKILL_DIR}}` with forward slashes.
 - Assets and sounds need a reusable licence (CC0, CC BY) with the source named. Sound effects are real or made and
   mixed in layers.
@@ -55,7 +55,7 @@ If `claude` is not installed, say so in your report and still run the other chec
 
 ## Finish
 
-- Raise `version` in `plugins/visualize-in-3d/.claude-plugin/plugin.json`: patch for a fix or a fault, minor for a
+- Raise `version` in `plugins/<plugin>/.claude-plugin/plugin.json` of each plugin you changed: patch for a fix or a fault, minor for a
   look, mode, script or harness.
 - Keep one topic in each commit. In the report, list the changed files and the checks with their result. Say what
   you could not check.

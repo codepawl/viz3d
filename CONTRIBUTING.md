@@ -7,7 +7,7 @@ Thanks for helping. This guide is for people. If you work through a coding agent
 
 - **A fault you saw.** Maybe a film had a hidden hit, or a caption went by too fast. Open an issue with the prompt you used, the agent and model, and one frame that shows the fault. We add it
   to a fault list in `references/self-review.md` or `references/action.md`, so every later run checks for it.
-- **A new look.** You need a style that the five looks do not cover. Add a section to `references/looks.md` (see
+- **A new look.** You need a style that the current looks do not cover. Add a section to `references/looks.md` (see
   below).
 - **An example topic.** You built a place or a system that went well. Add it to `examples/` as a topic file.
 - **A harness adapter.** Your agent needs its own command file to run `/viz3d`.
@@ -41,7 +41,7 @@ harness/opencode/viz3d.md                  /viz3d for OpenCode
 2. Describe the look in the same order as the other sections: palette, light, materials, camera, effects, and what
    breaks it.
 3. Add one row for the look under `## Choosing`.
-4. Add the look name to the list of looks in `README.md` and in the `description` of `SKILL.md`.
+4. Add the look to the looks table in `README.md`, the look words in `skills/viz3d/SKILL.md` and the `description` of `SKILL.md`.
 
 ### A mode
 
@@ -65,7 +65,7 @@ what the fault looks like in a frame and how to measure it, not only its name.
 - **Frontmatter of `skills/visualize-in-3d/SKILL.md`** has only `name`, `description` and `license`. Other keys
   make the upload to claude.ai fail. The `viz3d` command can also use `argument-hint` and
   `disable-model-invocation`.
-- **No private details.** No user names, home folders, drive letters, company names or internal tools. Write paths
+- **No private details.** No user names, home folders, drive letters, company names or internal tools. A fault line says what went wrong and how to measure it, with no name or date of who saw it. Write paths
   as `{{WORK_DIR}}` and `{{SKILL_DIR}}`, with forward slashes.
 - **Assets and sounds** must have a licence that lets anyone reuse them, such as CC0 or CC BY. Name the source and
   the licence. Sound effects are real recordings or sounds you made and mixed in layers, not one beep per hit.
@@ -103,7 +103,7 @@ to the pull request.
 
 ## Versions
 
-Raise `version` in `plugins/visualize-in-3d/.claude-plugin/plugin.json` in the same pull request:
+Raise `version` in the `.claude-plugin/plugin.json` of the plugin you changed (`plugins/<plugin>/`) in the same pull request:
 
 - patch (0.3.0 to 0.3.1) for a fix or a new fault,
 - minor (0.3.0 to 0.4.0) for a new look, mode, script or harness.

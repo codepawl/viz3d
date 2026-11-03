@@ -235,7 +235,7 @@ the point rather than a backdrop for a clean model. First used for a cockroach s
   wave stacks over the chain and stands the antenna straight up.
 - Blended-transparent materials (wings, fins, glass in many downloaded models) write no depth, so the glyph pass
   reads them as empty background and they vanish. Switch them to an alpha cutout (`transparent false`, `alphaTest`
-  about 0.35, `depthWrite true`) and render the normal pass double-sided (roach wings, 2026-10-29).
+  about 0.35, `depthWrite true`) and render the normal pass double-sided (roach wings).
 - A floor under the glyphs needs its own sparse treatment (tag it in the normal pass, 1-4 small glyphs by light,
   wide grout) plus a light pool that travels with the subject, or a tracking shot reads as flat haze.
 

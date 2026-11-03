@@ -82,8 +82,7 @@ insect movement, feel the physics in every joints"):
 - Plot joint angles against targets before recording a clip: a move overshoots once and settles within about two
   cycles, and nothing grows.
 - Before tuning a gait, wingbeat or strike, read the measured kinematics for that animal (or its nearest studied
-  relative) and cite them in SOURCES.md: which joints carry the stroke, cycle rate, duty factor, body sway (An,
-  2026-10-29, "did you reference the cockroach walk + sprint?"). Insects push by extending the femur and tibia;
+  relative) and cite them in SOURCES.md: which joints carry the stroke, cycle rate, duty factor, body sway. Insects push by extending the femur and tibia;
   the hip moves little, so a hip-only stroke looks like rowing. Mark slowed rates and judgement calls as such.
 
 Effects must look heavy and dangerous:

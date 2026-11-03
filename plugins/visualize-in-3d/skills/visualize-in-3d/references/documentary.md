@@ -82,6 +82,13 @@ inferred from frames. These are defaults; the user's own rules win.
 - People are flat silhouettes coded by role, with no built faces; real faces appear only in archive photos.
 - Put evidence side by side so viewers can compare by eye. These comparisons, turns in the story, chilling small details,
   quotable thesis lines and chapter starts are where most-replayed peaks sat. Lists without a person sat in the dips.
+- Every shot moves for its whole length, cards and walls of text included. Use a slow push in or pull out of 3 to 10%
+  at an even rate. A frame that stands still reads as a slide deck. Measure it, because the rule was
+  written and still missed: compare each shot's first and last frame, and a shot that did not change fails.
+- Two framings of the same object are one continuous camera move, never a cut. Example: a scrolling wall that stops on
+  one row. Pick the angle, then push into the row. A cut between two framings of the same object jumps, and the object
+  looks misaligned. Before a hard cut into a new space, let the last framing
+  settle for at least 1 s. Give a shot under 3 s a reason, such as a beat on the music.
 - Motion: stills drift 1 to 3% over about 5 s; a 3D shot holds 1.5 s and then moves. Typed text runs 30 to 70 characters per
   second, faster than the voice. A quote card builds in about 1.9 s inside a gap in the voice. A long quote lights word by word
   from the transcript's word start times (31 words within about one frame); a shorter one fades in phrase by phrase.

@@ -1,6 +1,6 @@
 ---
 name: visualize-in-3d
-description: Turn anything hard to picture into a 3D world people can watch or play with - an operation or system (airport, data center, port, factory, hospital), an event spreading over real land (wildfire, flood), a story in time (a historical event, a case), characters or machines in action (a fight, a chase, a launch), or how a thing works. Builds a live three.js app with a dashboard and a 30 s film, a lesson app, a quick no-Blender prototype, a live embed that runs on real data inside an existing dashboard, a documentary film, an action short, or an interactive cutaway plate or book. Looks include toy isometric, point cloud, photoreal terrain, dark documentary, pixel diorama and illustrated cutaway plate. Models come from ready sources or Blender builds made from real references, and the skill checks its own frames before showing anyone. Use for "visualize how X works", "show this event on a 3D map", "a live 3D dashboard of X", "a 3D lesson on how X works", "a documentary-style 3D explainer", "a quick 3D prototype", "two creatures fight in 3D", "app nhìn như game", "làm phim 3D về", "cho 2 con đánh nhau", "pixel battle", "theme point cloud", "kiểu wildfire tool".
+description: Turn anything hard to picture into a 3D world people can watch or play with - an operation or system (airport, data center, port, factory, hospital), an event spreading over real land (wildfire, flood), a story in time (a historical event, a case), characters or machines in action (a fight, a chase, a launch), or how a thing works. Builds a live three.js app with a dashboard and a 30 s film, a lesson app, a quick no-Blender prototype, a live embed that runs on real data inside an existing dashboard, a documentary film, an action short, an interactive cutaway plate or book, or a playable web game. Looks include clean ops world, toy and lived-in isometric, point cloud, photoreal terrain, dark and white model documentary, pixel diorama, cutaway plate, ASCII showcase and layer build film. Models come from ready sources or Blender builds made from real references, and the skill checks its own frames before showing anyone. Use for "visualize how X works", "show this event on a 3D map", "a live 3D dashboard of X", "a 3D lesson on how X works", "a documentary-style 3D explainer", "a quick 3D prototype", "two creatures fight in 3D", "app nhìn như game", "làm phim 3D về", "cho 2 con đánh nhau", "pixel battle", "theme point cloud", "kiểu wildfire tool".
 license: MIT
 ---
 
@@ -85,6 +85,8 @@ on the user's word.
 
 ## Rules
 
+- Every round, fixes included: a fast low-quality preview of the whole cut to the user first; full render only after
+  the user signs off.
 - Original names and designs by default. Real brands, liveries and known characters only when the user asks, with
   licensed models and a credit line.
 - Every main asset matches a reference of the real thing. Models from memory read as toys.

@@ -8,7 +8,7 @@ This skill has your agent turn questions
 like these into a 3D world you can watch or click through. The world is built from researched facts and from models
 made to real dimensions.
 
-It has seven modes:
+It has eight modes:
 
 - **Live app**: a three.js app with a dashboard around a 3D world of the place. A seeded simulation moves the units and
   the numbers. The agent records a 30 s film by driving the app with real clicks on a virtual clock.
@@ -28,14 +28,17 @@ It has seven modes:
 - **Book**: an illustrated cutaway plate of one big object or building, such as a liner or a castle, in 3D. You orbit
   it, read the margin labels and fly into any room, each full of small people at work. Several subjects make a
   page-turning book with a short quiz on each page.
+- **Game**: a free browser game people play. The player steers one creature or unit through an open world that pushes
+  back, grows by playing, and starts again from a death card. Bots play it before you do, to balance it and to find
+  stuck states.
 
 | Live app | Documentary film |
 |---|---|
 | ![A canal lock app: a container ship selected, its card open on the right, and the stage timeline at the bottom](docs/images/live-app.jpg) | ![A documentary map: a red route from a farm to a hardware store across a county](docs/images/documentary.jpg) |
 | **Quick prototype** | **Live embed** |
 | ![An electric bus depot built from three.js primitives, with pantograph chargers over the buses](docs/images/quick-prototype.jpg) | ![A transit company dashboard with the 3D depot view inside it, a bus card open and a live status mark](docs/images/live-embed.jpg) |
-| **Lesson app** | |
-| ![An Arduino lesson: an LED fading on a breadboard, the current code line highlighted and the PWM signal drawn on the right](docs/images/lesson-app.jpg) | |
+| **Lesson app** | **Stage cameras** |
+| ![An Arduino lesson: an LED fading on a breadboard, the current code line highlighted and the PWM signal drawn on the right](docs/images/lesson-app.jpg) | ![A metro app with the stage bar at the top and the speed controls at the bottom](docs/images/stages.jpg) |
 
 A real place starts from its real layout. The agent draws the plan from OpenStreetMap data and
 builds the 3D world on the same coordinates, so the two line up. Things then work as they do in reality. Aircraft
@@ -44,19 +47,36 @@ and ports, and the agent measures every gap before it records.
 
 ![Singapore Changi: the aerodrome plan drawn from OpenStreetMap on the left, the same layout in 3D on the right](docs/images/real-place.jpg)
 
-Every live app has stage cameras on number keys, a guided tour, follow camera and playback from 0.25x to 10x:
+Every live app has stage cameras on number keys, a guided tour, follow camera and playback from 0.25x to 10x, as in
+the metro app above.
 
-![A metro app with the stage bar at the top and the speed controls at the bottom](docs/images/stages.jpg)
+There are twelve looks:
 
-There are six looks: toy isometric, point-cloud survey, photoreal terrain, dark documentary, pixel diorama and illustrated cutaway plate.
+| Look | Fits |
+|---|---|
+| Clean ops world | The default for a system that runs: a white-grey world with one accent colour, framed like a real operations product |
+| Toy isometric | A friendly diorama of a place or system |
+| Lived-in isometric | Ordinary buildings where people live or work and a crisis plays out inside |
+| Point-cloud survey | A scanned, technical view of land, sea or a site |
+| Photoreal terrain | Something spreading over real land, such as a wildfire or a flood |
+| Dark documentary | A case or an event told as a film |
+| White model documentary | A case told as an architect's white model |
+| Pixel diorama | Pixel-art sprites on a 3D stage, for battles and small worlds |
+| Illustrated cutaway plate | One big object or building cut open, for the book mode |
+| Dither + ASCII showcase | A film that shows off a model, a tool or a product: the model stays clean, the world around it turns to ASCII |
+| Gradient glow ASCII | A creature or object that is itself the art, drawn in glowing ASCII |
+| Layer build film | One locked aerial camera while a place is built up layer by layer |
+
+Name a look in your request, or let the agent pick one from the subject.
 
 ## What is new
 
-- The `/viz3d` command with a mode word, and command files for Gemini CLI and OpenCode.
-- The `book` mode and the illustrated cutaway plate look.
-- The pixel diorama look and an action short mode.
-- A self-review loop that measures frames, looks at them and fixes faults before you see the result.
-- A source list for ready models, and notes on publishing a live page as a claude.ai Artifact.
+- The `game` mode: a playable browser game, balanced by bot playtests.
+- Six more looks: clean ops world, lived-in isometric, white model documentary, Dither + ASCII showcase, gradient glow
+  ASCII and layer build film.
+- A longer self-review fault list: contact and support checks, camera flights measured against every mesh, vehicles
+  that steer and roll like the real ones, and sound faults.
+- A fast low-quality preview of the whole film goes to you first. The full render waits for your sign-off.
 
 ## Install
 
@@ -107,6 +127,7 @@ Start it with the command, a mode and the subject:
 /viz3d app a container port
 /viz3d action two mechs fighting in a flooded city
 /viz3d book the Titanic
+/viz3d game a worm that eats its way through a city
 ```
 
 | Mode | What you get |
@@ -118,6 +139,7 @@ Start it with the command, a mode and the subject:
 | `film` | Documentary film |
 | `action` | Action short: creatures, machines or characters doing something |
 | `book` | Illustrated cutaway plate of one subject, or a page-turning book of several, with quizzes |
+| `game` | Playable browser game, balanced by bot playtests |
 
 Leave the mode out and the agent picks one from the subject. How you type the command depends on the agent:
 

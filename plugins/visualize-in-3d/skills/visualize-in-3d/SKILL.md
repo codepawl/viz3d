@@ -1,18 +1,18 @@
 ---
 name: visualize-in-3d
-description: Turn anything hard to picture into a 3D world people can watch or play with - an operation or system (airport, data center, port, factory, hospital), an event spreading over real land (wildfire, flood), a story in time (a historical event, a case), characters or machines in action (a fight, a chase, a launch), or how a thing works. Builds a live three.js app with a dashboard and a 30 s film, a lesson app, a quick no-Blender prototype, a live embed that runs on real data inside an existing dashboard, a documentary film, an action short, an interactive cutaway plate or book, or a playable web game. Looks include clean ops world, toy and lived-in isometric, point cloud, photoreal terrain, dark and white model documentary, pixel diorama, cutaway plate, ASCII showcase and layer build film. Models come from ready sources or Blender builds made from real references, and the skill checks its own frames before showing anyone. Use for "visualize how X works", "show this event on a 3D map", "a live 3D dashboard of X", "a 3D lesson on how X works", "a documentary-style 3D explainer", "a quick 3D prototype", "two creatures fight in 3D", "app nhìn như game", "làm phim 3D về", "cho 2 con đánh nhau", "pixel battle", "theme point cloud", "kiểu wildfire tool".
+description: Visualize anything in 3D - a place, an operation or system (airport, data center, port, factory, hospital), an object or product, a creature or character, a story or event in time, something spreading over real land, or how a thing works. Builds a live three.js app with a dashboard and a 30 s film, a lesson app, a quick no-Blender prototype, a live embed on real data, a documentary film, an action short, a showcase film or stills of one object, an interactive cutaway plate or book, or a playable web game. Looks come in four families (clean product, real and cinematic, technical, stylized art), from clean ops world and isometric dioramas to photoreal terrain, white model, point cloud, cutaway plate, pixel, ASCII, glow and layer build. Models come from ready sources or Blender builds made from real references, and the skill checks its own frames before showing anyone. Use for "visualize X in 3D", "make a 3D film of X", "show this event on a 3D map", "a live 3D dashboard of X", "a 3D lesson on how X works", "show off this model", "a quick 3D prototype", "two creatures fight in 3D", "dựng 3D cái này", "app nhìn như game", "làm phim 3D về", "cho 2 con đánh nhau", "pixel battle", "theme point cloud", "kiểu wildfire tool".
 license: MIT
 ---
 
-# Visualize in 3D (Dựng thế giới 3D để thấy mọi thứ vận hành)
+# Visualize in 3D (Dựng mọi thứ thành 3D)
 
 If `references/local.md` exists, read it first: it sets the folders and house rules for this machine.
 
-Take any subject and make it visible in 3D: models from real references, a seeded simulation or a scripted timeline
+Take any subject and make it 3D: models from real references, a seeded simulation or a scripted timeline
 driving them, a look chosen for the subject, and a film checked frame by frame. The user can also start it with
-`/viz3d <mode> <subject>` (modes: app, lesson, prototype, embed, film, action, book, game).
+`/viz3d <mode> <subject>` (modes: app, lesson, prototype, embed, film, action, showcase, book, game).
 Paths use `{{WORK_DIR}}` for the folder where projects live (the current directory unless the user names one) and
-`{{SKILL_DIR}}` for this skill's folder. Write paths with forward slashes on every platform.
+`{{SKILL_DIR}}` for this skill's folder, with forward slashes on every platform.
 
 ## Before you start
 
@@ -39,15 +39,15 @@ Read what the user wants people to see, then pick one shape (or combine two) and
 | Something spreading over real land | Terrain app with a time scrubber | `references/looks.md` (photoreal terrain), `examples/wildfire-valley.md` |
 | A story, case or piece of history | Documentary film | `references/documentary.md`, `references/film.md`, `references/67js.md` |
 | Characters, creatures or machines doing something | Action short | `references/action.md`, `references/67js.md` |
+| One object, product, model or creature to show off | Showcase film or stills | `references/looks.md` (Dither + ASCII showcase, Gradient glow ASCII), `references/film.md`, `references/67js.md` |
 | One object cut open or exploded | Cutaway film, or an app with a section view | `references/film.md`, `references/looks.md`, `references/67js.md` |
 | One big object or building with many rooms, as a page or a book | Book: interactive illustrated cutaway plate, with quizzes | `references/book.md`, `references/looks.md` |
 | A game people play in the browser (steer a creature, survive, grow) | Playable web game, bot-balanced | `references/game.md` |
 | A demo for leaders in about an hour | Quick prototype from three.js primitives | `references/live-embed.md` |
 | A live view inside an existing dashboard or product | Embed (web component or iframe) on real data | `references/live-embed.md`, `scripts/mock-feed.mjs` |
 
-Pick the look in `references/looks.md` (Choosing); clean ops world is the default for a system that runs. Study a
-look the user shows from a reference video with timestamped frame sheets
-(`scripts/contact-sheet.sh <video> <folder> <fps>`), then write it up as a new section in `looks.md`.
+Pick the look in `references/looks.md` (Choosing: four families, a default per shape). Study a look the user shows from
+a reference video with frame sheets (`scripts/contact-sheet.sh <video> <folder> <fps>`) and add it to `looks.md`.
 
 ## 2. Write the plan file
 

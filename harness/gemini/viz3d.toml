@@ -1,8 +1,12 @@
-description = "Turn a place, system, object or event into a 3D world with the visualize-in-3d skill"
+description = "Visualize anything in 3D with the visualize-in-3d skill"
 prompt = """
 Activate the visualize-in-3d skill and follow it from the start for this request:
 
 {{args}}
 
-If the first word is a mode, use that shape and drop the word from the subject. The modes are app (live app with a dashboard and a short film), lesson (lesson app), prototype (quick prototype from primitives), embed (live embed on real data), film or doc (documentary film), action (action short), book (illustrated cutaway plate, or a book of several with quizzes), game (playable browser game). Otherwise pick the shape from the subject with the skill's table. If the request is empty, ask what the user wants people to see.
+If the request is empty or is "help", list the modes and looks below and ask what the user wants to make 3D. Otherwise, if the first word is a mode, use that shape and drop the word from the subject; if the request names a look, use that look, else the default look for the shape.
+
+Modes: film or doc (documentary film), action (action short), showcase (film or stills that show off one object or model), app (live 3D app with a dashboard and a short film), lesson (a real object built and explained step by step), book (illustrated cutaway plate, or a book with quizzes), game (playable browser game), prototype (quick prototype from primitives), embed (live 3D view inside a dashboard, on real data). With no mode, pick the shape from the subject with the skill's table.
+
+Looks: clean product (ops, toy, lived-in), real and cinematic (terrain, documentary, white model, layer build), technical (point cloud, plate), stylized art (pixel, ASCII, glow).
 """

@@ -1,10 +1,10 @@
 # Looks
 
 Each topic file names one look. The look sets the world's rendering, the UI skin and what the film shows; the data
-model, the dashboard parts and the film's click-driven shape stay the same. Reading map: Toy isometric (default),
+model, the dashboard parts and the film's click-driven shape stay the same. Reading map: start with Choosing at the end (four families and the default look per shape), then Toy isometric,
 Point-cloud survey, Photoreal terrain analysis, Dark documentary, Pixel diorama, Illustrated cutaway plate,
 Lived-in isometric, Dither + ASCII showcase, Gradient glow ASCII, Clean ops world, White model documentary, Layer
-build film, Choosing.
+build film.
 
 Reference stills or clips for a look are optional. If you have some, save them under `{{WORK_DIR}}/references/<slug>/`
 and point the briefs at them; they are for study only and never ship in the app or the film. Without them, the
@@ -317,6 +317,28 @@ one is a finished, cinematic frame. No labels and no narration: the picture alon
   final layer.
 
 ## Choosing
+
+The looks fall into four families. Pick the family from what the piece is for, then the look from the subject.
+
+| Family | Looks | Pick it when |
+|---|---|---|
+| Clean product | Clean ops world, Toy isometric, Lived-in isometric | The piece should read like a real product or a friendly diorama: apps, lessons, prototypes, embeds |
+| Real and cinematic | Photoreal terrain, Dark documentary, White model documentary, Layer build film | It should feel real and filmed: land, events, cases, a place being built |
+| Technical | Point-cloud survey, Illustrated cutaway plate | It should read like a survey or an engineering plate: terrain from above, one object cut open |
+| Stylized art | Pixel diorama, Dither + ASCII showcase, Gradient glow ASCII | The look is part of the art: battles, games, showing off a model, a creature as art |
+
+Default look per shape, when the user names none:
+
+| Shape | Default look |
+|---|---|
+| Live app, quick prototype, live embed | Clean ops world |
+| Lesson app | Clean ops world, close to the object |
+| Terrain app | Photoreal terrain |
+| Documentary film | Dark documentary; white model documentary when places and action must be seen clearly |
+| Action short | Pixel diorama for creature battles; otherwise the look of the world the action happens in |
+| Showcase film or stills | Dither + ASCII showcase with the model rendered clean |
+| Book | Illustrated cutaway plate |
+| Game | Pixel diorama or toy isometric |
 
 A build-up or breakdown of a place, where the wow is watching it become real, goes layer build film. A case that needs its action and places clearly seen can go white model documentary; dark documentary suits a case that lives on
 what stays hidden. Clean ops world is the default for a system that runs (an operation with units, tasks and flows). Toy isometric (a

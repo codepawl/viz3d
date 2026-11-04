@@ -1,6 +1,6 @@
 {
   "name": "codepawl",
-  "description": "viz3d: turn hard-to-picture places, systems and events into a 3D world you can watch or click through",
+  "description": "viz3d: visualize anything in 3D, as a film, an app you click through, a lesson, a book or a game",
   "owner": {
     "name": "CodePawl",
     "url": "https://codepawl.com"
@@ -9,7 +9,7 @@
     {
       "name": "visualize-in-3d",
       "source": "./plugins/visualize-in-3d",
-      "description": "Turn hard-to-picture places, systems and events into a 3D world you can watch or click through"
+      "description": "Visualize anything in 3D: a place, a system, an object, a creature, a story or an idea, as a film, an app, a lesson, a book or a game"
     },
     {
       "name": "build-minecraft-model-from-image",

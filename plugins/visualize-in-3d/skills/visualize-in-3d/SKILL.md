@@ -10,7 +10,7 @@ If `references/local.md` exists, read it first: it sets the folders and house ru
 
 Take any subject and make it 3D: models from real references, a seeded simulation or a scripted timeline
 driving them, a look chosen for the subject, and a film checked frame by frame. The user can also start it with
-`/viz3d <mode> <subject>` (modes: app, lesson, prototype, embed, film, action, showcase, book, game).
+`/viz3d <mode> <subject>` (modes: app, lesson, prototype, embed, film or doc, action, showcase, book, game).
 Paths use `{{WORK_DIR}}` for the folder where projects live (the current directory unless the user names one) and
 `{{SKILL_DIR}}` for this skill's folder, with forward slashes on every platform.
 
@@ -46,7 +46,7 @@ Read what the user wants people to see, then pick one shape (or combine two) and
 | A demo for leaders in about an hour | Quick prototype from three.js primitives | `references/live-embed.md` |
 | A live view inside an existing dashboard or product | Embed (web component or iframe) on real data | `references/live-embed.md`, `scripts/mock-feed.mjs` |
 
-Pick the look in `references/looks.md` (Choosing: four families, a default per shape). Study a look the user shows from
+Pick the look in `references/looks.md` (Choosing: four families, a default per shape; a named look wins). Study a look the user shows from
 a reference video with frame sheets (`scripts/contact-sheet.sh <video> <folder> <fps>`) and add it to `looks.md`.
 
 ## 2. Write the plan file

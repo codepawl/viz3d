@@ -343,7 +343,7 @@ Default look per shape, when the user names none:
 A build-up or breakdown of a place, where the wow is watching it become real, goes layer build film. A case that needs its action and places clearly seen can go white model documentary; dark documentary suits a case that lives on
 what stays hidden. Clean ops world is the default for a system that runs (an operation with units, tasks and flows). Toy isometric (a
 more playful diorama on a slab, stronger colour) stays as an alternative when the user asks for it or the subject is
-light-hearted. A showcase film always uses dither + ASCII with the model
+light-hearted. A showcase film defaults to dither + ASCII with the model
 rendered clean. The point-cloud look can read as dull on a busy site, so use it when
 it is asked for. Otherwise pick the look the place itself suggests: built places full of moving vehicles go toy
 isometric; land and water seen from above go point-cloud; an event spreading across real land over time goes

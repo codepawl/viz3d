@@ -101,7 +101,7 @@ Playback runs from 0.25x to 10x.
 
 ## Looks
 
-The twelve looks fall into four families. Put the look word in your command, or leave it out and the agent uses the
+The thirteen looks fall into four families. Put the look word in your command, or leave it out and the agent uses the
 default look for the mode.
 
 | Family | Look | Word | Fits |
@@ -115,6 +115,7 @@ default look for the mode.
 | | Layer build film | `layer build` | One locked aerial camera while a place is built up layer by layer |
 | Technical | Point-cloud survey | `point cloud` | A scanned, technical view of land, sea or a site |
 | | Illustrated cutaway plate | `plate` | One big object or building cut open, for the book mode |
+| | Space-time cube | `space-time` | Movers under spacing rules, such as air traffic: the map is the floor, time goes up, and you drag a tube to fix a breach |
 | Stylized art | Pixel diorama | `pixel` | Pixel-art sprites on a 3D stage, for battles, games and small worlds |
 | | Dither + ASCII showcase | `ASCII` | A film that shows off a model, a tool or a product: the model stays clean, the world around it turns to ASCII |
 | | Gradient glow ASCII | `glow` | A creature or object that is itself the art, drawn in glowing ASCII |
@@ -122,6 +123,8 @@ default look for the mode.
 | Layer build | ASCII |
 |---|---|
 | ![A city built up layer by layer, shown here at its white model stage](docs/images/layer-build.jpg) | ![An ASCII dungeon game: the hero and a spell drawn in glyphs inside a cave](docs/images/ascii.jpg) |
+| **Space-time cube** | |
+| ![An airport radar as a green phosphor space-time cube: flights as tubes of rings rising over the scope, one tube being dragged to fix a wake spacing breach](docs/images/space-time.jpg) | |
 
 Default looks: apps, prototypes, embeds and lessons use clean ops world. Films use dark documentary, showcases use
 Dither + ASCII and books use the cutaway plate. You can show the agent a reference video of a new look. It studies the

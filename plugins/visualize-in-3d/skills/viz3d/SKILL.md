@@ -38,6 +38,7 @@ In tools that do not fill in the line above, the request is the rest of the user
 | `layer build` | Layer build film |
 | `point cloud` | Point-cloud survey |
 | `plate`, `cutaway` | Illustrated cutaway plate |
+| `space-time` | Space-time cube |
 | `pixel` | Pixel diorama |
 | `ASCII` | Dither + ASCII showcase |
 | `glow` | Gradient glow ASCII |
@@ -57,7 +58,7 @@ In tools that do not fill in the line above, the request is the rest of the user
 
 | Clean product | Real and cinematic | Technical | Stylized art |
 |---|---|---|---|
-| ops, toy, lived-in | terrain, documentary, white model, layer build | point cloud, plate | pixel, ASCII, glow |
+| ops, toy, lived-in | terrain, documentary, white model, layer build | point cloud, plate, space-time | pixel, ASCII, glow |
 
 Examples: `/viz3d app a container port`, `/viz3d film white model the Chernobyl accident`,
 `/viz3d showcase glow a cockroach`, `/viz3d game pixel a worm that eats a city`.

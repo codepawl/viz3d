@@ -4,7 +4,7 @@ Each topic file names one look. The look sets the world's rendering, the UI skin
 model, the dashboard parts and the film's click-driven shape stay the same. Reading map: start with Choosing at the end (four families and the default look per shape), then Toy isometric,
 Point-cloud survey, Photoreal terrain analysis, Dark documentary, Pixel diorama, Illustrated cutaway plate,
 Lived-in isometric, Dither + ASCII showcase, Gradient glow ASCII, Clean ops world, White model documentary, Layer
-build film.
+build film, Space-time cube.
 
 Reference stills or clips for a look are optional. If you have some, save them under `{{WORK_DIR}}/references/<slug>/`
 and point the briefs at them; they are for study only and never ship in the app or the film. Without them, the
@@ -316,6 +316,39 @@ one is a finished, cinematic frame. No labels and no narration: the picture alon
 - Sound: one recording per action, placed from the film's own event times; a real track whose surge lands on the
   final layer.
 
+## Space-time cube
+
+A technical figure for anything that moves under spacing rules: aircraft, ships, trains, robots on a floor. The floor
+is the map and time is the vertical axis, so each mover is a tube and two tubes touching is a real breach. It looks
+like a live research tool: thin lines, small solid nodes, live readouts and crop brackets. One gesture re-lays the
+same data every few seconds with no cut. It uses plain three.js lines and no models.
+
+- Each mover is a 1 px centre line plus a ring every 20 s of its time. The ring radius is half the lateral minimum, so
+  two rings touch exactly at the minimum. Rings take the alert colour only inside a conflict window.
+- One key cycles four views of the same vertices: cube, top-down scope (time collapsed), time-distance stringline, and a
+  conflict graph (nodes on a ring in runway order, edges for closest approach). Morph positions with eased weights
+  over about 1.4 s and never cut. A cut plane scrubs time, and its slice is a live 2D scope with dots and data blocks.
+- Play: drag a tube along its own time axis to delay it. The model finds a control that gives the wanted delay. It
+  tries the speed inside the legal band first, then a vector. A departure gets a ground hold. About 0.25 s of delay
+  per pixel makes a fix take tens of pixels. Measure the drag axis at the tube with only time changing.
+- Compute every number on screen from the model each frame. Show the closest approach, the time to the next conflict,
+  the runway spacing and the conflict count. Each rule comes from the real rulebook with its paragraph in a notes file. Invented parts of the
+  scenario, such as routes, are marked as invented.
+- Captions are the real method names in mono ("SPACE–TIME / CUBE", "TIME–DISTANCE / STRINGLINE") with the axes and
+  units on the line below.
+- Labels are an HTML layer with a halo in the background colour. Declutter them every frame in priority order: the
+  label in hand, conflicts, alerts, tags, edge labels, axis labels. Each label tries six offsets around its anchor.
+  It avoids the HUD panels and the cursor. A label that must show and finds no free offset steps down a line at a time.
+- Skins: a phosphor scope (near-black, one green, brightness for emphasis, amber only for a broken rule, a fade quad
+  with `autoClear` off for persistence), white paper with one red, or a buff approach chart with chart blue and
+  magenta. The scope gets an antenna sweep at the real rate (an ASR-9 turns at 12.5 rpm, one scan per 4.8 s): a 1 px
+  leading line over an additive fan. Persistence stacks the fan about 5 times at a 0.2 fade, so keep its own glow low.
+- Proof: drive a real mouse from a script on a virtual 30 fps clock. Assert that each drag removes the conflict it
+  aims at. Assert that it adds only the conflicts you expect. Record the demo with the same script, already moving in the first frame.
+- Traps: scanning every pair at every step is slow, so cache each track resampled per second. A pointer-up can drop the
+  last move, so apply the pending control on release. A departure that circles its last waypoint makes fake conflicts:
+  hold its heading past the last fix.
+
 ## Choosing
 
 The looks fall into four families. Pick the family from what the piece is for, then the look from the subject.
@@ -324,7 +357,7 @@ The looks fall into four families. Pick the family from what the piece is for, t
 |---|---|---|
 | Clean product | Clean ops world, Toy isometric, Lived-in isometric | The piece should read like a real product or a friendly diorama: apps, lessons, prototypes, embeds |
 | Real and cinematic | Photoreal terrain, Dark documentary, White model documentary, Layer build film | It should feel real and filmed: land, events, cases, a place being built |
-| Technical | Point-cloud survey, Illustrated cutaway plate | It should read like a survey or an engineering plate: terrain from above, one object cut open |
+| Technical | Point-cloud survey, Illustrated cutaway plate, Space-time cube | It should read like a survey, an engineering plate or a research figure: terrain from above, one object cut open, movers checked against spacing rules |
 | Stylized art | Pixel diorama, Dither + ASCII showcase, Gradient glow ASCII | The look is part of the art: battles, games, showing off a model, a creature as art |
 
 Default look per shape, when the user names none:
@@ -340,7 +373,9 @@ Default look per shape, when the user names none:
 | Book | Illustrated cutaway plate |
 | Game | Pixel diorama or toy isometric |
 
-A build-up or breakdown of a place, where the wow is watching it become real, goes layer build film. A case that needs its action and places clearly seen can go white model documentary; dark documentary suits a case that lives on
+A build-up or breakdown of a place, where the wow is watching it become real, goes layer build film. Movers
+that must keep apart under real rules (air traffic, ships, trains), where the wow is seeing a breach and fixing it,
+go space-time cube. A case that needs its action and places clearly seen can go white model documentary; dark documentary suits a case that lives on
 what stays hidden. Clean ops world is the default for a system that runs (an operation with units, tasks and flows). Toy isometric (a
 more playful diorama on a slab, stronger colour) stays as an alternative when the user asks for it or the subject is
 light-hearted. A showcase film defaults to dither + ASCII with the model

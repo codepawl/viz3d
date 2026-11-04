@@ -29,6 +29,8 @@ a book or a game. It checks its own frames before it shows you anything.
 2. Type `/viz3d` with nothing after it. The agent shows the menu of modes and looks.
 3. Type a mode, a look if you want one, and the subject: `/viz3d film white model the Chernobyl accident`.
 
+Put the subject in quotes when it starts with a mode or look word: `/viz3d "film noir city"`.
+
 You can also skip the command and ask in your own words. The agent picks the mode and the look from the subject.
 
 ## What do you want to make?
@@ -67,20 +69,20 @@ The nine modes fall into three groups, by what people do with the result.
 - **Lesson app** (`lesson`): a step-by-step lesson on a real object at real size, such as an Arduino and a
   breadboard. Parts and wires plug in as they do on a desk. The highlighted code line is what the board does right
   now. A free bench lets the learner build their own circuit.
-- **Book** (`book`): an illustrated cutaway plate of one big object or building, such as a liner or a castle, in 3D.
+- **Book** (`book`): a 3D illustrated cutaway plate of one big object or building, such as a liner or a castle.
   You orbit it, read the margin labels and fly into any room, each full of small people at work. Several subjects
   make a page-turning book with a short quiz on each page.
 - **Game** (`game`): a free browser game people play. The player steers one creature or unit through an open world
-  that pushes back, grows by playing, and starts again from a death card. Bots play it before you do, to balance it
+  that pushes back. It grows by playing and starts again from a death card. Bots play it before you do, to balance it
   and to find stuck states.
 
 **Put it in your product**
 
 - **Quick prototype** (`prototype`): a live app in one pass from three.js primitives, with no Blender. Use it when you
   need something to show your leads this week.
-- **Live embed** (`embed`): the 3D view as a web component (`<viz3d-world>`) or an iframe page that goes into the
-  dashboard or product you already have. It reads your real data from REST, Server-Sent Events, WebSocket or a CSV
-  export through a field mapping file, so a new feed needs no code change. Tokens stay on your backend.
+- **Live embed** (`embed`): the 3D view as a web component (`<viz3d-world>`) or an iframe page. It goes into the
+  dashboard or product you already have. It reads your real data through a field mapping file, from REST, Server-Sent
+  Events, WebSocket or a CSV export. A new feed needs no code change. Tokens stay on your backend.
 
 | Documentary film | Action short |
 |---|---|
@@ -94,8 +96,8 @@ The nine modes fall into three groups, by what people do with the result.
 | **Live embed** | **Stage cameras in a live app** |
 | ![A transit company dashboard with the 3D depot view inside it, a bus card open and a live status mark](docs/images/live-embed.jpg) | ![A metro app with the stage bar at the top and the speed controls at the bottom](docs/images/stages.jpg) |
 
-Every live app has stage cameras on number keys, a guided tour, follow camera and playback from 0.25x to 10x, as in
-the metro app above.
+Every live app has stage cameras on number keys, a guided tour and a follow camera, as in the metro app above.
+Playback runs from 0.25x to 10x.
 
 ## Looks
 
@@ -213,11 +215,11 @@ that only takes a URL, use `embed.html?source=...` in an iframe. To test without
 Apps, lessons, embeds and games stay in three.js, because people click and steer them. Documentaries, action shorts,
 showcases, cutaway films and stills render in [67js](https://github.com/codepawl/67.js) when it is installed:
 
-- Terrain, scanned trees and grass, baked liquid, vehicles on paths, skinned characters, HDRI light and baked room
-  light come as addons.
+- Addons give terrain, scanned trees and grass, baked liquid, vehicles on paths and skinned characters. Others give
+  HDRI light and baked room light.
 - The agent builds the scene as a JSON recipe through MCP and checks it on labelled review grids. It tries two or
   three looks as branches and shows you the grid to pick from.
-- A timeline of shots with fades and depth of field drives the clock, so any frame renders the same in any order.
+- A timeline of shots with fades and depth of field drives the clock. Any frame renders the same in any order.
 - Render jobs export PNG and MP4 with the soundtrack and an audio sync check. Memory is planned before it is used.
 - Films longer than one render job are split, joined and checked. A 70 s test film showed no jump or sound gap at the
   joins.
@@ -258,13 +260,13 @@ The last command adds the 67js skills (`build-67js-scene` and `render-67js-media
 - `/viz3d` with nothing after it shows the menu. The menu groups the modes by what people do with them and the looks by family.
 - Films and stills render in [67js](https://github.com/codepawl/67.js) when it is installed.
 - The `game` mode: a playable browser game, balanced by bot playtests.
-- A longer self-review fault list: contact and support checks, camera flights measured against every mesh, vehicles
-  that steer and roll like the real ones, and sound faults.
+- A longer self-review fault list. It checks contact and support, camera flights through meshes, vehicles that
+  steer and roll, and sound.
 
 ## Also in this repository
 
 **build-minecraft-model-from-image** turns a picture of an object into a Minecraft-style 3D model. The agent looks at
-the picture and writes the model as code: a few cuboids with pixel textures, not a fine voxel grid and not an
+the picture and writes the model as code: a few cuboids with pixel textures. It does not use a fine voxel grid or an
 image-to-3D network. You get a GLB, a viewer page, renders from every side and a sheet that compares them with the
 picture. It needs Python through [uv](https://docs.astral.sh/uv/) and Blender 5.x for the renders.
 
@@ -290,8 +292,8 @@ Python through [uv](https://docs.astral.sh/uv/), Blender 5.x and a GPU.
 /plugin install build-house-from-plan@codepawl
 ```
 
-The plans behind the picture are public domain: Historic American Buildings Survey and Historic American Engineering
-Record sheets from the Library of Congress, and a USDA plan. Furniture includes CC BY models listed in the skill's example.
+The plans behind the picture are public domain. They are Historic American Buildings Survey and Historic American
+Engineering Record sheets from the Library of Congress, and a USDA plan. Furniture includes CC BY models listed in the skill's example.
 
 ## Contributing
 

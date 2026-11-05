@@ -6,7 +6,8 @@ license: MIT
 
 # Visualize in 3D (Dựng mọi thứ thành 3D)
 
-If `references/local.md` exists, read it first: it sets the folders and house rules for this machine.
+If `references/local.md` exists, read it first: it sets the folders and house rules for this machine. Then read
+`{{WORK_DIR}}/viz3d-lessons.md` if it exists: rules learned from this user's past corrections (`references/learning.md`).
 
 Take any subject and make it 3D: models from real references, a seeded simulation or a scripted timeline
 driving them, a look chosen for the subject, and a film checked frame by frame. The user can also start it with
@@ -43,11 +44,12 @@ Read what the user wants people to see, then pick one shape (or combine two) and
 | One object cut open or exploded | Cutaway film, or an app with a section view | `references/film.md`, `references/looks.md`, `references/67js.md` |
 | One big object or building with many rooms, as a page or a book | Book: interactive illustrated cutaway plate, with quizzes | `references/book.md`, `references/looks.md` |
 | A game people play in the browser (steer a creature, survive, grow) | Playable web game, bot-balanced | `references/game.md` |
-| A demo for leaders in about an hour | Quick prototype from three.js primitives | `references/live-embed.md` |
+| A demo for leaders in about an hour | Quick prototype from ready models, no Blender | `references/live-embed.md` |
 | A live view inside an existing dashboard or product | Embed (web component or iframe) on real data | `references/live-embed.md`, `scripts/mock-feed.mjs` |
 
-Pick the look in `references/looks.md` (Choosing: four families, a default per shape; a named look wins). Study a look the user shows from
-a reference video with frame sheets (`scripts/contact-sheet.sh <video> <folder> <fps>`) and add it to `looks.md`.
+Pick the look in `references/looks.md` (Choosing: four families, a default per shape; a named look wins). Then pick a
+style reference, never build from words alone: the user's image, video or page, else two or three you find and show
+(`references/style-reference.md`). Its style card goes in the plan file, and every review round compares against it.
 
 ## 2. Write the plan file
 
@@ -76,8 +78,8 @@ mode's fault list. Run the two passes separately; one pass doing both runs too l
 
 Open the final sheets and peak stills yourself (`scripts/contact-sheet.sh`, sheets newer than the video). Look for
 what the loop can miss: a subject wrong for the real thing, a dull beat, broken UI rules, toys or programmer art.
-Every fault the user or you find that the loop missed goes into the fault lists the same turn
-(`self-review.md`, Growing the lists).
+Learn the same turn (`references/learning.md`): every user correction and every fault you caught becomes a dated
+rule with a check in `{{WORK_DIR}}/viz3d-lessons.md`, applied to this piece before you report.
 
 ## 6. Polish
 
@@ -86,8 +88,7 @@ on the user's word.
 
 ## Rules
 
-- Every round, fixes included: a fast low-quality preview of the whole cut to the user first; full render only after
-  the user signs off.
+- Every round, fixes included: a fast low-quality preview of the whole cut first; full render after the user's OK.
 - Original names and designs by default. Real brands, liveries and known characters only when the user asks, with
   licensed models and a credit line.
 - Every main asset matches a reference of the real thing. Models from memory read as toys.
@@ -95,6 +96,5 @@ on the user's word.
   order. Real clicks on that clock drive an app's film, not a camera moved in code.
 - Render and encode at low priority, one heavy job at a time, and stop every server you start.
 - Real people and real harm: facts from sources, victims named with respect, no gore (`references/documentary.md`).
-- Reference images and videos are for study only: never ship them in the app or the film.
 - The public copy of this skill is mirrored from this folder. Edit only this folder; never put personal paths, names
   or tools outside `references/local.md`. A nightly sync script mirrors the rest.

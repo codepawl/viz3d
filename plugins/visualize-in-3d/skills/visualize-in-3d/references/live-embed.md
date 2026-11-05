@@ -17,11 +17,11 @@ Skip Pass 1 and do not ask about Blender. Build everything in one pass in `{{WOR
 
 1. **One site, one process.** The topic file lists one site, four KPIs and three to five stages. Leave out the site
    switcher and the film unless the user asks.
-2. **A primitive kit, not an asset pack.** One file `src/kit.jsx` with the parametric parts this subject needs, at
-   real size. For a site with goods and vehicles that is `Box`, `Slab` (floor with a 3 cm bevel), `Rack`,
-   `Conveyor`, `Tank`, `Pipe`, `Vehicle` (body, cab, four wheels), `Person` (capsule, 1.75 m), `Building` (walls with
-   window strips, no roof so the inside shows) and `Path` (a swept strip along points); a canal lock needs walls,
-   gates, water and a boat instead. Each part takes dimensions and a colour. Build every main asset from the kit against its reference sheet
+2. **Ready models first, a kit for the rest.** Take every prop that exists ready-made from the CC0 and CC BY packs
+   in `asset-sources.md` (Kenney, Quaternius, Poly Pizza, Poly Haven), chosen to match the style card's shapes:
+   boats, trees, rocks, people, vehicles, fences, plants. Build only the subject-specific parts in one file
+   `src/kit.jsx`, parametric and at real size (a lock's chamber and gates, a port's quay), with bevels and real
+   materials. A scene of plain boxes and capsules is a fail, not a prototype. Build every main asset from the kit against its reference sheet
    (`real-objects.md`): proportions and part count still matter.
 3. **The look carries the quality.** The look the user named, else the prototype default in `looks.md` (Choosing),
    Clean ops world: soft shadows, N8AO, a warm key light, a ground
@@ -32,7 +32,12 @@ Skip Pass 1 and do not ask about Blender. Build everything in one pass in `{{WOR
    The 3/4 camera must see into the working part: if a near wall hides it, cut that wall away or raise the camera.
 5. **Data the leaders recognise.** Ask for a sample export (CSV or JSON) and its field names. With a sample, map it
    as in "Field mapping" below. Without one, seed a simulation with the real counts and rates from the topic research.
-6. **Done when** the overview, a clicked unit with its card and each stage preset look right in screenshots, it runs
+6. **Quality gates**, checked on screenshots against the style reference (`style-reference.md`): shadows and ambient
+   occlusion on, with dark contact under every object; no single-colour ground area over a quarter of the frame;
+   the surroundings dressed to the card's density; every palette colour from the card; every model the right real
+   kind; the side-by-side shows no gap in camera, palette, light or density. Fix and re-shoot until all pass.
+   Measure the ground rule on the screenshot: quantise colours and report the largest bucket's share of the frame.
+7. **Done when** the gates pass, the overview, a clicked unit with its card and each stage preset look right in screenshots, it runs
    at 60 fps, the page logs no errors, and `npm run build` gives a static folder that opens from any web server.
    From `self-review.md` run "Each round" and the generic faults that apply to a still view; the film checks apply
    only when the user asked for a film.

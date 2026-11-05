@@ -272,7 +272,7 @@ reference app (a chip fab with a roof cut away, three.js with react-three-fiber)
 - Data: every number on the dashboard is computed from the running model, never typed in; the delta and the lists
   change as the simulation runs.
 - Film: a virtual clock and real clicks on units and list rows, ending on the world (see `film.md`).
-- Traps: a second accent colour, a dark theme, camera too low (loses the cutaway), KPI numbers that do not move.
+- Traps: a second accent colour, a dark main look (dark is only the second of the app's three themes), camera too low (loses the cutaway), KPI numbers that do not move.
 
 ## White model documentary
 

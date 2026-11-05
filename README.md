@@ -26,7 +26,7 @@ a book or a game. It checks its own frames before it shows you anything.
 ## Start in three steps
 
 1. [Install](#install) the plugin.
-2. Type `/viz3d` with nothing after it. The agent shows the menu of modes and looks.
+2. Type `/viz3d` with nothing after it (`/visualize-in-3d:viz3d` in Claude Code with the plugin). The agent shows the menu of modes and looks.
 3. Type a mode, a look if you want one, and the subject: `/viz3d film white model the Chernobyl accident`.
 
 Put the subject in quotes when it starts with a mode or look word: `/viz3d "film noir city"`.
@@ -193,7 +193,7 @@ How you type the command depends on the agent:
 
 | Agent | Command |
 |---|---|
-| Claude Code, plugin install | `/viz3d` (or `/visualize-in-3d:viz3d` when another plugin also has a `viz3d`) |
+| Claude Code, plugin install | `/visualize-in-3d:viz3d` (Claude Code puts the plugin name in front of plugin commands) |
 | Claude Code, skills folder | `/viz3d` |
 | Codex | `$viz3d`, or pick it from `/skills` |
 | Cursor | `/viz3d` |

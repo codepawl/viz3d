@@ -12,24 +12,30 @@ seeded data to a real feed is a config change.
 
 ## Quick prototype
 
-Skip Pass 1 and do not ask about Blender. Build everything in one pass in `{{FOLDER}}/app` with the Pass 2 stack
+Skip Pass 1 and do not ask about Blender. Build everything in one pass in `{{WORK_DIR}}/<topic>/app` with the Pass 2 stack
 (Vite, React, React Three Fiber, drei, postprocessing with N8AO) and these cuts:
 
 1. **One site, one process.** The topic file lists one site, four KPIs and three to five stages. Leave out the site
    switcher and the film unless the user asks.
-2. **A primitive kit, not an asset pack.** One file `src/kit.jsx` with parametric parts at real size: `Box`, `Slab`
-   (floor with a 3 cm bevel), `Rack`, `Conveyor`, `Tank`, `Pipe`, `Vehicle` (body, cab, four wheels), `Person`
-   (capsule, 1.75 m), `Building` (walls with window strips, no roof so the inside shows), `Path` (a swept strip along
-   points). Each takes dimensions and a colour. Build every main asset from the kit against its reference sheet
+2. **A primitive kit, not an asset pack.** One file `src/kit.jsx` with the parametric parts this subject needs, at
+   real size. For a site with goods and vehicles that is `Box`, `Slab` (floor with a 3 cm bevel), `Rack`,
+   `Conveyor`, `Tank`, `Pipe`, `Vehicle` (body, cab, four wheels), `Person` (capsule, 1.75 m), `Building` (walls with
+   window strips, no roof so the inside shows) and `Path` (a swept strip along points); a canal lock needs walls,
+   gates, water and a boat instead. Each part takes dimensions and a colour. Build every main asset from the kit against its reference sheet
    (`real-objects.md`): proportions and part count still matter.
-3. **The look carries the quality.** Toy isometric from `looks.md`: soft shadows, N8AO, a warm key light, a ground
+3. **The look carries the quality.** The look the user named, else the prototype default in `looks.md` (Choosing),
+   Clean ops world: soft shadows, N8AO, a warm key light, a ground
    with real materials, flat colours from one palette. Clean primitives under good light read as a design choice.
-4. **A light UI, motion that explains, three themes**, as the Pass 2 brief says: few plain buttons, no default
-   dashboard, flows and stages animated, and panels added only when the user asks for them.
+4. **A light UI and motion that explains**, as the Pass 2 brief says: few plain buttons, no default dashboard,
+   flows and stages animated, and panels added only when the user asks for them. One theme, the look's own palette;
+   the three themes come with the full app.
+   The 3/4 camera must see into the working part: if a near wall hides it, cut that wall away or raise the camera.
 5. **Data the leaders recognise.** Ask for a sample export (CSV or JSON) and its field names. With a sample, map it
    as in "Field mapping" below. Without one, seed a simulation with the real counts and rates from the topic research.
 6. **Done when** the overview, a clicked unit with its card and each stage preset look right in screenshots, it runs
-   at 60 fps, and `npm run build` gives a static folder that opens from any web server.
+   at 60 fps, the page logs no errors, and `npm run build` gives a static folder that opens from any web server.
+   From `self-review.md` run "Each round" and the generic faults that apply to a still view; the film checks apply
+   only when the user asked for a film.
 
 Budget about 60 tool calls. Report the URL to run it, the screenshots, and what a full build adds (Blender models,
 film, more sites).

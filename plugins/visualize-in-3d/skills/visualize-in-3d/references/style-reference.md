@@ -33,6 +33,8 @@ Write it into the plan file before anything is built. Each line is a value that 
 | Camera | Angle from the ground in degrees, field of view, how much of the frame the subject fills |
 | Palette | Five to eight colours sampled from the capture as hex, each with where it is used |
 | Light | Direction and colour of the key light, softness and length of shadows, how dark the contact shadows are |
+| Brightness | Median luminance and mean saturation of the capture, from `scripts/compare-look.py`; the tone mapping that keeps them |
+| Hero props | Each object the viewer will name (a cherry tree, a narrowboat): two or three photos of the real thing and how the reference stylizes it |
 | Materials | How each surface reads: painted, glossy, textured, flat; the roughness range |
 | Density | What fills the frame around the subject and roughly what share of it; no empty ground left over |
 | Shapes | Soft or hard edges, rounded or bevelled, stylized or real proportions |
@@ -45,13 +47,26 @@ Turn every line into settings before the first render. That means camera values,
 and shadow settings, the material list, and the set dressing list that gives the density. Pick models that already have the card's
 shapes (`asset-sources.md`) instead of reshaping primitives toward them.
 
+- **Tone mapping.** A bright stylized or pastel reference uses Neutral (`ToneMappingMode.NEUTRAL`) or AgX. ACES
+  darkens mid tones and turns pink into mauve, so keep it for cinematic looks. With `@react-three/postprocessing`,
+  import `ToneMappingMode` from `postprocessing`. Never pass `THREE.ACESFilmicToneMapping`: it is 4, which that enum
+  reads as UNCHARTED2, a much darker curve. Ambient occlusion darkens every grass blade, so keep N8AO near 0.8 and
+  tint it with the ground's dark tone, not blue.
+- **Hero props.** Build each one to its real silhouette first, then stylize it as the reference does. A cherry tree
+  has a short dark trunk that forks low into spreading limbs, an umbrella crown wider than tall, blossoms in
+  clusters with gaps that show the branches, white-pink on top and deeper pink inside, and petals on the ground. A
+  dense round ball of one pink is not a cherry tree. Never let instance colours go above 1: they clip to flat.
+
 ## Compare each round
 
 Each self-review round renders the build from the reference's camera (its angle and field of view, at a distance
 where the subject fills the same share of the frame) at the same size and puts the two side by
-side in one image. Write the three biggest gaps, each tied to a card line ("ground is one flat colour, card says
-grass with flowers and stones"), fix them, and render again. A round passes when no gap is about the card's camera,
-palette, light or density. Show the user the side-by-side, not the render alone.
+side in one image. Run `uv run --no-project --with pillow python {{SKILL_DIR}}/scripts/compare-look.py
+<reference> <render>`: it fails when the median luminance or the saturation is more than 10% off. Darkness is
+hard to judge by eye next to the scene you built, so trust the number. Crop each hero prop next to the real photo
+too. Write the three biggest gaps, each tied to a card line ("ground is one flat colour, card says
+grass with flowers and stones"), fix them, and render again. A round passes when compare-look prints PASS and no gap is
+about the card's camera, palette, light, density or a hero prop's silhouette. Show the user the side-by-side, not the render alone.
 
 ## Copy the style, not the work
 

@@ -37,7 +37,8 @@ Skip Pass 1 and do not ask about Blender. Build everything in one pass in `{{WOR
    the surroundings dressed to the card's density; every palette colour from the card; every model the right real
    kind; the side-by-side shows no gap in camera, palette, light or density. Fix and re-shoot until all pass.
    Measure the ground rule with `uv run --no-project --with pillow python {{SKILL_DIR}}/scripts/ground-share.py
-   <screenshot>`; it prints PASS or FAIL and the share of the largest flat colour.
+   <screenshot>`; it prints PASS or FAIL and the share of the largest flat colour. Measure brightness against the
+   reference with `scripts/compare-look.py` (`style-reference.md`, Compare each round).
 7. **Done when** the gates pass, the overview, a clicked unit with its card and each stage preset look right in screenshots, it runs
    at 60 fps, the page logs no errors, and `npm run build` gives a static folder that opens from any web server.
    From `self-review.md` run "Each round" and the generic faults that apply to a still view; the film checks apply

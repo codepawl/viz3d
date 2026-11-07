@@ -42,6 +42,12 @@ Use three.js with no Blender. A lofted shell, boxes and a few extrusions read we
   count, the worst offset and the worst offenders. It must report 0 above a 2 cm tolerance, and no sunken figure
   either. Run it on the raw requested heights as well, to see how many rooms relied on the drop.
 
+- **Machines** (a watch, an engine, a pump). The rooms are stages of the power path: source, transmission, regulator,
+  output. Callouts name each part's job and its real speed or ratio from tooth counts or specs, and the parts move at
+  those ratios on one clock, with a speed control (real time and two faster steps) so slow parts are seen to move. A
+  case or frame is cut like a shell and stays round: at least 64 segments, never a faceted box. A plate is plain or
+  finished as the real part is (brass, perlage, stripes), never a dot grid. Figures are left out.
+
 ## Post pass
 
 A full-screen pass turns the render into a plate.

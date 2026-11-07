@@ -12,6 +12,14 @@ round, Copy the style, not the work.
    Dribbble, Behance, ArtStation, Awwwards, Sketchfab, YouTube. Search by the look and the shape, not only the
    subject: "isometric stylized water three.js", "cutaway diorama", "ops dashboard 3D". Prefer pieces with a live
    page or a video, so you can study the motion and interaction too.
+   The reference must be in the same look as the build: a green LiDAR statue is no reference for a white-dot
+   strait map, and an off-look reference is worse than none. Search terms per look: Point-cloud survey "point cloud
+   terrain map white dots", "lidar city render"; Illustrated cutaway plate "cutaway illustration", "exploded view
+   engraving", a patent drawing; Space-time cube "space-time cube Hägerstrand", "time geography 3D". Fetch with a
+   browser User-Agent (`curl -L -A "Mozilla/5.0" ...`). Wikimedia Commons (`commons.wikimedia.org/w/api.php`) and the
+   Internet Archive hold public-domain plates and drawings; Commons rate-limits fast loops, so wait about 2 s
+   between calls and stop at about five tries. With no same-look reference after that, write the card from the
+   look's description in `looks.md`, skip compare-look and say so in the report.
 3. **Let the user pick.** Show the candidates side by side with one line each on what each one brings. If the user
    is away, pick the piece with the most engagement. Its camera and density must fit the subject. Say why.
 4. A look from `looks.md` is still chosen for its rules (camera kind, UI, traps). Where the reference and the
@@ -62,7 +70,8 @@ shapes (`asset-sources.md`) instead of reshaping primitives toward them.
 Each self-review round renders the build from the reference's camera (its angle and field of view, at a distance
 where the subject fills the same share of the frame) at the same size and puts the two side by
 side in one image. Run `uv run --no-project --with pillow python {{SKILL_DIR}}/scripts/compare-look.py
-<reference> <render>`: it fails when the median luminance or the saturation is more than 10% off, or the hue moves more than 10 degrees. Darkness is
+<reference> <render>`: it fails when the median luminance or the saturation is more than 10% off, or the hue moves more than 10 degrees. A monochrome reference (an engraving, a line drawing) is compared on
+luminance only, by itself. Darkness is
 hard to judge by eye next to the scene you built, so trust the number. Crop each hero prop next to the real photo
 too. Write the three biggest gaps, each tied to a card line ("ground is one flat colour, card says
 grass with flowers and stones"), fix them, and render again. A round passes when compare-look prints PASS and no gap is

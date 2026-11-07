@@ -27,7 +27,8 @@ Paths use `{{WORK_DIR}}` for the folder where projects live (the current directo
    about 80 tool calls. Where it does not, run the passes one after another in this session, finish and check one
    before starting the next, and re-read the plan file at the start of each.
 4. **Downloads** (elevation, map data, models, reference images, sounds): name the source, count and rough size,
-   and get the user's OK first.
+   and get the user's OK first. If the user approved downloads ahead or is away, take open files only (CC0, CC BY,
+   public domain, open data), list each in `CREDITS.md` and go on.
 
 ## 1. Pick the shape
 
@@ -83,8 +84,7 @@ rule with a check in `{{WORK_DIR}}/viz3d-lessons.md`, applied to this piece befo
 
 ## 6. Polish
 
-Give fixes to one more pass with "everything else is approved, change nothing else", then re-record. Publish only
-on the user's word.
+Give fixes to one more pass ("everything else is approved, change nothing else"), re-record, publish on the user's word.
 
 ## Rules
 

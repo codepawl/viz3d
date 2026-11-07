@@ -7,7 +7,8 @@ luminance and the mean saturation of each, then the render's ratio to the refere
 when the median luminance or the mean saturation differs from the reference by more than the
 tolerance, or when the median hue of the coloured pixels moves more than 10 degrees
 (water and flowers mix into it, so a smaller shift is noise). Crop UI out of both images first
-when the UI covers much of either frame.
+when the UI covers much of either frame. A monochrome reference (mean saturation under 20, such
+as an engraving or a line drawing) is compared on luminance only.
 """
 
 import argparse
@@ -16,8 +17,17 @@ import sys
 from PIL import Image
 
 
+def open_on_white(image_path):
+    image = Image.open(image_path)
+    if image.mode in ("RGBA", "LA", "P"):
+        image = image.convert("RGBA")
+        background = Image.new("RGBA", image.size, (255, 255, 255, 255))
+        image = Image.alpha_composite(background, image)
+    return image.convert("RGB")
+
+
 def measure(image_path):
-    image = Image.open(image_path).convert("RGB")
+    image = open_on_white(image_path)
     image.thumbnail((640, 640))
     luminance = sorted(image.convert("L").tobytes())
     hsv = image.convert("HSV").tobytes()
@@ -27,6 +37,7 @@ def measure(image_path):
     count = len(luminance)
     return {
         "hue": coloured_hues[len(coloured_hues) // 2] * 360 / 255 if coloured_hues else 0,
+        "coloured_share": len(coloured_hues) / count,
         "median": luminance[count // 2],
         "p10": luminance[count // 10],
         "p90": luminance[(9 * count) // 10],
@@ -50,12 +61,19 @@ def main():
         )
     brightness_ratio = render["median"] / max(reference["median"], 1)
     saturation_ratio = render["saturation"] / max(reference["saturation"], 1)
+    monochrome_reference = reference["saturation"] < 20
+    if monochrome_reference:
+        print("monochrome reference: comparing luminance only")
     failures = []
     if abs(brightness_ratio - 1) > arguments.tolerance:
         failures.append("darker" if brightness_ratio < 1 else "brighter")
-    if abs(saturation_ratio - 1) > arguments.tolerance:
+    if not monochrome_reference and abs(saturation_ratio - 1) > arguments.tolerance:
         failures.append("duller" if saturation_ratio < 1 else "more saturated")
-    hue_shift = render["hue"] - reference["hue"]
+    # Hue is an angle: take the short way round, and skip it when either image is nearly colourless.
+    hue_shift = (render["hue"] - reference["hue"] + 180) % 360 - 180
+    hue_measurable = min(reference["coloured_share"], render["coloured_share"]) >= 0.02
+    if not hue_measurable or monochrome_reference:
+        hue_shift = 0
     if abs(hue_shift) > 10:
         failures.append(f"hue off by {hue_shift:+.0f} degrees")
     verdict = "FAIL " + ", ".join(failures) if failures else "PASS"

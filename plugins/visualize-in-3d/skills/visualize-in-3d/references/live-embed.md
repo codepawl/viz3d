@@ -13,7 +13,9 @@ seeded data to a real feed is a config change.
 ## Quick prototype
 
 Skip Pass 1 and do not ask about Blender. Build everything in one pass in `{{WORK_DIR}}/<topic>/app` with the Pass 2 stack
-(Vite, React, React Three Fiber, drei, postprocessing with N8AO) and these cuts:
+(Vite, React, React Three Fiber, drei, postprocessing with N8AO) and these cuts. A named look's own rules win over
+steps 2 and 3: a Space-time cube draws lines and a map, a Point-cloud survey draws dots, a cutaway plate draws its
+plate, and none of them needs props or a dressed ground. Plain three.js without React is fine for those.
 
 1. **One site, one process.** The topic file lists one site, four KPIs and three to five stages. Leave out the site
    switcher and the film unless the user asks.
@@ -40,7 +42,10 @@ Skip Pass 1 and do not ask about Blender. Build everything in one pass in `{{WOR
    the surroundings dressed to the card's density; every palette colour from the card; every model the right real
    kind; the side-by-side shows no gap in camera, palette, light or density. Fix and re-shoot until all pass.
    Measure the ground rule with `uv run --no-project --with pillow python {{SKILL_DIR}}/scripts/ground-share.py
-   <screenshot>`; it prints PASS or FAIL and the share of the largest flat colour. Measure brightness against the
+   <screenshot>`; it prints PASS or FAIL and the share of the largest flat colour. A look whose design is a flat
+   background (the paper of a cutaway plate or space-time cube, the void of a point cloud, white model) passes
+   `--ignore "<background hex>"`, and the rest of the frame must still pass. The subject named in the request
+   fills at least a third of the default view: a strait seen as a thin line between hills fails. Measure brightness against the
    reference with `scripts/compare-look.py` (`style-reference.md`, Compare each round).
 7. **Done when** the gates pass, the overview, a clicked unit with its card and each stage preset look right in screenshots, it runs
    at 60 fps, the page logs no errors, and `npm run build` gives a static folder that opens from any web server.

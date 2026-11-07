@@ -36,13 +36,14 @@ Skip Pass 1 and do not ask about Blender. Build everything in one pass in `{{WOR
    occlusion on, with dark contact under every object; no single-colour ground area over a quarter of the frame;
    the surroundings dressed to the card's density; every palette colour from the card; every model the right real
    kind; the side-by-side shows no gap in camera, palette, light or density. Fix and re-shoot until all pass.
-   Measure the ground rule on the screenshot: quantise colours and report the largest bucket's share of the frame.
+   Measure the ground rule with `uv run --no-project --with pillow python {{SKILL_DIR}}/scripts/ground-share.py
+   <screenshot>`; it prints PASS or FAIL and the share of the largest flat colour.
 7. **Done when** the gates pass, the overview, a clicked unit with its card and each stage preset look right in screenshots, it runs
    at 60 fps, the page logs no errors, and `npm run build` gives a static folder that opens from any web server.
    From `self-review.md` run "Each round" and the generic faults that apply to a still view; the film checks apply
    only when the user asked for a film.
 
-Budget about 60 tool calls. Report the URL to run it, the screenshots, and what a full build adds (Blender models,
+Budget about 60 tool calls, unless the user or a brief sets another budget. Report the URL to run it, the screenshots, and what a full build adds (Blender models,
 film, more sites).
 
 ## Live embed

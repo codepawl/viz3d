@@ -47,7 +47,8 @@ shapes (`asset-sources.md`) instead of reshaping primitives toward them.
 
 ## Compare each round
 
-Each self-review round renders the build from the reference's camera at the same size and puts the two side by
+Each self-review round renders the build from the reference's camera (its angle and field of view, at a distance
+where the subject fills the same share of the frame) at the same size and puts the two side by
 side in one image. Write the three biggest gaps, each tied to a card line ("ground is one flat colour, card says
 grass with flowers and stones"), fix them, and render again. A round passes when no gap is about the card's camera,
 palette, light or density. Show the user the side-by-side, not the render alone.

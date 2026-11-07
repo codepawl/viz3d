@@ -45,7 +45,7 @@ plate, and none of them needs props or a dressed ground. Plain three.js without 
    <screenshot>`; it prints PASS or FAIL and the share of the largest flat colour. A look whose design is a flat
    background (the paper of a cutaway plate or space-time cube, the void of a point cloud, white model) passes
    `--ignore "<background hex>"`, and the rest of the frame must still pass. The subject named in the request
-   fills at least a third of the default view: a strait seen as a thin line between hills fails. Measure brightness against the
+   fills at least a third of the default view, measured as the share of the frame covered by the screen-space box of its points (a strait's centre line, a machine's parts): a strait seen as a thin line between hills fails. Measure brightness against the
    reference with `scripts/compare-look.py` (`style-reference.md`, Compare each round).
 7. **Done when** the gates pass, the overview, a clicked unit with its card and each stage preset look right in screenshots, it runs
    at 60 fps, the page logs no errors, and `npm run build` gives a static folder that opens from any web server.

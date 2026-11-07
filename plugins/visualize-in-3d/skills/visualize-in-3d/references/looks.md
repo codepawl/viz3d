@@ -29,7 +29,7 @@ plaza. Think of a clean isometric diorama inside a light operations dashboard.
 Reference: a strait-monitoring app drawn as white dots over terrain. Fits places defined by their land and water: straits, ports, borders, mountains, coasts, a city seen from above.
 
 - World: terrain as a dense grid of small white spheres raised by a real heightmap, so slopes shade and valleys sit
-  in shadow. Water is a flat, matte, light-grey plane. Vehicles and buildings are matte white clay models (no
+  in shadow. Water is a flat, matte plane a clear step darker than the dots (about `#87919b` under white `#f2f2f2` dots), with a sparse dot lattice; a light-grey plane hides white ships. Vehicles and buildings are matte white clay models (no
   textures, no colour) with real detail; wakes, trails and exhaust are particles of the same dots.
 - Rendering: under about 150k dots, `InstancedMesh` of low-poly spheres (8x6 segments). Above that, `THREE.Points`
   with a sphere-impostor shader (round point sprite, normal from the sprite UV for lambert shading, depth written so

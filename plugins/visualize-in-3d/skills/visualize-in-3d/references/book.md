@@ -44,15 +44,15 @@ Use three.js with no Blender. A lofted shell, boxes and a few extrusions read we
 
 - **Machines** (a watch, an engine, a pump). The rooms are stages of the power path: source, transmission, regulator,
   output. Callouts name each part's job and its real speed or ratio from tooth counts or specs, and the parts move at
-  those ratios on one clock, with a speed control (real time and two faster steps) so slow parts are seen to move. A
+  those ratios on one clock, with a speed control (real time and two faster steps) so slow parts are seen to move. Fast parts (a 4 Hz balance) flicker when sped up: keep them at real-time phase in the fast steps and say so on the speed label. A
   case or frame is cut like a shell and stays round: at least 64 segments, never a faceted box. A plate is plain or
-  finished as the real part is (brass, perlage, stripes), never a dot grid. Figures are left out.
+  finished as the real part is (brass, perlage, Geneva stripes, ruby jewels, bridges with slotted screws), never a dot grid. A watch case has a bezel, tapered lugs and a crown. Figures are left out.
 
 ## Post pass
 
 A full-screen pass turns the render into a plate.
 
-- Paper: cream base with low-frequency blotches, so no area is flat. Grain at the end, multiplied over everything.
+- Paper: cream base with low-frequency blotches, so no area is flat. Colour uniforms in a shader are linear: convert each hex with `new THREE.Color(hex)` (which converts sRGB to linear) or the paper renders dark. Grain at the end, multiplied over everything.
 - Washes: band the lit colour to 3 or 4 tones per material. Darken the colour along band edges, where pigment pools.
 - Ink: outlines from depth and normal edges in dark brown, about 24, 15 and 9 percent red, green and blue
   (`#3d2615`). Black outlines read as a vector cartoon. Vary the width a little with noise.

@@ -62,7 +62,7 @@ shapes (`asset-sources.md`) instead of reshaping primitives toward them.
 Each self-review round renders the build from the reference's camera (its angle and field of view, at a distance
 where the subject fills the same share of the frame) at the same size and puts the two side by
 side in one image. Run `uv run --no-project --with pillow python {{SKILL_DIR}}/scripts/compare-look.py
-<reference> <render>`: it fails when the median luminance or the saturation is more than 10% off. Darkness is
+<reference> <render>`: it fails when the median luminance or the saturation is more than 10% off, or the hue moves more than 10 degrees. Darkness is
 hard to judge by eye next to the scene you built, so trust the number. Crop each hero prop next to the real photo
 too. Write the three biggest gaps, each tied to a card line ("ground is one flat colour, card says
 grass with flowers and stones"), fix them, and render again. A round passes when compare-look prints PASS and no gap is

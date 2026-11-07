@@ -21,6 +21,12 @@ list each one in the report.
    them for props and set dressing, or as a base to restyle.
 5. **Build it** in Blender (or three.js, see `no-blender.md`) from a reference sheet (`real-objects.md`).
 
+Ground cover counts as an asset too. Search for it like a prop: a ground texture (ambientCG `Grass005` is a bright
+lawn, `api/v2/full_json?type=Material&q=grass` lists more) and tuft models on Poly Pizza (search "grass"; each
+model page links its `.glb` on static.poly.pizza and states its licence). Tufts alone leave bare ground between
+them; lay them on the texture. Brighten dark tuft textures with the material colour, and render two or three
+ground options for the user to pick.
+
 Pick the right kind of thing, not the nearest model: a narrowboat for a canal, not a sailing ship. A container
 crane belongs in a port, not a construction crane. A wrong kind fails review however good it looks.
 

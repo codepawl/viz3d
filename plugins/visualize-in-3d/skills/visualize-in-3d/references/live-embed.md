@@ -19,7 +19,10 @@ Skip Pass 1 and do not ask about Blender. Build everything in one pass in `{{WOR
    switcher and the film unless the user asks.
 2. **Ready models first, a kit for the rest.** Take every prop that exists ready-made from the CC0 and CC BY packs
    in `asset-sources.md` (Kenney, Quaternius, Poly Pizza, Poly Haven), chosen to match the style card's shapes:
-   boats, trees, rocks, people, vehicles, fences, plants. Build only the subject-specific parts in one file
+   boats, trees, rocks, people, vehicles, fences, plants, and the ground itself: a real CC0 ground texture (lawn,
+   sand, gravel from ambientCG or Poly Haven) under instanced tuft models (Quaternius "Grass Wispy" and "Tall
+   Grass" on Poly Pizza). Never code-built grass blades or a canvas-painted ground: flat triangles with random
+   greens read as noise. Build only the subject-specific parts in one file
    `src/kit.jsx`, parametric and at real size (a lock's chamber and gates, a port's quay), with bevels and real
    materials. A scene of plain boxes and capsules is a fail, not a prototype. Build every main asset from the kit against its reference sheet
    (`real-objects.md`): proportions and part count still matter.

@@ -1,8 +1,13 @@
 # viz3d
 
+[![Release](https://img.shields.io/github/v/release/codepawl/viz3d?label=release&color=2f6f4f)](https://github.com/codepawl/viz3d/releases)
+[![License: MIT](https://img.shields.io/badge/license-MIT-2f6f4f)](LICENSE)
+
 Visualize anything in 3D. Give your agent a subject: a place, a system, an object, a product, a creature, a story or an
 idea. The agent researches it, builds models to real dimensions, and makes a film, an app you click through, a lesson,
 a book or a game. It checks its own frames before it shows you anything.
+
+![Six builds made with viz3d: a canal lock with cherry trees, a cutaway wristwatch plate, a point-cloud map of the Bosphorus, a glowing ASCII cockroach, a cutaway plate of RMS Titanic and an air traffic space-time cube](docs/images/hero.jpg)
 
 <table>
   <tr>
@@ -120,11 +125,13 @@ default look for the mode.
 | | Dither + ASCII showcase | `ASCII` | A film that shows off a model, a tool or a product: the model stays clean, the world around it turns to ASCII |
 | | Gradient glow ASCII | `glow` | A creature or object that is itself the art, drawn in glowing ASCII |
 
-| Layer build | ASCII |
+| Toy isometric | Illustrated cutaway plate |
 |---|---|
+| ![A canal lock diorama: a narrowboat in the chamber between two timber gates, cherry trees in bloom on the banks](docs/images/canal.jpg) | ![A cutaway plate of a mechanical wristwatch in ink and watercolour, each wheel labelled with its job and speed](docs/images/watch.jpg) |
+| **Point-cloud survey** | **Space-time cube** |
+| ![The Bosphorus as a white point cloud: ships in orange moving through the strait, with live counts in the corner](docs/images/pointcloud.jpg) | ![An airport radar as a green phosphor space-time cube: flights as tubes of rings rising over the scope, one tube being dragged to fix a wake spacing breach](docs/images/space-time.jpg) |
+| **Layer build** | **ASCII** |
 | ![A city built up layer by layer, shown here at its white model stage](docs/images/layer-build.jpg) | ![An ASCII dungeon game: the hero and a spell drawn in glyphs inside a cave](docs/images/ascii.jpg) |
-| **Space-time cube** | |
-| ![An airport radar as a green phosphor space-time cube: flights as tubes of rings rising over the scope, one tube being dragged to fix a wake spacing breach](docs/images/space-time.jpg) | |
 
 Default looks: apps, prototypes, embeds and lessons use clean ops world. Films use dark documentary, showcases use
 Dither + ASCII and books use the cutaway plate. You can show the agent a reference video of a new look. It studies the
@@ -148,6 +155,22 @@ measures every gap before it records.
 5. It sends you a fast low-quality preview of the whole film. The full render waits for your sign-off.
 
 The skill asks before it downloads anything, such as elevation data, map data or reference images.
+
+### It learns the style from a picture
+
+The agent never builds a look from words alone. It finds a reference in the same look, writes a style card (camera,
+palette, light, brightness, density, hero props) and checks every round against it with measured gates:
+
+- `compare-look.py` compares brightness, saturation and hue with the reference and fails when the render drifts.
+- `ground-share.py` fails a frame where one flat colour covers more than a quarter of it.
+- The subject must fill at least a third of the default view.
+- Grass, trees and props come from CC0 and CC BY packs, never from code-built blades or boxes.
+
+Every correction you give becomes a dated rule in a lessons file, so the next build starts from it.
+
+![Two builds before and after one review round. Top: the Bosphorus point cloud, where the strait grows from a thin line to most of the frame. Bottom: the wristwatch plate, where a faceted box becomes a round case with Geneva stripes, jewels and ink](docs/images/self-review.jpg)
+
+*Left: the first build. Right: the same subject after the agent applied its own review notes.*
 
 ## Install
 
@@ -258,6 +281,10 @@ The last command adds the 67js skills (`build-67js-scene` and `render-67js-media
 
 ## What is new
 
+- Style from a reference: a style card in the plan file, checked by measured gates (`compare-look.py`,
+  `ground-share.py`).
+- Ground cover from real assets: a CC0 ground texture under instanced grass tufts.
+- Machines in cutaway plates move at their real gear ratios on one clock, in round cases with real plate finishes.
 - viz3d now covers any subject, not only things that are hard to understand.
 - The `showcase` mode: a film or stills that show off one object, product or model.
 - `/viz3d` with nothing after it shows the menu. The menu groups the modes by what people do with them and the looks by family.

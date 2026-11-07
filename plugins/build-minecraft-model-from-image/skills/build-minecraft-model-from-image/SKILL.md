@@ -39,6 +39,6 @@ A fine voxel grid looks jagged and ugly. The target is how Minecraft itself is m
 - Warnings are real: coplanar overlaps flicker in every viewer, and too many or too tiny boxes mean the model is sliding back into voxels.
 - Silhouette overlap is a guide only. Thin frames and photos with perspective score low (a correct chair scores 0.45). Open `overlay.png` rather than chasing the number.
 - Rendering uses the GPU. When another job holds it, keep to `--samples 24 --resolution 400`, or use `--no-render` and `viewer.html` until it frees up.
-- Pictures need a clear licence if the result is published. Leave third-party logos and brand text out of the model and say so.
+- Prefer pictures with a clear licence if the result is published; for an unclear one, name the risk once and ask the user. Leave third-party logos and brand text out of the model by default and say so; the user can ask for them.
 - If the picture is not enough for the unseen sides of a real object, search reference views before inventing them.
 - After editing the scripts, run `uv run --no-project {{SKILL_DIR}}/scripts/test_block_model.py` (no GPU needed).

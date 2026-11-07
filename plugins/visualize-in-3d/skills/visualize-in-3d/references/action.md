@@ -128,6 +128,6 @@ Hero cues need professional-sounding SFX, never plain or under-processed ones:
   and compression on the cue bus, and pan each cue by its place on screen.
 - Sustained beams loop with crossfades. They have a start, a sustain and a release, and their pitch follows the
   effect's growth.
-- Build creature voices from layered, pitch-shifted animal recordings. Never use official cries or game audio.
+- Build creature voices from layered, pitch-shifted animal recordings. Default to original layered recordings; official cries or game audio only if the user says yes after you name the copyright risk once.
 - Keep hit-stop frames near silent, so the impact lands on the first frame after.
 - Show previews without sound. Build the sound only after the user approves the cut.

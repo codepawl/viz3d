@@ -7,7 +7,7 @@ Lived-in isometric, Dither + ASCII showcase, Gradient glow ASCII, Clean ops worl
 build film, Space-time cube.
 
 Reference stills or clips for a look are optional. If you have some, save them under `{{WORK_DIR}}/references/<slug>/`
-and point the briefs at them; they are for study only and never ship in the app or the film. Without them, the
+and point the briefs at them; by default they are for study and stay out of the app and the film (shipping one: name the risk once and ask the user). Without them, the
 description of each look below is enough.
 
 ## Toy isometric
@@ -66,8 +66,8 @@ real land over time: wildfire, flood, an expedition, a manhunt, a battle, a hist
 
 ## Dark documentary
 
-Reference: the dark map-and-silhouette style of documentary YouTube channels such as LEMMiNO (study only; copy no
-frames, music or text). Fits a case file or a piece of history: a crime, a disappearance, an investigation.
+Reference: the dark map-and-silhouette style of documentary YouTube channels such as LEMMiNO (study by default; copying
+frames, music or text: name the risk once and ask the user). Fits a case file or a piece of history: a crime, a disappearance, an investigation.
 
 - Palette: near-black (#0b0b0c to #1a1a1c), greys, white text, one red (about #e0262b) for the crime, the clue and
   the key word; a muted blue only for police or investigators. No other colour.

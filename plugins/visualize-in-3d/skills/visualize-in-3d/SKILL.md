@@ -36,7 +36,7 @@ Read what the user wants people to see, then pick one shape (or combine two) and
 
 | The subject is | Shape | Read |
 |---|---|---|
-| A place or system that runs (units, tasks, flows) | Live app with dashboard and a 30 s film | `references/brief.md`, `examples/` |
+| A place or system that runs (units, tasks, flows) | Live app with dashboard and a 30 s film | `references/brief.md`, `examples/`; a built world shown as render, then clay model, then render: `references/clay-reveal.md` |
 | How a thing works (aircraft, circuit board, engine) | Lesson app: 3 to 5 lessons, one control each, a "Build your own" sandbox | `references/brief.md` (parts, flow overlays, sandboxes) |
 | Something spreading over real land | Terrain app with a time scrubber | `references/looks.md` (photoreal terrain), `examples/wildfire-valley.md` |
 | A story, case or piece of history | Documentary film | `references/documentary.md`, `references/film.md`, `references/67js.md` |

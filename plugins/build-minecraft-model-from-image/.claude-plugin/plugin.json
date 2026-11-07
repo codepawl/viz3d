@@ -1,6 +1,6 @@
 {
   "name": "build-minecraft-model-from-image",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Turn a 2D picture of an object into a Minecraft-style 3D model: a few clean cuboids with pixel textures, written by the agent as code, with GLB export, a viewer, renders and checks.",
   "author": {
     "name": "CodePawl",

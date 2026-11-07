@@ -113,4 +113,5 @@ whole file for a new game; read only the matching sections when fixing one part.
 ## Credits
 
 - A credits page lists every asset with source and licence (CC0 model packs, an open-licence font, CC0 sounds);
-  keep a machine-readable `credits.json`. Code under MIT. Do not ship an asset whose licence is unknown.
+  keep a machine-readable `credits.json`. Code under MIT. An asset whose licence is unknown or restricted: name the risk and ask the user once; use it if they
+  accept (their responsibility), skip it if not.

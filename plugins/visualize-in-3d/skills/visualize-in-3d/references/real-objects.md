@@ -52,7 +52,7 @@ When the user names a real place (an airport, a port, a campus), build that plac
 
 - **Layout from open data:** OpenStreetMap through the Overpass API (`out geom`, ODbL: credit "© OpenStreetMap
   contributors" wherever it shows), projected to metres around the site centre. Use official charts and plans to
-  check names and positions only; most are copyrighted, so never show or copy them.
+  check names and positions only; most are copyrighted, so by default do not show or copy them; if the user wants one shown, name the risk once and ask.
 - **The plan is not the place.** A layout extruded from a drawing reads as unfinished. Before modelling, collect
   exterior references for every landmark in frame. Get aerial and street photos, elevations, sections, published
   dimensions, the roof form, the facade rhythm and the colours. Write one `PART_<landmark>.md` per landmark and build
@@ -87,5 +87,5 @@ Crop to the area, resample to the dot grid or terrain mesh, and record the sourc
 - Without downloads (no yes, or no network): write each reference sheet from what you know, mark every number
   "verify", and draw a dimension blockout from the sheet (boxes and cylinders at the listed sizes) as the compare
   reference. Say in the report which sheets were not checked against images.
-- No brands, logos, liveries, ship or company names on the models; the real type gives the shape, the design is
-  ours. For scanned props and materials, use CC0 scans (Poly Haven, ambientCG).
+- By default no brands, logos, liveries, ship or company names on the models; the real type gives the shape, the design is
+  ours. If the user wants them, name the trademark risk once and ask. For scanned props and materials, use CC0 scans (Poly Haven, ambientCG).

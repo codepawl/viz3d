@@ -14,7 +14,7 @@ built floor plan lands on its ink.
 
 ## Order of work
 
-1. **Find the sheet and its sources.** Licence-clear plan, plus photos of the same building or its type and period.
+1. **Find the sheet and its sources.** Prefer a licence-clear plan (an unclear one: name the risk, ask the user once), plus photos of the same building or its type and period.
    Read `references/read-plan.md` in full: sources, calibration, reading order, the table of what may be inferred.
 2. **Write `plan.json`.** `references/plan-format.md` holds every key. Read the sections you need. Everything not read
    off the drawing goes in `provenance.inferred`, and the final report repeats that list.

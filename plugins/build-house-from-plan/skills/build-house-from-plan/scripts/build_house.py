@@ -405,8 +405,9 @@ def build_equipment(plan, collections, report):
     fit = json.loads(report_path.read_text(encoding="utf-8"))
     floor = plan["levels"].get("floor", 0.0)
     plain = MeshBatch("equipment_plain", 61)
-    zones = MeshBatch("fit_zones", 62)
     for row in fit.get("equipment", []):
+        # One zone object per item (fit_zone_<id>), so a film script can move or recolour one item's zones.
+        zones = MeshBatch(f"fit_zone_{row['id']}", 62)
         footprint = row["footprint_m"]
         width, depth, height = row["size_m"]
         bottom = floor + row["z0_m"]
@@ -430,11 +431,11 @@ def build_equipment(plan, collections, report):
             # A clash stands to the clear height, so a cut shows it crossing the wall it runs into.
             top = floor + plan["levels"].get("ceiling", bottom + height) if status == "clash" else floor + FIT_FLOOR_PATCH_METRES
             zones.add_prism(zone, floor + 0.002, top, f"fit_{status}")
+        if zones.faces:
+            zones.finish(collections["fitout"])
         report.setdefault("fit", []).append({"id": row["id"], "status": row["status"], "margin_m": row["margin_m"]})
     if plain.faces:
         plain.finish(collections["furnish"], bevel=0.004)
-    if zones.faces:
-        zones.finish(collections["fitout"])
 
 
 def treeline_items(plan):

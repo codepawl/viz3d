@@ -602,6 +602,20 @@ class BuildUp:
         self.apply_roof(value)
 
 
+def load_film_script(plan, film, scale):
+    """A film's `script` is a Python file beside the plan with setup(plan, film, scale) returning frame(index, count).
+
+    It animates what a camera path cannot: a wall that rises, an item that slides, a zone that changes colour."""
+    if not film.get("script"):
+        return None
+    import importlib.util
+    path = pathlib.Path(options_plan_folder) / film["script"]
+    spec = importlib.util.spec_from_file_location(path.stem, path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.setup(plan, film, scale)
+
+
 def render_film(plan, film, scale, out_folder, frame_limit):
     frames = int(frame_limit or film["frames"])
     folder = out_folder / film["name"]
@@ -630,6 +644,7 @@ def render_film(plan, film, scale, out_folder, frame_limit):
         bpy.data.objects["plan_sheet"].hide_render = True
         bpy.context.view_layer.layer_collection.children["site"].exclude = True
         melt_studio_horizon(measure_floor_colour(camera))
+    story = load_film_script(plan, film, scale)
     for frame in range(frames):
         target_path = folder / f"f{frame:04d}.png"
         if target_path.exists():
@@ -638,6 +653,11 @@ def render_film(plan, film, scale, out_folder, frame_limit):
             build_up.apply(frame / max(1, frames - 1))
         fraction = eased(frame / max(1, frames - 1))
         now = {"pos": list(catmull(positions, fraction)), "look": list(catmull(targets, fraction)), "level": film.get("level", True)}
+        if story is not None:
+            # The script moves its own objects for this frame and may return {"pos", "look"} to drive the camera.
+            camera_override = story(frame, frames)
+            if camera_override:
+                now.update(camera_override)
         aim_camera(camera, now, scale)
         bpy.context.view_layer.update()
         if stops_at_points:

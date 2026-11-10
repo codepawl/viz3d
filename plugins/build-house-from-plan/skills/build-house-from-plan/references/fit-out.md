@@ -65,7 +65,7 @@ as a card with shape-coded marks: circle fits, triangle tight, square clash) and
 unit fault or clash. Fix the plan and rerun before modelling further, unless the clash is the point of the piece.
 
 `build_house.py` reads `fitout_report.json`: it builds the equipment into `furnish` and each service zone into a
-`fitout` collection, a floor patch in green or amber, and a red volume up to the clear height where a zone clashes (a cut trims it 2 cm above the wall poché, so it reads as
+`fitout` collection, one object per item named `fit_zone_<id>`: a floor patch in green or amber, and a red volume up to the clear height where a zone clashes (a cut trims it 2 cm above the wall poché, so it reads as
 red across the wall it runs into). Shots and films
 show them unless they set `fit_zones: false`. A `build_up` film brings the zones in after the equipment lands. Rerun
 `fitout_check.py` before every build, since the builder trusts the report as it is.

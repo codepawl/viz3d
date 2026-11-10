@@ -98,7 +98,10 @@ poché and hides the roof and ceilings. `films[]`: `{name, frames, path: [{pos, 
 `build_up: {walls: [start, end], roof: [start, end], furnish: [start, end]}` (fractions of the film) lays the source sheet
 on the floor, aligned by the calibration pairs, grows the walls off its lines from the centre out, lands the roof and
 brings in the furniture. `studio: true` gives a film the same studio floor without the sheet, for a shot cut
-right after a build-up.
+right after a build-up. `script: "story.py"` names a Python file beside the plan whose `setup(plan, film, scale)`
+returns `frame(index, count)`. It runs before each frame, moves its own objects (a wall that slides, an item that backs
+off, a zone that turns red) and may return `{pos, look}` to drive the camera. Tell the finding with that motion, not
+with text over the film.
 
 ## Streets
 

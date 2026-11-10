@@ -27,7 +27,7 @@ options_plan_folder = "."
 
 def read_arguments():
     arguments = sys.argv[sys.argv.index("--") + 1:]
-    options = {"plan": arguments[0], "out": arguments[1], "shots": None, "samples": 512, "scale": 100, "film": None, "frames": None}
+    options = {"plan": arguments[0], "out": arguments[1], "shots": None, "samples": 512, "scale": 100, "film": None, "frames": None, "size": "1920x1080"}
     index = 2
     while index < len(arguments):
         name = arguments[index].lstrip("-")
@@ -37,7 +37,7 @@ def read_arguments():
     return options
 
 
-def setup_cycles(samples, scale_percent):
+def setup_cycles(samples, scale_percent, size="1920x1080"):
     scene = bpy.context.scene
     scene.render.engine = "CYCLES"
     cycles = scene.cycles
@@ -63,8 +63,9 @@ def setup_cycles(samples, scale_percent):
     cycles.caustics_reflective = False
     cycles.caustics_refractive = False
     cycles.blur_glossy = 0.5
-    scene.render.resolution_x = 1920
-    scene.render.resolution_y = 1080
+    width, height = (int(value) for value in size.lower().split("x"))
+    scene.render.resolution_x = width
+    scene.render.resolution_y = height
     scene.render.resolution_percentage = scale_percent
     # Grass and scanned trees take minutes to sync; keep them between shots.
     scene.render.use_persistent_data = True
@@ -230,6 +231,12 @@ def apply_cut(height, plan):
             item.data = mesh
     for name in ("roof", "ceilings"):
         bpy.data.collections[name].hide_render = True
+    # Clash volumes stop just above the cut, a red patch over the poché of the wall they run into.
+    fitout = bpy.data.collections.get("fitout")
+    if fitout is not None:
+        for item in fitout.objects:
+            for vertex in item.data.vertices:
+                vertex.co.z = min(vertex.co.z, height + 0.02)
     for item in bpy.data.collections["furnish"].objects:
         if item.location.z > height:
             item.hide_render = True
@@ -517,6 +524,8 @@ class BuildUp:
         self.roof = [(item, item.location.z) for item in bpy.data.collections["roof"].all_objects]
         self.ceilings = list(bpy.data.collections["ceilings"].all_objects)
         self.furnish = list(bpy.data.collections["furnish"].all_objects)
+        fitout = bpy.data.collections.get("fitout")
+        self.fit_zones = list(fitout.all_objects) if fitout else []
         # Rugs and curtains share one mesh and arrive with the furniture, not with the walls.
         self.fabric = bpy.data.objects.get("fabric")
         self.furnish_scale = {item.name: item.scale.copy() for item in self.furnish}
@@ -572,6 +581,9 @@ class BuildUp:
             wanted = self.furnish_scale[item.name] * max(growth, 0.001)
             if (item.scale - wanted).length > 1e-5:
                 item.scale = wanted
+        # Service zones land once the equipment stands, so the clash is the last thing to appear.
+        for item in self.fit_zones:
+            set_hidden(item, value < end)
 
     def apply_roof(self, value):
         start, end = self.stages["roof"]
@@ -630,6 +642,13 @@ def render_film(plan, film, scale, out_folder, frame_limit):
         render_to(target_path)
 
 
+def show_fit_zones(wanted):
+    """Equipment service zones from fitout_check.py: on unless a shot or film sets `fit_zones: false`."""
+    fitout = bpy.data.collections.get("fitout")
+    if fitout is not None:
+        fitout.hide_render = not wanted
+
+
 def main():
     options = read_arguments()
     plan_path = pathlib.Path(options["plan"])
@@ -639,7 +658,7 @@ def main():
     scale = METRES_PER_UNIT[plan.get("units", "m")]
     out_folder = pathlib.Path(options["out"])
     out_folder.mkdir(parents=True, exist_ok=True)
-    setup_cycles(int(options["samples"]), int(options["scale"]))
+    setup_cycles(int(options["samples"]), int(options["scale"]), options["size"])
     site = plan.get("site", {})
     setup_world(site)
     add_lamps(plan, scale)
@@ -653,6 +672,7 @@ def main():
         for portal in portals:
             portal.hide_render = not film.get("interior", False)
         bpy.context.scene.view_settings.exposure = film.get("exposure", 0.0)
+        show_fit_zones(film.get("fit_zones", True))
         render_film(plan, film, scale, out_folder, options["frames"])
         return
     shots = plan.get("shots", [])
@@ -668,6 +688,7 @@ def main():
         if shot.get("cut") and shot["cut"] != cut_applied:
             apply_cut(plan["levels"].get("floor", 0.0) * scale + shot["cut"] * scale, plan)
             cut_applied = shot["cut"]
+        show_fit_zones(shot.get("fit_zones", True))
         camera_for(shot, scale, shot["name"])
         bpy.context.view_layer.update()
         bpy.context.scene.view_settings.exposure = 0.0

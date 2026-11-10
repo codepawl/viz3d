@@ -144,8 +144,9 @@ def check_openings(plan, faults):
         head_metres = opening.get("head", 0) * scale
         sill_metres = opening.get("sill", 0) * scale
         kind = opening.get("kind")
-        if kind == "door" and not 0.40 <= width_metres <= 2.2:
-            faults.append(f"door {opening['id']} is {width_metres:.2f} m wide")
+        leaf_metres = width_metres / max(1, opening.get("leaves", 1))
+        if kind == "door" and not 0.40 <= leaf_metres <= 1.3:
+            faults.append(f"door {opening['id']} has {leaf_metres:.2f} m leaves")
         if kind == "door" and not 1.45 <= head_metres - sill_metres <= 2.7:
             faults.append(f"door {opening['id']} is {head_metres - sill_metres:.2f} m tall")
         if kind == "window" and head_metres <= sill_metres:

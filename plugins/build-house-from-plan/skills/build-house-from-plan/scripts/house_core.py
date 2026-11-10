@@ -40,6 +40,8 @@ TEXTURED_MATERIALS = {
     "gravel_path": ("gravel_ground_01", 2.0, (0.72, 0.68, 0.62), 0.0, 1.0, 1.0),
     "fabric_linen": ("hessian_230", 0.1, (1.0, 0.97, 0.90), 0.9, 0.12, 1.0),
     "fabric_rug": ("dirty_carpet", 1.0, (1.5, 1.15, 0.9), 0.2, 0.7, 1.0),
+    "corrugated_metal": ("corrugated_iron", 1.6, (0.78, 0.80, 0.82), 0.6, 0.9, 0.9),
+    "concrete_slab": ("concrete_floor_02", 3.0, (0.82, 0.80, 0.77), 0.3, 0.4, 0.75),
 }
 
 # name: (base colour, roughness, metallic)
@@ -66,6 +68,7 @@ PLAIN_MATERIALS = {
     "towel": ((0.42, 0.50, 0.50), 0.95, 0.0),
     "soot": ((0.008, 0.007, 0.007), 0.95, 0.0),
     "putty": ((0.40, 0.38, 0.34), 0.7, 0.0),
+    "stainless": ((0.62, 0.62, 0.60), 0.26, 1.0),
 }
 
 
@@ -253,6 +256,29 @@ def make_lamp_material(strength):
     return material
 
 
+FIT_ZONE_COLOURS = {
+    "fit_fits": (0.10, 0.62, 0.30),
+    "fit_tight": (1.0, 0.55, 0.05),
+    "fit_clash": (1.0, 0.08, 0.04),
+}
+
+
+def make_fit_zone_material(name):
+    """A see-through tinted volume that glows a little, so a service zone reads in any light."""
+    colour = FIT_ZONE_COLOURS[name]
+    material = bpy.data.materials.new(name)
+    material.use_nodes = True
+    material.blend_method = "BLEND"
+    tree = material.node_tree
+    shader = tree.nodes["Principled BSDF"]
+    shader.inputs["Base Color"].default_value = (*colour, 1)
+    shader.inputs["Emission Color"].default_value = (*colour, 1)
+    shader.inputs["Emission Strength"].default_value = 0.8 if name == "fit_clash" else 0.08
+    shader.inputs["Alpha"].default_value = 0.42 if name == "fit_clash" else 0.22
+    shader.inputs["Roughness"].default_value = 0.6
+    return material
+
+
 _material_cache = {}
 
 
@@ -267,6 +293,8 @@ def get_material(name):
         material = make_glass_material()
     elif name.startswith("lamp_"):
         material = make_lamp_material(float(name.split("_")[1]))
+    elif name in FIT_ZONE_COLOURS:
+        material = make_fit_zone_material(name)
     else:
         raise KeyError(f"unknown material {name}")
     _material_cache[name] = material

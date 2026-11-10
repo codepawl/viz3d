@@ -83,6 +83,8 @@ row of variants (Poly Haven plants). At `rot: 0` a model's front faces -y, so it
 the asset library's `models` folder) or `obj:<Objaverse uid>` (from `site.objaverse_folder`). `at` is the footprint centre. `lamps[]`:
 `{at, z, watts, kind, colour, soft}`.
 
+Fit-outs add `sheets[]`, `dimensions[]` and `equipment[]`: `references/fit-out.md`.
+
 ## Site, shots, films
 
 `site`: `hdri`, `sun: {azimuth, elevation, strength, angle, colour}`, `sky_strength`, `sky_clamp`, `centre`,
@@ -90,7 +92,7 @@ the asset library's `models` folder) or `obj:<Objaverse uid>` (from `site.objave
 `plants[]` (same keys as `furnish`), `treeline: {count, radius, assets}` or a list of those for several rings, `window_sky` (brightness of the lamp filling each window on interior shots, default 1.0), `ground_level`, `objaverse_folder`. Azimuth is degrees from +x, counter-clockwise. The sky's own
 sun is turned to match and clamped, so the lamp casts the sharp shadow.
 `shots[]`: `{name, kind: "interior"|"exterior", pos, look, lens, exposure, meter, meter_target, level, cut}`. Interiors meter
-themselves to a median (`meter_target`, default 0.26) the way a camera does; `exposure` adds stops on top. `level` (default on) keeps
+themselves to a median (`meter_target`, default 0.26) the way a camera does; `exposure` adds stops on top. `fit_zones: false` hides equipment service zones. `level` (default on) keeps
 verticals vertical with lens shift. `cut` slices the house at that height above the floor, caps the walls in dark
 poché and hides the roof and ceilings. `films[]`: `{name, frames, path: [{pos, look}], lens, exposure, cut, interior, level, build_up}`.
 `build_up: {walls: [start, end], roof: [start, end], furnish: [start, end]}` (fractions of the film) lays the source sheet

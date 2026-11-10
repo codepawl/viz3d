@@ -1,6 +1,6 @@
 ---
 name: build-house-from-plan
-description: Turn a 2D house plan into a photoreal 3D house in Blender Cycles, checked by overlaying the build on the drawing. Stills, a film of the walls rising off the drawing, and whole streets of houses. Use for a floor plan, a house plan or a blueprint that should become a real-looking 3D house or street, "từ house plan làm nhà 3D", "bản vẽ thành nhà 3D", "dựng nhà từ mặt bằng", "nhà 3D từ bản vẽ".
+description: Turn a 2D house plan into a photoreal 3D house in Blender Cycles, checked by overlaying the build on the drawing. Stills, a film of the walls rising off the drawing, and whole streets of houses. Fit-outs too: reconciles sheets written in metres and feet, checks equipment with its clearances and shows clashes in 3D with a coordination table. Use for a floor plan, a house plan, a blueprint or a shop, café, brewery or kitchen fit-out that should become a real-looking 3D house or street, "từ house plan làm nhà 3D", "bản vẽ thành nhà 3D", "dựng nhà từ mặt bằng", "nhà 3D từ bản vẽ".
 license: MIT
 ---
 
@@ -23,12 +23,15 @@ built floor plan lands on its ink.
    uv run --no-project --with pillow --with numpy --with scipy python scripts/plan_check.py check plan.json
    uv run --no-project --with pillow --with numpy --with scipy python scripts/plan_check.py overlay plan.json
    ```
+   Fit-out with equipment or sheets in mixed units (m, mm, ft-in): read `references/fit-out.md` and run
+   `uv run --no-project --with pillow python scripts/fitout_check.py all plan.json` for the unit reconciliation and
+   coordination tables. Fix unit faults before building; clashes then show in 3D as red volumes.
 4. **Build.** One Blender at a time:
    ```bash
    blender -b --factory-startup -t 6 -P scripts/build_house.py -- plan.json out/house.blend
    ```
    It writes the as-built section next to the blend. Score it with `plan_check.py asbuilt <section.json>`.
-5. **Preview small.** `--samples 48 --scale 50`, then look at every shot beside the reference photos:
+5. **Preview small.** `--samples 48 --scale 50` (`--size 1080x1350` for a portrait frame), then look at every shot beside the reference photos:
    ```bash
    blender -b out/house.blend -t 6 -P scripts/render_house.py -- plan.json out/preview --samples 48 --scale 50
    ```

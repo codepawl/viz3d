@@ -393,6 +393,50 @@ def furnish(plan, structure, collections, report):
         place_asset(plan, item, library_collection, collections["site"], report, on_ground=True)
 
 
+FIT_FLOOR_PATCH_METRES = 0.012
+
+
+def build_equipment(plan, collections, report):
+    """Equipment from `fitout_report.json` (written by fitout_check.py, already in metres), each service zone
+    a tinted volume in its status colour: green fits, amber tight, red clash. A clash zone stands to the clear height."""
+    report_path = plan["_folder"] / "fitout_report.json"
+    if not report_path.exists():
+        return
+    fit = json.loads(report_path.read_text(encoding="utf-8"))
+    floor = plan["levels"].get("floor", 0.0)
+    plain = MeshBatch("equipment_plain", 61)
+    zones = MeshBatch("fit_zones", 62)
+    for row in fit.get("equipment", []):
+        footprint = row["footprint_m"]
+        width, depth, height = row["size_m"]
+        bottom = floor + row["z0_m"]
+        centre = [sum(point[axis] for point in footprint) / 4 for axis in range(2)]
+        if row.get("asset"):
+            # A model whose front is not -y turns by asset_rot; a quarter turn swaps its native x and y.
+            asset_rot = row.get("asset_rot", 0)
+            item = {"asset": row["asset"], "at": centre, "rot": row["rot"] + asset_rot, "z": bottom, "name": row["id"]}
+            if row.get("paint"):
+                item["paint"] = row["paint"]
+            if row.get("fit_size", True):
+                quarter_turn = round(asset_rot / 90) % 2 == 1
+                item["fit_size"] = [depth, width, height] if quarter_turn else [width, depth, height]
+            if place_asset(plan, item, collections["library"], collections["furnish"], report) is None:
+                report["missing"].append(row["asset"])
+        elif row.get("material") != "none":
+            plain.add_prism(footprint, bottom, bottom + height, row.get("material") or "aluminium_dull")
+        failing = {problem["check"].split(" ")[0] for problem in row["problems"] if problem["status"] == "clash"}
+        for side, zone in row["zones_m"].items():
+            status = row["status"] if side in failing or row["status"] != "clash" else "fits"
+            # A clash stands to the clear height, so a cut shows it crossing the wall it runs into.
+            top = floor + plan["levels"].get("ceiling", bottom + height) if status == "clash" else floor + FIT_FLOOR_PATCH_METRES
+            zones.add_prism(zone, floor + 0.002, top, f"fit_{status}")
+        report.setdefault("fit", []).append({"id": row["id"], "status": row["status"], "margin_m": row["margin_m"]})
+    if plain.faces:
+        plain.finish(collections["furnish"], bevel=0.004)
+    if zones.faces:
+        zones.finish(collections["fitout"])
+
+
 def treeline_items(plan):
     """A ring of trees far enough out to close the horizon; azimuths in `skip` stay open as views."""
     line = plan.get("site", {}).get("treeline")
@@ -690,7 +734,7 @@ def main():
     output = pathlib.Path(arguments[1]).resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
     bpy.ops.wm.read_factory_settings(use_empty=True)
-    collections = {name: new_collection(name) for name in ("walls", "floors", "ceilings", "facade", "roof", "frame", "fitted", "furnish", "site", "library")}
+    collections = {name: new_collection(name) for name in ("walls", "floors", "ceilings", "facade", "roof", "frame", "fitted", "furnish", "fitout", "site", "library")}
     structure = house_parts.Structure(plan)
     clock = time.perf_counter()
 
@@ -705,6 +749,7 @@ def main():
     phase_done("structure")
     report = {"placed": [], "clashes": [], "missing": []}
     furnish(plan, structure, collections, report)
+    build_equipment(plan, collections, report)
     phase_done("furnish")
     build_ground(plan, collections["site"])
     phase_done("ground")

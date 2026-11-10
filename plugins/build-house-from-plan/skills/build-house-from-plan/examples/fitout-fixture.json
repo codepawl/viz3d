@@ -1,0 +1,43 @@
+{
+ "units": "m",
+ "fitout_title": "Test roastery: coordination",
+ "unit_tolerance_m": 0.02,
+ "fit_tight_m": 0.10,
+ "levels": {"floor": 0.0, "ceiling": 3.2},
+ "sheets": [
+  {"id": "A-101", "name": "Architect floor plan", "default_unit": "mm"},
+  {"id": "M-201", "name": "Equipment supplier layout", "default_unit": "in"}
+ ],
+ "dimensions": [
+  {"id": "room_width", "label": "Roastery clear width", "sheet": "A-101", "text": "6100", "a": [0, 4], "b": [6.1, 4]},
+  {"id": "room_width", "sheet": "M-201", "text": "20'-0\" (6.40 m)"},
+  {"id": "room_depth", "label": "Roastery clear depth", "sheet": "A-101", "text": "8.00 m"},
+  {"id": "room_depth", "sheet": "M-201", "text": "26' 3\""},
+  {"id": "ceiling", "label": "Ceiling height", "sheet": "A-101", "text": "3200 mm"},
+  {"id": "ceiling", "sheet": "M-201", "text": "10'-6\""},
+  {"id": "door", "label": "Loading door", "sheet": "A-101", "text": "1000"},
+  {"id": "door", "sheet": "M-201", "text": "39 3/8\""}
+ ],
+ "walls": [
+  {"id": "S", "a": [-0.1, -0.1], "b": [6.2, -0.1], "t": 0.2, "kind": "ext", "outside": -1},
+  {"id": "E", "a": [6.2, -0.1], "b": [6.2, 8.1], "t": 0.2, "kind": "ext", "outside": -1},
+  {"id": "N", "a": [6.2, 8.1], "b": [-0.1, 8.1], "t": 0.2, "kind": "ext", "outside": -1},
+  {"id": "W", "a": [-0.1, 8.1], "b": [-0.1, -0.1], "t": 0.2, "kind": "ext", "outside": -1}
+ ],
+ "openings": [
+  {"id": "D1", "wall": "S", "kind": "door", "from": 2.0, "to": 3.0, "sill": 0, "head": 2.4, "swing": 1}
+ ],
+ "rooms": [
+  {"name": "Roastery", "kind": "work", "poly": [[0, 0], [6.1, 0], [6.1, 8], [0, 8]], "ceiling": 3.2}
+ ],
+ "equipment": [
+  {"id": "R1", "name": "Roaster 15 kg", "room": "Roastery", "at": [5.075, 5.0], "rot": -90,
+   "size": ["2.10 m", "1.45 m", "2.35 m"], "clear": {"front": "1.0 m", "back": "600 mm", "left": "18\"", "right": "0.45 m", "top": "0.6 m"}},
+  {"id": "C1", "name": "Cooling tray", "room": "Roastery", "at": [2.6, 5.2], "rot": -90,
+   "size": [1.2, 1.2, 1.0], "clear": {"front": 0.9}},
+  {"id": "G1", "name": "Green bean rack", "room": "Roastery", "at": [0.7, 3.0], "rot": 90,
+   "size": ["9'", "42\"", "8'"], "clear": {"front": "4'"}},
+  {"id": "P1", "name": "Packing bench", "room": "Roastery", "at": [3.0, 7.5], "rot": 0,
+   "size": ["2.4 m", "0.75 m", "0.9 m"], "clear": {"front": "0.9 m", "back": "50 mm"}}
+ ]
+}

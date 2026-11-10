@@ -41,7 +41,7 @@ TEXTURED_MATERIALS = {
     "fabric_linen": ("hessian_230", 0.1, (1.0, 0.97, 0.90), 0.9, 0.12, 1.0),
     "fabric_rug": ("dirty_carpet", 1.0, (1.5, 1.15, 0.9), 0.2, 0.7, 1.0),
     "corrugated_metal": ("corrugated_iron", 1.6, (0.78, 0.80, 0.82), 0.6, 0.9, 0.9),
-    "concrete_slab": ("concrete_floor_02", 3.0, (0.82, 0.80, 0.77), 0.3, 0.4, 0.75),
+    "concrete_slab": ("concrete_floor_02", 4.0, (0.86, 0.84, 0.80), 0.5, 0.15, 0.85),
 }
 
 # name: (base colour, roughness, metallic)
@@ -273,8 +273,8 @@ def make_fit_zone_material(name):
     shader = tree.nodes["Principled BSDF"]
     shader.inputs["Base Color"].default_value = (*colour, 1)
     shader.inputs["Emission Color"].default_value = (*colour, 1)
-    shader.inputs["Emission Strength"].default_value = 0.8 if name == "fit_clash" else 0.08
-    shader.inputs["Alpha"].default_value = 0.42 if name == "fit_clash" else 0.22
+    shader.inputs["Emission Strength"].default_value = 0.5 if name == "fit_clash" else 0.08
+    shader.inputs["Alpha"].default_value = 0.3 if name == "fit_clash" else 0.22
     shader.inputs["Roughness"].default_value = 0.6
     return material
 

@@ -624,6 +624,12 @@ def render_film(plan, film, scale, out_folder, frame_limit):
         add_plan_sheet(plan, scale)
         build_up = BuildUp(plan, scale, film["build_up"])
         melt_studio_horizon(measure_floor_colour(camera))
+    elif film.get("studio"):
+        # The same studio floor as a build-up, without the sheet, so a film cut after one keeps its look.
+        add_plan_sheet(plan, scale)
+        bpy.data.objects["plan_sheet"].hide_render = True
+        bpy.context.view_layer.layer_collection.children["site"].exclude = True
+        melt_studio_horizon(measure_floor_colour(camera))
     for frame in range(frames):
         target_path = folder / f"f{frame:04d}.png"
         if target_path.exists():

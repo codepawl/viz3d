@@ -1,0 +1,8 @@
+{
+  "name": "pixel-splats",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@codepawlhq/67js": "^0.19.0"
+  }
+}

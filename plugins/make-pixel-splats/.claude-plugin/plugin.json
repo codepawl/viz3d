@@ -1,0 +1,20 @@
+{
+  "name": "make-pixel-splats",
+  "version": "0.1.0",
+  "description": "Make pixel art scenes out of gaussian splats written by code, with no 3D model: SDF shapes, baked light, 67js, palette and dither, with haunted medieval examples and a film renderer.",
+  "author": {
+    "name": "CodePawl",
+    "url": "https://codepawl.com"
+  },
+  "homepage": "https://github.com/codepawl/viz3d",
+  "repository": "https://github.com/codepawl/viz3d",
+  "license": "MIT",
+  "keywords": [
+    "3d",
+    "pixel-art",
+    "gaussian-splats",
+    "67js",
+    "voxel",
+    "sdf"
+  ]
+}

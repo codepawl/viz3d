@@ -20,6 +20,11 @@
       "name": "build-house-from-plan",
       "source": "./plugins/build-house-from-plan",
       "description": "Turn a 2D house plan into a photoreal 3D house, checked against the drawing"
+    },
+    {
+      "name": "make-pixel-splats",
+      "source": "./plugins/make-pixel-splats",
+      "description": "Make pixel art scenes out of gaussian splats written by code, rendered in 67js"
     }
   ]
 }

@@ -325,6 +325,18 @@ Python through [uv](https://docs.astral.sh/uv/), Blender 5.x and a GPU.
 The plans behind the picture are public domain. They are Historic American Buildings Survey and Historic American
 Engineering Record sheets from the Library of Congress, and a USDA plan. Furniture includes CC BY models listed in the skill's example.
 
+**make-pixel-splats** makes pixel art scenes out of gaussian splats that a script writes, with no 3D model. Each
+shape is a signed distance function. Every surface voxel becomes one round splat with sun, shadow and ambient light
+baked into its colour. [67js](https://github.com/codepawl/67.js) draws the splats at a low size, then a post pass adds
+glow, haze, a small palette and ordered dither. It comes with three haunted medieval scenes, three cozy islands, eased
+motion helpers and a headless renderer for stills and films. It needs Node 20, Chrome and npm.
+
+![A haunted chapel, a witch's swamp and the Reaper at a gallows, all pixel art made of gaussian splats](docs/images/pixel-splats.jpg)
+
+```text
+/plugin install make-pixel-splats@codepawl
+```
+
 ## Contributing
 
 Faults you saw, new looks, example topics and harness adapters are welcome. Read

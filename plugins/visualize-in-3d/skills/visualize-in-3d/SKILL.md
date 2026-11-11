@@ -44,7 +44,7 @@ Read what the user wants people to see, then pick one shape (or combine two) and
 | One object, product, model or creature to show off | Showcase film or stills | `references/looks.md` (Dither + ASCII showcase, Gradient glow ASCII), `references/film.md`, `references/67js.md` |
 | One object cut open or exploded | Cutaway film, or an app with a section view | `references/film.md`, `references/looks.md`, `references/67js.md` |
 | One big object or building with many rooms, as a page or a book | Book: interactive illustrated cutaway plate, with quizzes | `references/book.md`, `references/looks.md` |
-| A game people play in the browser (steer a creature, survive, grow) | Playable web game, bot-balanced | `references/game.md` |
+| A game people play in the browser (steer a creature, survive, grow) | Playable web game, bot-balanced; any other game people play goes to the `game-generalist` skill | `references/game.md` (worked example) |
 | A demo for leaders in about an hour | Quick prototype from ready models, no Blender | `references/live-embed.md` |
 | A live view inside an existing dashboard or product | Embed (web component or iframe) on real data | `references/live-embed.md`, `scripts/mock-feed.mjs` |
 

@@ -342,6 +342,13 @@ motion helpers and a headless renderer for stills and films. It needs Node 20, C
 Faults you saw, new looks, example topics and harness adapters are welcome. Read
 [CONTRIBUTING.md](CONTRIBUTING.md). Coding agents read [AGENTS.md](AGENTS.md).
 
+## Sponsors
+
+viz3d is free and MIT licensed. [Sponsors](https://github.com/sponsors/codepawl) pay for GPU time, test
+hardware and the hours that go into it. Company sponsors get their logo here from $250 a month.
+
+[![Sponsor CodePawl](https://img.shields.io/badge/Sponsor-CodePawl-EA4AAA?style=for-the-badge&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/codepawl)
+
 ## License
 
 MIT

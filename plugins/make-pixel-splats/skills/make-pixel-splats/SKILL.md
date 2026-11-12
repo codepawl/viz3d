@@ -47,6 +47,22 @@ light. 67js draws them at a low internal size, then the page turns the frame int
 - C: internal 360 px, spacing 0.015, dither 0.06, `paletteSteps: 3`. Holds detail at night. The haunted films use it.
 - Reveal: raise `internalSize` to 1080 and set `style.palette` to `'none'` to show the single round splats.
 
+## Matching a crisp reference
+
+Sharp pixel art is decided by the shapes and colours you build, not by the post pass. Rounded SDF shapes with smooth
+baked light and noisy materials give many close tones side by side, and that reads as blur at any pixel size. Flags
+that harden alpha, drop haze, thin the palette or median the tones made it cleaner but never crisp (three rounds,
+then dropped).
+
+- Before building, put a reference frame beside a first still at the same scale, zoom both 3x, and send that pair to
+  the owner. Do it at the first still, not after several film previews, and send it whenever they ask to compare.
+- Build for flat pixels from the start: boxy parts with flat faces, one or two hues per scene in 4 to 6 steps, material
+  colour picked from that ramp with no noise, light quantized into bands, dither used as texture on large faces.
+- Plain dark background: no gradient, moon halo, clouds or dense stars. No glow halos, haze, mist or translucent
+  splats; a light is a hard bright pixel cluster.
+- Internal size near 190 to 216 px with an integer upscale.
+- The cozy and haunted scenes here are the soft, painterly look. Do not promise the crisp look from them.
+
 ## Rules that came from mistakes
 
 - Never mutate cached static lists in a frame. Copy before scaling, or splats shrink a little every frame.

@@ -35,7 +35,7 @@ which also holds subframe blur for the train and the dark-mass trap at the openi
 
 ## Build it (any software)
 
-The flow is not tied to one tool: Blender, Cinema 4D, Maya, Houdini, Unreal, Unity, Godot, three.js or 67js all
+The flow is not tied to one tool: Blender, Cinema 4D, Maya, Houdini, Unreal, Unity, Godot, three.js or Crucible all
 work, and the wipe can be made in Resolve, Premiere, After Effects, CapCut, Kdenlive or FFmpeg. The per-tool table
 (clay override and two-pass render in each) is in the 3d-generalist skill's `references/clay-reveal.md`, "Build it".
 The rules that hold everywhere:
@@ -53,9 +53,9 @@ The rules that hold everywhere:
 - Worlds that suit it: open city tiles (clean shapes, no bases), a place built by script in a DCC, kitbashed library
   assets; hero props from CC0 libraries or an image-to-3D service.
 
-When the renderer is 67js (measured on an RTX 3060): ten city tiles, 960x540, 4x MSAA, 360 frames per pass in
+When the renderer is Crucible (measured on an RTX 3060): ten city tiles, 960x540, 4x MSAA, 360 frames per pass in
 4 to 17 s. Turn the sky with `loadHdri(url, { rotation })`, `rotation = atan2(sunZ, sunX) of the HDRI's sun -
-atan2(z, x) of the wanted azimuth` (67js maps `u = atan(x, -z) / 2pi + 0.5`), check by the brightest pixel of a
+atan2(z, x) of the wanted azimuth` (Crucible maps `u = atan(x, -z) / 2pi + 0.5`), check by the brightest pixel of a
 still; per-frame `environment: { fogDensity }` for the haze; import `src/view-transform-shader.js` for AgX.
 
 ## Sound
@@ -76,7 +76,7 @@ tool is set up. Nothing under the clay section.
   ground) inside the same mesh. In clay those bases show as white islands. Measure the base first (vertex spread per
   height slice); if it cannot be cut, pick another source.
 - Very heavy CC0 trees (millions of vertices) crash a browser tab or stall a viewport; check the vertex count in the glTF before placing many.
-- glTF with KHR_materials_unlit and black factors renders black in some renderers (67js); skip or fix the material.
+- glTF with KHR_materials_unlit and black factors renders black in some renderers (Crucible); skip or fix the material.
 - A camera looking almost straight down yaws hard for small moves: the crane smeared and snapped at the top in the
   first proof. End the crane on a high oblique (about 60 degrees down), keep it moving through the wipe back, and let
   the last shot drift on at the crane's speed instead of starting from rest.

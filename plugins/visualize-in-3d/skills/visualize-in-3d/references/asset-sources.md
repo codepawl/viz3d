@@ -33,7 +33,7 @@ tiers, has a 3D viewer Space for search, and keeps the source's licence and cred
 
 To search across libraries by kind, size and tier, read [codepawl/asset-index](https://huggingface.co/datasets/codepawl/asset-index) (one table of assets from several libraries, with how to get each).
 
-Load them in the browser with three.js or [67js](https://github.com/codepawl/67.js) (`npm install 67js@npm:@codepawlhq/67js meshoptimizer`).
+Load them in the browser with three.js or [Crucible](https://github.com/codepawl/crucible) (`npm install @codepawlhq/crucible meshoptimizer`).
 In Blender, Godot, Unity or Unreal, import the `engine/` tier: it keeps PNG and JPEG textures, because Blender cannot read KTX2.
 
 Then the general sources, in this order:

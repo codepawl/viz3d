@@ -24,7 +24,7 @@
     {
       "name": "make-pixel-splats",
       "source": "./plugins/make-pixel-splats",
-      "description": "Make pixel art scenes out of gaussian splats written by code, rendered in 67js"
+      "description": "Make pixel art scenes out of gaussian splats written by code, rendered in Crucible"
     }
   ]
 }

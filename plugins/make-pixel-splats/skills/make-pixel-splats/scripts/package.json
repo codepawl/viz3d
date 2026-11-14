@@ -3,6 +3,6 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@codepawlhq/67js": "^0.19.0"
+    "@codepawlhq/crucible": "^0.20.0"
   }
 }

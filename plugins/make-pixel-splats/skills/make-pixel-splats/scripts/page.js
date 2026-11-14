@@ -1,7 +1,7 @@
-// Page side of the renderer: builds a scene, draws its splats with 67js at a low internal size, then turns the frame
+// Page side of the renderer: builds a scene, draws its splats with Crucible at a low internal size, then turns the frame
 // into pixel art (palette, ordered dither, glow halos) and scales it up with nearest-neighbour sampling.
-import { Renderer67 } from '/node_modules/@codepawlhq/67js/build/67.module.js';
-import { attachGaussianSplats, createGaussianSplats } from '/node_modules/@codepawlhq/67js/build/gaussian-splats.js';
+import { CrucibleRenderer } from '/node_modules/@codepawlhq/crucible/build/67.module.js';
+import { attachGaussianSplats, createGaussianSplats } from '/node_modules/@codepawlhq/crucible/build/gaussian-splats.js';
 import { packSplatData, hashNoise, valueNoise } from './voxel-splats.js';
 import { SCENE_BUILDERS } from './scenes.js';
 
@@ -18,7 +18,7 @@ function getRenderer(size) {
   canvas.style.height = `${size}px`;
   document.body.appendChild(canvas);
   state.canvas = canvas;
-  state.renderer = new Renderer67(canvas, [], { ground: false, transparent: true, pixelRatio: 1, samples: 1, memoryBudgetMiB: 512 });
+  state.renderer = new CrucibleRenderer(canvas, [], { ground: false, transparent: true, pixelRatio: 1, samples: 1, memoryBudgetMiB: 512 });
   state.rendererSize = size;
   return state.renderer;
 }

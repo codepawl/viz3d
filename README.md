@@ -12,18 +12,18 @@ a book or a game. It checks its own frames before it shows you anything.
 <table>
   <tr>
     <td width="200">
-      <a href="https://67js.codepawl.com">
+      <a href="https://crucible.codepawl.com">
         <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="https://67js.codepawl.com/brand/wordmark-dark.svg?v=0.10.0" />
-          <img src="https://67js.codepawl.com/brand/wordmark-light.svg?v=0.10.0" alt="67js" width="160" />
+          <source media="(prefers-color-scheme: dark)" srcset="https://crucible.codepawl.com/brand/wordmark-dark.svg?v=0.10.0" />
+          <img src="https://crucible.codepawl.com/brand/wordmark-light.svg?v=0.10.0" alt="Crucible" width="160" />
         </picture>
       </a>
     </td>
     <td>
-      Films and stills render in <a href="https://github.com/codepawl/67.js"><b>67js</b></a>, our WebGL2 engine that
+      Films and stills render in <a href="https://github.com/codepawl/crucible"><b>Crucible</b></a>, our WebGL2 engine that
       agents drive through an MCP server: JSON scene recipes, PNG review grids, and GPU or CPU export to images and
       video with bounded memory. viz3d works without it, and looks better with it. See
-      <a href="#films-and-stills-with-67js">Films and stills with 67js</a>.
+      <a href="#films-and-stills-with-crucible">Films and stills with Crucible</a>.
     </td>
   </tr>
 </table>
@@ -236,10 +236,10 @@ your feed:
 that only takes a URL, use `embed.html?source=...` in an iframe. To test without your real system, the skill's
 `scripts/mock-feed.mjs` replays a JSONL file as a live feed.
 
-## Films and stills with 67js
+## Films and stills with Crucible
 
 Apps, lessons, embeds and games stay in three.js, because people click and steer them. Documentaries, action shorts,
-showcases, cutaway films and stills render in [67js](https://github.com/codepawl/67.js) when it is installed:
+showcases, cutaway films and stills render in [Crucible](https://github.com/codepawl/crucible) when it is installed:
 
 - Addons give terrain, scanned trees and grass, baked liquid, vehicles on paths and skinned characters. Others give
   HDRI light and baked room light.
@@ -253,21 +253,21 @@ showcases, cutaway films and stills render in [67js](https://github.com/codepawl
 Set it up in your project:
 
 ```bash
-npm install 67js@npm:@codepawlhq/67js
+npm install @codepawlhq/crucible
 ```
 
 ```bash
-claude mcp add 67js-scene -- npx --package @codepawlhq/67js 67js-mcp --backend gpu --memory 256
+claude mcp add crucible-scene -- npx --package @codepawlhq/crucible crucible-mcp --backend gpu --memory 256
 ```
 
 ```bash
-npx skills add codepawl/67.js
+npx skills add codepawl/crucible
 ```
 
-The last command adds the 67js skills (`build-67js-scene` and `render-67js-media`). The skill's
+The last command adds the Crucible skills (`build-crucible-scene` and `render-crucible-media`). The skill's
 `references/67js.md` has the full workflow, Windows notes and the faults we have seen. Showcase and docs are at
-[67js.codepawl.com](https://67js.codepawl.com). If viz3d is useful to you, a star on
-[codepawl/67.js](https://github.com/codepawl/67.js) helps the engine behind it.
+[Crucible.codepawl.com](https://crucible.codepawl.com). If viz3d is useful to you, a star on
+[codepawl/crucible](https://github.com/codepawl/crucible) helps the engine behind it.
 
 ## What you need
 
@@ -277,7 +277,7 @@ The last command adds the 67js skills (`build-67js-scene` and `render-67js-media
 - [Blender](https://www.blender.org/download/) 5.x is optional. It gives much better models for the full live app and
   the documentary. Without it the skill builds the models in three.js and tells you the quality is lower. Quick
   prototypes and embeds never need it.
-- [67js](https://github.com/codepawl/67.js) is optional. It renders the films and stills, as described above.
+- [Crucible](https://github.com/codepawl/crucible) is optional. It renders the films and stills, as described above.
 
 ## What is new
 
@@ -288,7 +288,7 @@ The last command adds the 67js skills (`build-67js-scene` and `render-67js-media
 - viz3d now covers any subject, not only things that are hard to understand.
 - The `showcase` mode: a film or stills that show off one object, product or model.
 - `/viz3d` with nothing after it shows the menu. The menu groups the modes by what people do with them and the looks by family.
-- Films and stills render in [67js](https://github.com/codepawl/67.js) when it is installed.
+- Films and stills render in [Crucible](https://github.com/codepawl/crucible) when it is installed.
 - The `game` mode: a playable browser game, balanced by bot playtests.
 - A longer self-review fault list. It checks contact and support, camera flights through meshes, vehicles that
   steer and roll, and sound.
@@ -327,7 +327,7 @@ Engineering Record sheets from the Library of Congress, and a USDA plan. Furnitu
 
 **make-pixel-splats** makes pixel art scenes out of gaussian splats that a script writes, with no 3D model. Each
 shape is a signed distance function. Every surface voxel becomes one round splat with sun, shadow and ambient light
-baked into its colour. [67js](https://github.com/codepawl/67.js) draws the splats at a low size, then a post pass adds
+baked into its colour. [Crucible](https://github.com/codepawl/crucible) draws the splats at a low size, then a post pass adds
 glow, haze, a small palette and ordered dither. It comes with three haunted medieval scenes, three cozy islands, eased
 motion helpers and a headless renderer for stills and films. It needs Node 20, Chrome and npm.
 

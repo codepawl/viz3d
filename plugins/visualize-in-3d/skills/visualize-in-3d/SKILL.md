@@ -21,7 +21,7 @@ Paths use `{{WORK_DIR}}` for the folder where projects live (the current directo
    the usual install folder. If it is missing, say it gives much better models, is free at blender.org, and ask
    whether to wait or go on without it. Without it, follow `references/no-blender.md` and say in the report that
    model quality is lower.
-2. **Node 20+ and Playwright with Chromium** for recording; **ffmpeg** for encoding and checks. **67js** renders
+2. **Node 20+ and Playwright with Chromium** for recording; **ffmpeg** for encoding and checks. **Crucible** renders
    films and stills: when one is the deliverable, read `references/67js.md` for setup and when to use it.
 3. **Subagents:** where the harness has them, give each pass to a fresh subagent with its brief and keep it inside
    about 80 tool calls. Where it does not, run the passes one after another in this session, finish and check one

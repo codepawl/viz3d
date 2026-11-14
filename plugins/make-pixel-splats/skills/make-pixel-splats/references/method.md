@@ -13,9 +13,9 @@ Reading map: [Pipeline](#pipeline), [Scene object](#scene-object), [Frame option
    marching toward the sun through `shadowModel`, ambient occlusion and a rim term. The result goes into the colour.
    Splats are drawn unlit, so the light never changes after this step. `material` can return an emission above 0 to
    keep a colour bright in shadow (candles, windows, a skull in a hood).
-4. **Draw.** `packSplatData` packs lists into the 67js splat data (`positions`, RGBA `colors`, linear `scales`,
+4. **Draw.** `packSplatData` packs lists into the Crucible splat data (`positions`, RGBA `colors`, linear `scales`,
    `rotations` with w first). `createGaussianSplats` and `attachGaussianSplats` from
-   `@codepawlhq/67js/addons/gaussian-splats` put them in a `Renderer67` with a transparent background.
+   `@codepawlhq/crucible/addons/gaussian-splats` put them in a `CrucibleRenderer` with a transparent background.
 5. **Post.** `page.js` reads the canvas back and composites, in order: background gradient, stars, moon with halo,
    cloud band, lightning flash, glow halos, then haze (bloom over a threshold, lift toward a haze colour, a mist band
    near the bottom, vignette, a 1 px soften), then the palette with a 4x4 Bayer dither, then a nearest-neighbour

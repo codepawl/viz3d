@@ -180,7 +180,7 @@ function shadePoint(shadowModel, x, y, z, normalX, normalY, normalZ, surface, li
   return result;
 }
 
-// Concatenate splat lists ({ count, positions, colors (0..1 floats, rgba), scales }) into one 67js splat data object.
+// Concatenate splat lists ({ count, positions, colors (0..1 floats, rgba), scales }) into one Crucible splat data object.
 export function packSplatData(lists) {
   let total = 0;
   for (const list of lists) total += list.count;

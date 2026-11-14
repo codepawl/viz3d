@@ -1,20 +1,20 @@
 ---
 name: make-pixel-splats
-description: Make pixel art scenes out of gaussian splats written by code, with no 3D model, rendered in 67js. Shapes come from signed distance functions, every surface voxel becomes one round splat with sun, shadow and ambient light baked into its colour, and a post pass adds glow, haze, a small palette and ordered dither before a nearest-neighbour upscale. Includes three haunted medieval scenes, three cozy islands, eased motion helpers, a headless frame renderer and a 24 s film plan cut on lightning. Use for pixel art splats, voxel splat dioramas, code-built gaussian splat scenes, scenes like a haunted crag or a witch swamp.
+description: Make pixel art scenes out of gaussian splats written by code, with no 3D model, rendered in Crucible. Shapes come from signed distance functions, every surface voxel becomes one round splat with sun, shadow and ambient light baked into its colour, and a post pass adds glow, haze, a small palette and ordered dither before a nearest-neighbour upscale. Includes three haunted medieval scenes, three cozy islands, eased motion helpers, a headless frame renderer and a 24 s film plan cut on lightning. Use for pixel art splats, voxel splat dioramas, code-built gaussian splat scenes, scenes like a haunted crag or a witch swamp.
 license: MIT
 ---
 
 # Pixel art from code-built gaussian splats
 
 No mesh and no capture go in. A script writes every splat: position, round scale and a colour that already holds its
-light. 67js draws them at a low internal size, then the page turns the frame into pixel art.
+light. Crucible draws them at a low internal size, then the page turns the frame into pixel art.
 
 ## Set up
 
 `{{SKILL_DIR}}` is this skill's folder and `{{WORK_DIR}}` the folder where projects live.
 
 1. Copy `{{SKILL_DIR}}/scripts/` to `{{WORK_DIR}}/pixel-splats/` and run `npm install` there. It installs
-   `@codepawlhq/67js`, which brings `playwright-core`. Rendering needs Chrome installed.
+   `@codepawlhq/crucible`, which brings `playwright-core`. Rendering needs Chrome installed.
 2. Stills: `node render.mjs plans/stills.mjs out/stills`. Film frames: `node render.mjs plans/haunted-film.mjs out/film`
    (`FILM_FPS`, `FILM_SIZE`, `FILM_UNTIL` set rate, output size and a cut-off), then
    `ffmpeg -framerate 30 -i out/film/frame_%04d.png -c:v libx264 -pix_fmt yuv420p film.mp4`.

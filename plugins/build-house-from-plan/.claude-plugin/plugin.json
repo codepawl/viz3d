@@ -1,6 +1,6 @@
 {
   "name": "build-house-from-plan",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Turn a 2D house plan into a photoreal 3D house in Blender Cycles, checked by overlaying the build on the drawing, with stills, a build-up film and whole streets. Fit-outs too: reconciles sheets in metres and feet, checks equipment with its clearances and shows clashes in 3D with a coordination table.",
   "author": {
     "name": "CodePawl",

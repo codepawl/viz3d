@@ -1,6 +1,6 @@
 ---
 name: build-minecraft-model-from-image
-description: Turn a 2D picture of an object into a Minecraft-style 3D model, a few clean cuboids with pixel textures in the Blockbench look, never fine jagged voxels. Exports GLB, a viewer and renders. Use for "make this photo a Minecraft model", "block model from an image", "turn this object into blocks", "voxel from a picture", "từ ảnh làm khối 3D minecraft", "voxel từ ảnh", "biến ảnh đồ vật thành block", "làm model minecraft".
+description: "Turn a 2D picture of an object into a Minecraft-style 3D model: a few clean cuboids with pixel textures, never fine voxels. Exports GLB, a viewer and renders. Use for \"make this photo a Minecraft model\", \"block model from an image\", \"voxel from a picture\", \"từ ảnh làm khối 3D minecraft\", \"voxel từ ảnh\", \"biến ảnh đồ vật thành block\", \"làm model minecraft\"."
 license: MIT
 ---
 

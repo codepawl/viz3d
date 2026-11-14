@@ -1,5 +1,22 @@
 # A playable web game
 
+<!-- skill-navigation:start -->
+## Reading Map
+
+- [A playable web game](#a-playable-web-game)
+- [Core loop](#core-loop)
+- [Controls](#controls)
+- [Growth](#growth)
+- [Opponents and the director](#opponents-and-the-director)
+- [Bot playtests (the balance gate)](#bot-playtests-the-balance-gate)
+- [Creature motion](#creature-motion)
+- [Tutorial and first load](#tutorial-and-first-load)
+- [Performance](#performance)
+- [Film mode and the post](#film-mode-and-the-post)
+- [Deploy](#deploy)
+- [Credits](#credits)
+<!-- skill-navigation:end -->
+
 A free browser game people play, not a film or a dashboard: one creature or unit the player steers, a world that
 pushes back, and growth the player earns. Reading map: Core loop, Controls, Growth, Opponents and the director, Bot
 playtests, Creature motion, Tutorial and first load, Performance, Film mode and the post, Deploy, Credits. Read the

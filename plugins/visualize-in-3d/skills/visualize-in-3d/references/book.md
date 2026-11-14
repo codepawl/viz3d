@@ -1,5 +1,19 @@
 # Book mode: illustrated cutaway plates
 
+<!-- skill-navigation:start -->
+## Reading Map
+
+- [Book mode: illustrated cutaway plates](#book-mode-illustrated-cutaway-plates)
+- [Plan file](#plan-file)
+- [Build](#build)
+- [Post pass](#post-pass)
+- [Labels](#labels)
+- [Page and book](#page-and-book)
+- [Reel](#reel)
+- [Faults seen](#faults-seen)
+- [Checks](#checks)
+<!-- skill-navigation:end -->
+
 One page per subject: a big object or building cut open like an encyclopedia plate, in 3D. The viewer orbits it, reads
 labels in the margins and flies to a room. Several subjects make a page-turning book with a short quiz on each
 page. It uses the "Illustrated cutaway plate" look from `looks.md`. The rules below came from a real build of a

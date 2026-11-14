@@ -1,5 +1,16 @@
 # Action film mode
 
+<!-- skill-navigation:start -->
+## Reading Map
+
+- [Action film mode](#action-film-mode)
+- [Action sheet](#action-sheet)
+- [Pass 1: cast, rig, stage](#pass-1-cast-rig-stage)
+- [Pass 2: beats, effects, camera](#pass-2-beats-effects-camera)
+- [Faults seen](#faults-seen)
+- [Sound](#sound)
+<!-- skill-navigation:end -->
+
 Use this mode for a short film where characters, creatures, vehicles or machines act. Examples: a fight, a chase,
 a race, a match, a rescue, a launch, a crash, an animal hunting. It works in any look from `looks.md`. The rules
 below came from a duel between two original creatures in the pixel diorama look and hold for any cast and action.

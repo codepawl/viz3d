@@ -1,5 +1,25 @@
 # Looks
 
+<!-- skill-navigation:start -->
+## Reading Map
+
+- [Looks](#looks)
+- [Toy isometric](#toy-isometric)
+- [Point-cloud survey](#point-cloud-survey)
+- [Photoreal terrain analysis](#photoreal-terrain-analysis)
+- [Dark documentary](#dark-documentary)
+- [Pixel diorama](#pixel-diorama)
+- [Illustrated cutaway plate](#illustrated-cutaway-plate)
+- [Lived-in isometric](#lived-in-isometric)
+- [Dither + ASCII showcase](#dither--ascii-showcase)
+- [Gradient glow ASCII](#gradient-glow-ascii)
+- [Clean ops world (default for a system that runs)](#clean-ops-world-default-for-a-system-that-runs)
+- [White model documentary](#white-model-documentary)
+- [Layer build film](#layer-build-film)
+- [Space-time cube](#space-time-cube)
+- [Choosing](#choosing)
+<!-- skill-navigation:end -->
+
 Each topic file names one look. The look sets the world's rendering, the UI skin and what the film shows; the data
 model, the dashboard parts and the film's click-driven shape stay the same. Reading map: start with Choosing at the end (four families and the default look per shape), then Toy isometric,
 Point-cloud survey, Photoreal terrain analysis, Dark documentary, Pixel diorama, Illustrated cutaway plate,

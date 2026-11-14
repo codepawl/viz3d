@@ -1,5 +1,19 @@
 # Film craft
 
+<!-- skill-navigation:start -->
+## Reading Map
+
+- [Film craft](#film-craft)
+- [Pacing and text](#pacing-and-text)
+- [Camera](#camera)
+- [Motion](#motion)
+- [Figures and places](#figures-and-places)
+- [Maps](#maps)
+- [Sound](#sound)
+- [Live app films](#live-app-films)
+- [Checks](#checks)
+<!-- skill-navigation:end -->
+
 Rules learned from fixing real films made with this skill. They apply to every look; the dark documentary look
 leans on them most. Reading map: Pacing and text, Camera, Motion, Figures and places, Maps, Sound, Live app films, Checks.
 

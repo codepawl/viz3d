@@ -11,6 +11,8 @@ light. 67js draws them at a low internal size, then the page turns the frame int
 
 ## Set up
 
+`{{SKILL_DIR}}` is this skill's folder and `{{WORK_DIR}}` the folder where projects live.
+
 1. Copy `{{SKILL_DIR}}/scripts/` to `{{WORK_DIR}}/pixel-splats/` and run `npm install` there. It installs
    `@codepawlhq/67js`, which brings `playwright-core`. Rendering needs Chrome installed.
 2. Stills: `node render.mjs plans/stills.mjs out/stills`. Film frames: `node render.mjs plans/haunted-film.mjs out/film`

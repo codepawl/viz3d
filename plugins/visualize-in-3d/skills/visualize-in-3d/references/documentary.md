@@ -1,5 +1,21 @@
 # Documentary film mode
 
+<!-- skill-navigation:start -->
+## Reading Map
+
+- [Documentary film mode](#documentary-film-mode)
+- [Fact file](#fact-file)
+- [Respect rules](#respect-rules)
+- [Project shape](#project-shape)
+- [Script](#script)
+- [Scenes](#scenes)
+- [Maps](#maps)
+- [Sound](#sound)
+- [Long-form craft](#long-form-craft)
+- [Render and checks](#render-and-checks)
+- [Passes](#passes)
+<!-- skill-navigation:end -->
+
 For an event, a case or a piece of history told in order: a 2-4 minute film in the dark documentary look (or
 another look the subject suggests), made from a fact file, a real map, block-built scenes and flat glowing figures.
 It was built first for a 1950s criminal case and then generalized. Reading map: Fact file, Respect rules, Project

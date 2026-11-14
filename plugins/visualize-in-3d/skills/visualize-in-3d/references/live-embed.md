@@ -1,5 +1,14 @@
 # Quick prototypes and live embeds
 
+<!-- skill-navigation:start -->
+## Reading Map
+
+- [Quick prototypes and live embeds](#quick-prototypes-and-live-embeds)
+- [Quick prototype](#quick-prototype)
+- [Live embed](#live-embed)
+- [Publishing as a claude.ai Artifact](#publishing-as-a-claudeai-artifact)
+<!-- skill-navigation:end -->
+
 Two needs that the full live app does not cover. Read the section that matches the request.
 
 - **Quick prototype**: a 3D view to show leaders this week, on a machine with no Blender, in about an hour of agent
@@ -108,7 +117,8 @@ no update for five intervals fades and shows "stale". The status mark (an icon p
 
 ### The component
 
-Build two outputs from the same code with `vite build --lib` and a second entry:
+Build two outputs from the same code: Vite library mode for the component (`build.lib` in the config; the CLI has no
+`--lib` flag) and a second build with `embed.html` as its entry:
 
 - **Web component** `dist/viz3d-world.js` for any page, React, Vue or plain HTML:
 

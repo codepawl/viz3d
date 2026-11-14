@@ -1,5 +1,15 @@
 # Self-review loop
 
+<!-- skill-navigation:start -->
+## Reading Map
+
+- [Self-review loop](#self-review-loop)
+- [Each round](#each-round)
+- [Generic faults](#generic-faults)
+- [Growing the lists](#growing-the-lists)
+- [Previews and the final render](#previews-and-the-final-render)
+<!-- skill-navigation:end -->
+
 Every pass that produces something to watch (an app, a film, a documentary, an action short) runs this loop
 itself before it reports. Run up to three rounds. The goal is that the main session and the user find nothing a
 measurement or a look at the frames could have found.

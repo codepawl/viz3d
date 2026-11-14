@@ -1,5 +1,13 @@
 # Briefs for the live app passes
 
+<!-- skill-navigation:start -->
+## Reading Map
+
+- [Briefs for the live app passes](#briefs-for-the-live-app-passes)
+- [Pass 1: Blender asset pack](#pass-1-blender-asset-pack)
+- [Pass 2: the app and the film](#pass-2-the-app-and-the-film)
+<!-- skill-navigation:end -->
+
 Two passes, one after the other, each pointed at the same topic file: hand each to a fresh subagent where the
 harness has them, or run them in sequence in one session. Copy each brief, replace `{{SKILL_DIR}}` (where this skill lives), `{{FOLDER}}`,
 `{{PORT}}` and `{{TOPIC}}` (the topic file's path), and change nothing else. The topic file's first line names the

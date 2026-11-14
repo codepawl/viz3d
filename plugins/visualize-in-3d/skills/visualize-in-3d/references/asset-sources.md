@@ -23,6 +23,15 @@ tiers, has a 3D viewer Space for search, and keeps the source's licence and cred
 | [codepawl/menagerie-glb](https://huggingface.co/datasets/codepawl/menagerie-glb) ([viewer](https://huggingface.co/spaces/codepawl/menagerie-glb-viewer)) | 79 MuJoCo Menagerie robots with joints | Per robot, see card | Robot arms, quadrupeds, humanoids that move |
 | [codepawl/ct-anatomy-glb](https://huggingface.co/datasets/codepawl/ct-anatomy-glb) ([viewer](https://huggingface.co/spaces/codepawl/ct-anatomy-glb-viewer)) | 7 CT bodies, 20 organs, 115 structures | CC BY 4.0 | Anatomy explainers, medical cutaways |
 | [codepawl/100style-glb](https://huggingface.co/datasets/codepawl/100style-glb) ([viewer](https://huggingface.co/spaces/codepawl/100style-viewer)) | 810 100STYLE mocap clips, 100 walking styles, retargeted onto one free character | CC BY 4.0 | Walks, runs and stylised locomotion |
+| [codepawl/kenney-glb](https://huggingface.co/datasets/codepawl/kenney-glb) ([viewer](https://huggingface.co/spaces/codepawl/kenney-glb-viewer)) | 4,451 models from Kenney's 3D kits | CC0 | Stylized low-poly props, vehicles, buildings, game kits |
+| [codepawl/quaternius-glb](https://huggingface.co/datasets/codepawl/quaternius-glb) ([viewer](https://huggingface.co/spaces/codepawl/quaternius-glb-viewer)) | 797 Quaternius models, animated characters keep their clips | CC0 | Stylized animals, characters, nature, buildings |
+| [codepawl/google-poly-glb](https://huggingface.co/datasets/codepawl/google-poly-glb) ([viewer](https://huggingface.co/spaces/codepawl/google-poly-glb-viewer)) | 9,971 Google Poly low-poly models | CC BY 3.0 per author, see card | Low-poly props and scenes of almost any kind |
+| [codepawl/rocketbox-avatars-glb](https://huggingface.co/datasets/codepawl/rocketbox-avatars-glb) ([viewer](https://huggingface.co/spaces/codepawl/rocketbox-avatars-glb-viewer)) | 140 rigged Microsoft Rocketbox avatars on one skeleton, with face blendshapes | MIT, licence text travels with copies | Rigged people by job (medical, police, construction), crowds |
+| [codepawl/0ad-art-glb](https://huggingface.co/datasets/codepawl/0ad-art-glb) ([viewer](https://huggingface.co/spaces/codepawl/0ad-art-glb-viewer)) | 1,670 0 A.D. units, buildings, animals, trees and rocks with clips | CC BY-SA 3.0 (share-alike) | Ancient world scenes, animated soldiers and animals |
+| [codepawl/pixel-atlas-glb](https://huggingface.co/datasets/codepawl/pixel-atlas-glb) ([viewer](https://huggingface.co/spaces/codepawl/pixel-atlas-glb-viewer)) | 6,194 low-poly objects with 16x16 pixel-art textures | CC0 | Pixel-look games and dioramas |
+| [codepawl/world-fish-glb](https://huggingface.co/datasets/codepawl/world-fish-glb) ([viewer](https://huggingface.co/spaces/codepawl/world-fish-glb-viewer)) | 121 fish species with depth range and size data | CC0 | Underwater scenes, depth explainers |
+
+To search across libraries by kind, size and tier, read [codepawl/asset-index](https://huggingface.co/datasets/codepawl/asset-index) (one table of assets from several libraries, with how to get each).
 
 Load them in the browser with three.js or [67js](https://github.com/codepawl/67.js) (`npm install 67js@npm:@codepawlhq/67js meshoptimizer`).
 In Blender, Godot, Unity or Unreal, import the `engine/` tier: it keeps PNG and JPEG textures, because Blender cannot read KTX2.
@@ -36,8 +45,8 @@ Then the general sources, in this order:
 2. **Scans and real materials**: Poly Haven and ambientCG (CC0), NVIDIA SimReady props (CC BY 4.0), NASA 3D
    Resources, Smithsonian Open Access (CC0 items).
 3. **Stylized and low-poly packs**: Kenney and Quaternius (CC0), Poly Pizza (CC0 or CC BY per model). Kenney's
-   site refuses scripted downloads (HTTP 403). If the user cannot fetch a pack by hand, use Quaternius, Poly Pizza
-   or the Poly Haven API. Poly Haven has no stylized trees, and some scans run to hundreds of megabytes. Keep each
+   site refuses scripted downloads (HTTP 403): take Kenney and Quaternius models from the `kenney-glb` and
+   `quaternius-glb` packs above, or use Poly Pizza or the Poly Haven API. Poly Haven has no stylized trees, and some scans run to hundreds of megabytes. Keep each
    model in a web build under about 20 MB.
 4. **AI-generated models**: the Scenario 3D Collection, a public dataset of about 1,300 GLB models (CC BY 4.0,
    credit "Scenario"). It holds props, characters, creatures, mechs, vehicles and buildings made by image-to-3D and

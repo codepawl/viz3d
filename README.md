@@ -1,7 +1,18 @@
-# viz3d
+<p align="center">
+  <a href="https://codepawl.com">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/codepawl/.github/main/brand/codepawl-lockup-dark.png">
+      <img alt="CodePawl" src="https://raw.githubusercontent.com/codepawl/.github/main/brand/codepawl-lockup.png" width="200">
+    </picture>
+  </a>
+</p>
 
-[![Release](https://img.shields.io/github/v/release/codepawl/viz3d?label=release&color=2f6f4f)](https://github.com/codepawl/viz3d/releases)
-[![License: MIT](https://img.shields.io/badge/license-MIT-2f6f4f)](LICENSE)
+<h1 align="center">viz3d</h1>
+
+<p align="center">
+  <a href="https://github.com/codepawl/viz3d/releases"><img alt="Release" src="https://img.shields.io/github/v/release/codepawl/viz3d?label=release&color=4f4e5a&labelColor=2a282d"></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-4f4e5a?labelColor=2a282d"></a>
+</p>
 
 Visualize anything in 3D. Give your agent a subject: a place, a system, an object, a product, a creature, a story or an
 idea. The agent researches it, builds models to real dimensions, and makes a film, an app you click through, a lesson,
@@ -347,8 +358,23 @@ Faults you saw, new looks, example topics and harness adapters are welcome. Read
 viz3d is free and MIT licensed. [Sponsors](https://github.com/sponsors/codepawl) pay for GPU time, test
 hardware and the hours that go into it. Company sponsors get their logo here from $250 a month.
 
-[![Sponsor CodePawl](https://img.shields.io/badge/Sponsor-CodePawl-EA4AAA?style=for-the-badge&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/codepawl)
+[![Sponsor CodePawl](https://img.shields.io/badge/Sponsor-CodePawl-4f4e5a?style=for-the-badge&logo=githubsponsors&logoColor=white&labelColor=2a282d)](https://github.com/sponsors/codepawl)
 
 ## License
 
 MIT
+
+<br>
+
+<p align="center">
+  <sub>Made by CodePawl, an independent 3D studio in Vietnam.</sub>
+  <br>
+  <sub>
+    <a href="https://codepawl.com">Website</a> ·
+    <a href="https://x.com/codepawl">X</a> ·
+    <a href="https://github.com/codepawl">GitHub</a> ·
+    <a href="https://huggingface.co/codepawl">Hugging Face</a> ·
+    <a href="https://www.youtube.com/@codepawlhq">YouTube</a> ·
+    <a href="https://www.threads.com/@codepawl">Threads</a>
+  </sub>
+</p>

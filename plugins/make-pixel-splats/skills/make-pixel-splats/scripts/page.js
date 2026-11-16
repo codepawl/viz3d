@@ -99,7 +99,8 @@ function atmosphereSplats(scene, time, fade) {
 const easeOutBack = amount => 1 + 2.2 * Math.pow(amount - 1, 3) + 1.2 * Math.pow(amount - 1, 2);
 
 // Moves, fades and grows static splats for the build-up and break-apart moments, and darkens ground under movers.
-function animateStatic(scene, time, { assemble = 1, dissolve = 0 }) {
+// travel scales how far splats fly: 1 is the full burst, small values swap a scene almost in place.
+function animateStatic(scene, time, { assemble = 1, dissolve = 0, travel = 1 }) {
   const shadows = scene.contactShadows(time);
   const [minimumY, maximumY] = scene.heightRange;
   const range = maximumY - minimumY;
@@ -128,23 +129,23 @@ function animateStatic(scene, time, { assemble = 1, dissolve = 0 }) {
         const progress = Math.min(Math.max((assemble - delay) / 0.25, 0), 1);
         const settle = easeOutBack(progress);
         const scatterAngle = randomSecond * Math.PI * 2;
-        const lift = (1 - settle) * (1.6 + random * 1.2);
-        positions[index * 3] = x + Math.cos(scatterAngle) * (1 - settle) * 0.9;
+        const lift = (1 - settle) * (1.6 + random * 1.2) * travel;
+        positions[index * 3] = x + Math.cos(scatterAngle) * (1 - settle) * 0.9 * travel;
         positions[index * 3 + 1] = y + lift;
-        positions[index * 3 + 2] = z + Math.sin(scatterAngle) * (1 - settle) * 0.9;
+        positions[index * 3 + 2] = z + Math.sin(scatterAngle) * (1 - settle) * 0.9 * travel;
         colors[index * 4 + 3] *= progress > 0 ? Math.min(progress * 3, 1) : 0;
-        scales[index] *= 1 + (1 - progress) * 0.5;
+        scales[index] *= 1 + (1 - progress) * 0.1;
       }
       if (dissolve > 0) {
         const delay = random * 0.45 + ((maximumY - y) / range) * 0.25;
         const progress = Math.min(Math.max((dissolve - delay) / 0.35, 0), 1);
-        const push = progress * progress;
+        const push = progress * progress * travel;
         const outward = Math.hypot(x, z) || 1;
         positions[index * 3] = x + (x / outward) * push * 1.3 + Math.cos(randomSecond * 6.28) * push * 0.5;
         positions[index * 3 + 1] = y + push * (1.2 + random * 1.5);
         positions[index * 3 + 2] = z + (z / outward) * push * 1.3 + Math.sin(randomSecond * 6.28) * push * 0.5;
         colors[index * 4 + 3] *= 1 - progress;
-        scales[index] *= 1 + progress * 2.5;
+        scales[index] *= 1 + progress * 0.15;
       }
     }
     return { count: list.count, positions, colors, scales };
@@ -245,13 +246,150 @@ function expandPalette(palette, steps) {
   return expanded;
 }
 
+// Ink resolve: the look of the pixel-splat dioramas on X, written from their published method (not their code).
+// The splats are drawn at twice the pixel grid. Each art pixel looks at its 2x2 samples: inside an object it takes
+// the palette colour nearest to their average (with a faint ordered dither); on a silhouette it takes the colour
+// most of its samples agree on and paints it as a contour, a darker tone of that body colour, never black ink.
+const INK_WEIGHTS = [0.30, 0.55, 0.15];
+
+function nearestPaletteIndex(color, palette, skipBackground) {
+  let bestIndex = skipBackground && palette.length > 1 ? 1 : 0;
+  let bestDistance = Infinity;
+  for (let index = bestIndex; index < palette.length; index++) {
+    let distance = 0;
+    for (let channel = 0; channel < 3; channel++) distance += (color[channel] - palette[index][channel]) ** 2 * INK_WEIGHTS[channel];
+    if (distance < bestDistance) {
+      bestDistance = distance;
+      bestIndex = index;
+    }
+  }
+  return bestIndex;
+}
+
+function contourTone(body) {
+  const shade = body.map(value => value * 0.64);
+  const luma = shade.reduce((sum, value, channel) => sum + value * INK_WEIGHTS[channel], 0);
+  const lift = Math.max(1, 0.12 / Math.max(luma, 0.001));
+  return shade.map(value => Math.min(1, value * lift));
+}
+
+function inkResolve(scene, internalSize, style, outputSize, fadeToBlack) {
+  const largeSize = internalSize * 2;
+  const large = document.createElement('canvas');
+  large.width = largeSize;
+  large.height = largeSize;
+  const largeContext = large.getContext('2d', { willReadFrequently: true });
+  largeContext.imageSmoothingEnabled = false;
+  largeContext.drawImage(state.canvas, 0, 0, largeSize, largeSize);
+  const samples = largeContext.getImageData(0, 0, largeSize, largeSize).data;
+  const palette = scene.palette;
+  const background = palette[0];
+  const contour = style.inkContour ?? true;
+  const ditherAmount = style.inkDither ?? 0.03;
+  const quantize = style.inkPalette ?? true;
+  const coverage = new Uint8Array(internalSize * internalSize);
+  const majority = new Int16Array(internalSize * internalSize).fill(-1);
+  const native = new Float32Array(internalSize * internalSize * 3);
+  for (let row = 0; row < internalSize; row++) {
+    for (let column = 0; column < internalSize; column++) {
+      const pixelIndex = row * internalSize + column;
+      const votes = new Map();
+      const sum = [0, 0, 0];
+      let solidCount = 0;
+      for (let sample = 0; sample < 4; sample++) {
+        const offset = ((row * 2 + (sample >> 1)) * largeSize + column * 2 + (sample & 1)) * 4;
+        if (samples[offset + 3] < 128) continue;
+        const color = [samples[offset] / 255, samples[offset + 1] / 255, samples[offset + 2] / 255];
+        solidCount++;
+        for (let channel = 0; channel < 3; channel++) sum[channel] += color[channel];
+        const label = nearestPaletteIndex(color, palette, true);
+        votes.set(label, (votes.get(label) ?? 0) + 1);
+      }
+      coverage[pixelIndex] = solidCount;
+      let bestVotes = 0;
+      for (const [label, count] of votes) {
+        if (count > bestVotes) {
+          bestVotes = count;
+          majority[pixelIndex] = label;
+        }
+      }
+      for (let channel = 0; channel < 3; channel++) native[pixelIndex * 3 + channel] = solidCount ? sum[channel] / solidCount : background[channel];
+    }
+  }
+  const output = document.createElement('canvas');
+  output.width = internalSize;
+  output.height = internalSize;
+  const outputContext = output.getContext('2d');
+  const image = outputContext.createImageData(internalSize, internalSize);
+  const isEmpty = (column, row) => column < 0 || row < 0 || column >= internalSize || row >= internalSize || coverage[row * internalSize + column] === 0;
+  for (let row = 0; row < internalSize; row++) {
+    for (let column = 0; column < internalSize; column++) {
+      const pixelIndex = row * internalSize + column;
+      let color = background;
+      if (coverage[pixelIndex] > 0) {
+        const averaged = [0, 1, 2].map(channel => native[pixelIndex * 3 + channel]);
+        if (quantize) {
+          const threshold = (BAYER[(row % 4) * 4 + (column % 4)] - 0.5) * ditherAmount;
+          color = palette[nearestPaletteIndex(averaged.map(value => value + threshold), palette, true)];
+        } else {
+          color = averaged;
+        }
+        const outer = coverage[pixelIndex] < 4 || isEmpty(column - 1, row) || isEmpty(column + 1, row) || isEmpty(column, row - 1) || isEmpty(column, row + 1);
+        if (contour && outer && majority[pixelIndex] >= 0) {
+          const body = palette[majority[pixelIndex]];
+          const tone = contourTone(body);
+          const amount = coverage[pixelIndex] / 4;
+          const strength = style.inkContourStrength ?? 0.65;
+          color = body.map((value, channel) => background[channel] * (1 - amount) + (value * (1 - strength) + tone[channel] * strength) * amount);
+        }
+      }
+      for (let channel = 0; channel < 3; channel++) {
+        image.data[pixelIndex * 4 + channel] = Math.round(Math.min(Math.max(color[channel] * (1 - fadeToBlack), 0), 1) * 255);
+      }
+      image.data[pixelIndex * 4 + 3] = 255;
+    }
+  }
+  outputContext.putImageData(image, 0, 0);
+  const upscaled = document.createElement('canvas');
+  upscaled.width = outputSize;
+  upscaled.height = outputSize;
+  const upscaledContext = upscaled.getContext('2d');
+  upscaledContext.imageSmoothingEnabled = false;
+  upscaledContext.drawImage(output, 0, 0, outputSize, outputSize);
+  return upscaled.toDataURL('image/png');
+}
+
 function postProcess(scene, renderer, time, internalSize, style, outputSize, fadeToBlack, flash = 0) {
+  if (style.ink) return inkResolve(scene, internalSize, style, outputSize, fadeToBlack);
   const reader = document.createElement('canvas');
   reader.width = internalSize;
   reader.height = internalSize;
   const readerContext = reader.getContext('2d', { willReadFrequently: true });
-  readerContext.drawImage(state.canvas, 0, 0, internalSize, internalSize);
-  const image = readerContext.getImageData(0, 0, internalSize, internalSize);
+  // supersample N renders the splats at N times the pixel grid and keeps the centre sample of each cell, so a soft
+  // gaussian edge lands on one side of a pixel instead of being averaged into an in-between colour.
+  const supersample = style.supersample ?? 1;
+  let image;
+  if (supersample > 1) {
+    const largeSize = internalSize * supersample;
+    const large = document.createElement('canvas');
+    large.width = largeSize;
+    large.height = largeSize;
+    const largeContext = large.getContext('2d', { willReadFrequently: true });
+    largeContext.drawImage(state.canvas, 0, 0, largeSize, largeSize);
+    const largePixels = largeContext.getImageData(0, 0, largeSize, largeSize).data;
+    image = readerContext.createImageData(internalSize, internalSize);
+    const centre = Math.floor(supersample / 2);
+    for (let row = 0; row < internalSize; row++) {
+      for (let column = 0; column < internalSize; column++) {
+        const source = ((row * supersample + centre) * largeSize + column * supersample + centre) * 4;
+        const target = (row * internalSize + column) * 4;
+        for (let channel = 0; channel < 4; channel++) image.data[target + channel] = largePixels[source + channel];
+      }
+    }
+  } else {
+    readerContext.drawImage(state.canvas, 0, 0, internalSize, internalSize);
+    image = readerContext.getImageData(0, 0, internalSize, internalSize);
+  }
   const pixels = image.data;
   const glows = [...scene.glows(time), ...(scene.extraGlows ?? [])].map(glow => {
     const screen = project(renderer, glow.position, internalSize);
@@ -277,7 +415,9 @@ function postProcess(scene, renderer, time, internalSize, style, outputSize, fad
     for (let column = 0; column < internalSize; column++) {
       const pixelIndex = row * internalSize + column;
       const offset = pixelIndex * 4;
-      const alpha = pixels[offset + 3] / 255;
+      // alphaCut makes every pixel either object or background, so silhouettes have no half-transparent fringe.
+      const rawAlpha = pixels[offset + 3] / 255;
+      const alpha = style.alphaCut ? (rawAlpha >= style.alphaCut ? 1 : 0) : rawAlpha;
       const centerDistance = Math.min(Math.hypot(column / internalSize - 0.5, row / internalSize - 0.42) * 1.6, 1);
       const color = [0, 1, 2].map(channel => {
         const background = inner[channel] + (outer[channel] - inner[channel]) * centerDistance;
@@ -364,6 +504,43 @@ function postProcess(scene, renderer, time, internalSize, style, outputSize, fad
   return output.toDataURL('image/png');
 }
 
+// Explainer looks for the "how it's made" film.
+// look 'clay': every splat turned to a neutral grey of its own brightness, so the shapes read before any colour.
+// splatKeep < 1: only that share of splats is drawn, each bigger, so the dots that make the surface are visible.
+function applyLook(lists, options) {
+  const look = options.look ?? null;
+  const keep = options.splatKeep ?? 1;
+  if (!look && keep >= 1) return lists;
+  let seed = 0;
+  return lists.map(list => {
+    const kept = [];
+    for (let index = 0; index < list.count; index++) {
+      seed++;
+      if (keep < 1 && hashNoise(seed * 0.731, 4.1, 2.9) >= keep) continue;
+      kept.push(index);
+    }
+    const positions = new Float32Array(kept.length * 3);
+    const colors = new Float32Array(kept.length * 4);
+    const scales = new Float32Array(kept.length);
+    const grow = keep < 1 ? 1 + (1 - keep) * 1.6 : 1;
+    kept.forEach((source, target) => {
+      positions.set(list.positions.subarray(source * 3, source * 3 + 3), target * 3);
+      const red = list.colors[source * 4];
+      const green = list.colors[source * 4 + 1];
+      const blue = list.colors[source * 4 + 2];
+      const alpha = list.colors[source * 4 + 3];
+      if (look === 'clay') {
+        const brightness = 0.12 + (0.3 * red + 0.59 * green + 0.11 * blue) * 0.95;
+        colors.set([brightness, brightness, brightness * 1.04, alpha], target * 4);
+      } else {
+        colors.set([red, green, blue, alpha], target * 4);
+      }
+      scales[target] = list.scales[source] * grow;
+    });
+    return { count: kept.length, positions, colors, scales };
+  });
+}
+
 // options: { time, internalSize, outputSize, style: { palette, dither, paletteSteps, splatScale }, camera: {...},
 //   assemble, dissolve, fadeToBlack }
 window.renderFrame = function renderFrame(options) {
@@ -387,12 +564,12 @@ window.renderFrame = function renderFrame(options) {
   }
   const fade = Math.max(1 - (options.dissolve ?? 0) * 1.5, 0) * Math.min(Math.max(((options.assemble ?? 1) - 0.4) * 2, 0), 1);
   const atmosphere = atmosphereSplats(scene, time, fade);
-  const lists = [...staticLists, ...dynamicLists, ...atmosphere.lists];
+  const lists = applyLook([...staticLists, ...dynamicLists, ...atmosphere.lists], options);
   scene.extraGlows = atmosphere.glows;
   const splatScale = options.style.splatScale ?? 1;
   const scaledLists = splatScale === 1 ? lists : lists.map(list => ({ ...list, scales: list.scales.map(value => value * splatScale) }));
   const data = packSplatData(scaledLists.filter(list => list.count > 0));
-  const renderer = getRenderer(options.internalSize);
+  const renderer = getRenderer(options.internalSize * (options.style.supersample ?? 1));
   const splats = createGaussianSplats(data, { maximumCount: 3_000_000 });
   const detach = attachGaussianSplats(renderer, splats);
   renderer.render(cameraFor(scene, time, options.camera ?? {}));

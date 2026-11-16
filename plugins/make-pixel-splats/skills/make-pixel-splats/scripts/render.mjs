@@ -25,10 +25,14 @@ const server = createServer(async (request, response) => {
 });
 await new Promise(done => server.listen(0, '127.0.0.1', done));
 
+// Draw on the real GPU. Software rendering works but is several times slower. On Linux (the Modal runner, which sets
+// CHROME_PATH) WebGL reaches the NVIDIA card only through ANGLE on Vulkan.
+const platformArgs = process.platform === 'win32'
+  ? ['--use-angle=d3d11']
+  : ['--use-angle=vulkan', '--enable-features=Vulkan', '--no-sandbox'];
 const browser = await chromium.launch({
-  channel: 'chrome',
-  // Draw on the real GPU. Software rendering works but is several times slower.
-  args: [...(process.platform === 'win32' ? ['--use-angle=d3d11'] : []), '--enable-gpu', '--ignore-gpu-blocklist', '--disable-gpu-sandbox'],
+  ...(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : { channel: 'chrome' }),
+  args: [...platformArgs, '--enable-gpu', '--ignore-gpu-blocklist', '--disable-gpu-sandbox'],
 });
 const page = await browser.newPage({ viewport: { width: 1200, height: 1200 } });
 page.on('pageerror', error => console.error('page error:', error.message));

@@ -1,5 +1,6 @@
 // Three original pixel-art splat dioramas. Each scene builds its static splats once and adds moving splats per frame.
 import { buildMedieval } from './medieval.js';
+import { buildWindmill } from './windmill.js';
 import { buildSwamp, buildGallows } from './medieval2.js';
 import {
   hashNoise, valueNoise, sphereDistance, ellipsoidDistance, boxDistance, cylinderDistance, taperedCylinderDistance,
@@ -560,4 +561,17 @@ function subsetList(list, indices) {
   return { count: indices.length, positions, colors, scales };
 }
 
-export const SCENE_BUILDERS = { lighthouse: buildLighthouse, snail: buildSnail, koi: buildKoi, medieval: buildMedieval, swamp: buildSwamp, gallows: buildGallows };
+import { buildSeason } from './seasons.js';
+import { buildSeasonCycle } from './season-cycle.js';
+export const SCENE_BUILDERS = { spring: spacing => buildSeason(spacing, 'spring'), summer: spacing => buildSeason(spacing, 'summer'), autumn: spacing => buildSeason(spacing, 'autumn'), winter: spacing => buildSeason(spacing, 'winter'), ...lookVariants(), cycle: buildSeasonCycle, lighthouse: buildLighthouse, snail: buildSnail, koi: buildKoi, medieval: buildMedieval, swamp: buildSwamp, gallows: buildGallows, windmill: buildWindmill };
+
+// Look tests for Pocket Seasons: "<season>:<look>" with B = blocks + flat bands + patches, C = pixel-size blocks + flat bands + patches.
+function lookVariants() {
+  const looks = { B: { toon: true, clusters: true }, C: { toon: true, clusters: true, voxel: 0.0075 }, D: { toon: true, clusters: true, voxel: 0, splatScale: 0.95, jitter: 0.35 } };
+  const variants = {};
+  for (const seasonName of ['spring', 'summer', 'autumn', 'winter']) {
+    for (const [lookName, look] of Object.entries(looks)) variants[`${seasonName}:${lookName}`] = spacing => buildSeason(spacing, seasonName, look);
+  }
+  for (const [lookName, look] of Object.entries(looks)) variants[`cycle:${lookName}`] = spacing => buildSeasonCycle(spacing, look);
+  return variants;
+}

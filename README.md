@@ -9,6 +9,17 @@
 
 <h1 align="center">viz3d</h1>
 
+> [!IMPORTANT]
+> **viz3d moved into [creator-generalist](https://github.com/codepawl/creator-generalist).** Its four skills
+> (`visualize-in-3d`, `make-pixel-splats`, `build-house-from-plan` and `build-minecraft-model-from-image`) now ship
+> inside the `3d-generalist` plugin there, next to the 2D, 3D and game skills. This repository is archived and gets no
+> more updates. Install the pack instead:
+>
+> ```text
+> /plugin marketplace add codepawl/creator-generalist
+> /plugin install 3d-generalist@creator-generalist
+> ```
+
 <p align="center">
   <a href="https://github.com/codepawl/viz3d/releases"><img alt="Release" src="https://img.shields.io/github/v/release/codepawl/viz3d?label=release&color=4f4e5a&labelColor=2a282d"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-4f4e5a?labelColor=2a282d"></a>
